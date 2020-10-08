@@ -1,0 +1,54 @@
+#search-area {
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+  padding-left: 8.5em;
+}
+
+#location-dropdown, #category-dropdown {
+  height: 3.2em;
+  width: 260px;
+}
+
+#mainpage-search-button {
+  height: 3.2em;
+  width: 200px;
+}
+
+#category-dropdown-list, #location-dropdown-list  {
+  width: 85%;
+}
+
+#location-link {
+  text-align: center;
+  width: 85%;
+}
+
+#location-link:hover {
+  color: #EF6C00;
+}
+
+#category-list {
+  padding-left: 2.5em;
+  padding-top: 1em;
+}
+
+#category-list:nth-child(3n+3) {
+  padding-bottom: 1.5em;
+}
+
+#category-list > a {
+  color: black;
+  text-decoration: none;
+}
+
+#category-list > a:hover {
+  color: #EF6C00;
+}
+
+#category-list > a:nth-child(2n+1) {
+  padding-right: 3.5em;
+}
+
+input {
+  text-align: center;
+}
