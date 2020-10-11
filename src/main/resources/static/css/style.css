@@ -1,12 +1,17 @@
 #search-area {
   padding-top: 2.5em;
   padding-bottom: 2.5em;
-  padding-left: 8.5em;
+  padding-left: 3em;
 }
 
-#location-dropdown, #category-dropdown {
+#category-dropdown {
   height: 3.2em;
   width: 260px;
+}
+
+#location-dropdown {
+  height: 3.2em;
+  width: 500px;
 }
 
 #mainpage-search-button {
@@ -14,8 +19,12 @@
   width: 200px;
 }
 
-#category-dropdown-list, #location-dropdown-list  {
-  width: 85%;
+#category-dropdown-list  {
+  width: 92%;
+}
+
+#location-dropdown-list {
+  width: 95%;
 }
 
 #location-link {
@@ -23,8 +32,12 @@
   width: 85%;
 }
 
-#location-link:hover {
+#location-link1:hover {
   color: #EF6C00;
+}
+
+#location-link2:hover {
+  color: red;
 }
 
 #category-list {
@@ -36,12 +49,12 @@
   padding-bottom: 1.5em;
 }
 
-#category-list > a {
+#category-list > a, #location-list tbody tr td a {
   color: black;
   text-decoration: none;
 }
 
-#category-list > a:hover {
+#category-list > a:hover, #location-list tbody tr td a:hover {
   color: #EF6C00;
 }
 
@@ -49,6 +62,25 @@
   padding-right: 3.5em;
 }
 
+#location-list td {
+  text-align: center;
+}
+
+
 input {
   text-align: center;
+}
+
+.card {
+  width: 15rem;
+  margin-right: 2em;
+}
+
+#popular-space {
+  font-weight: bold;
+  font-size: 2.5em;
+}
+
+#popular-space-btn {
+  font-weight: 600;
 }
