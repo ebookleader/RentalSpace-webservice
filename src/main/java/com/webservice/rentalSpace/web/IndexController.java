@@ -9,4 +9,10 @@ public class IndexController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("/user/login")
+    public String login_user() {
+        return "login_user";
+    }
 }
+

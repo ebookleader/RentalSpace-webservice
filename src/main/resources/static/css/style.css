@@ -94,3 +94,42 @@ input {
 .btn-link, .btn-link:hover{
   color: black;
 }
+
+/* login */
+#login-form {
+  width: 40%;
+}
+
+#btn-login, #btn-signup {
+  width: 100%;
+}
+
+.btn-naver {
+  background-color: #00CE36;
+  color: white;
+  font-weight: 500;
+  border: none;
+  width: 88%;
+}
+
+.btn-naver:focus, .btn-google:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.btn-naver:hover {
+  background-color: #00C433;
+}
+
+.btn-google {
+  background-color: #DC4A37;
+  color: white;
+  font-weight: 500;
+  border: none;
+  width: 88%;
+}
+
+.btn-google:hover {
+  background-color: #D93C27;
+  opacity: 100%;
+}
