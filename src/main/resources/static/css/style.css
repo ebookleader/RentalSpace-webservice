@@ -1,7 +1,9 @@
 #search-area {
+  width: 97%;
   padding-top: 2.5em;
   padding-bottom: 2.5em;
-  padding-left: 3em;
+  padding-left: 2em;
+  margin-right: 5%;
 }
 
 #category-dropdown {
@@ -74,13 +76,21 @@ input {
 .card {
   width: 15rem;
   margin-right: 2em;
+  display: inline-block;
 }
 
 #popular-space {
   font-weight: bold;
   font-size: 2.5em;
+  display: inline-block;
 }
 
 #popular-space-btn {
+  width: 100%;
   font-weight: 600;
+  margin-left: 20%;
+}
+
+.btn-link, .btn-link:hover{
+  color: black;
 }

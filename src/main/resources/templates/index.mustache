@@ -16,7 +16,16 @@
                     <a class="nav-link" href="#">Categories</a>
                 </li>
                 <li class="nav-item active mr-3">
-                    <a class="nav-link" href="#">Login</a>
+                    <!-- 로그인 안되어있을시 -->
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle text-decoration-none" type="button" id="login-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="login-dropdown">
+                            <a class="dropdown-item" href="#">로그인</a>
+                            <a class="dropdown-item" href="#">회원가입</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -37,7 +46,7 @@
         <div class="container bg-warning text-dark form-inline rounded" id="search-area">
             <!-- location search -->
             <div class="dropdown pr-4">
-                <button class="btn btn-light dropdown-toggle pl-5 pr-5" type="button" id="location-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-light dropdown-toggle pl-5 pr-5" data-flip="false" type="button" id="location-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
                         <path fill-rule="evenodd" d="M8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
@@ -109,9 +118,10 @@
 </div>
 
 <!-- popular spot -->
+<br><br>
 <div class="container">
     <p id="popular-space">Popular Space</p>
-    <div class="text-right mr-5">
+    <div class="text-right" id="popular-space">
         <button type="button" class="btn btn-warning" id="popular-space-btn">View All Space</button>
     </div>
     <div class="form-inline">
@@ -143,7 +153,38 @@
 </div>
 
 <!-- recently published -->
+<br><br><br>
+<div class="container">
+    <p id="popular-space">Recently Published</p>
+    <div class="text-right" id="popular-space">
+        <button type="button" class="btn btn-warning" id="popular-space-btn">View All Space</button>
+    </div>
+    <div class="form-inline">
+        <div class="card">
+            <img src="/img/example.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="/img/example.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="/img/example.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="/img/example.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-</div>
-</div>
 {{>layout/footer}}
