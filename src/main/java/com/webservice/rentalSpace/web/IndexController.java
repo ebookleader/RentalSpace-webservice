@@ -14,5 +14,10 @@ public class IndexController {
     public String login_user() {
         return "login_user";
     }
+
+    @GetMapping("/signup")
+    public String signup_user() {
+        return "signup_user";
+    }
 }
 

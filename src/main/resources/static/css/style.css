@@ -1,3 +1,6 @@
+.content-area {
+  background-color: #F4F5F7;
+}
 #search-area {
   width: 97%;
   padding-top: 2.5em;
@@ -97,9 +100,10 @@ input {
 
 /* login */
 #login-form {
-  width: 40%;
+  background-color: white;
+  width: 55%;
+  border-radius: 10%;
 }
-
 #btn-login, #btn-signup {
   width: 100%;
 }
@@ -132,4 +136,11 @@ input {
 .btn-google:hover {
   background-color: #D93C27;
   opacity: 100%;
+}
+
+/* signup */
+#signup-form {
+  background-color: white;
+  width: 45%;
+  border-radius: 10%;
 }
