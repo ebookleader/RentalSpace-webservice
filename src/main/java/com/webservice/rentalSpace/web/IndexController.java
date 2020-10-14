@@ -19,5 +19,10 @@ public class IndexController {
     public String signup_user() {
         return "signup_user";
     }
+
+    @GetMapping("/space/list")
+    public String space_list() {
+        return "space_list";
+    }
 }
 
