@@ -24,5 +24,6 @@ public class IndexController {
     public String space_list() {
         return "space_list";
     }
+
 }
 

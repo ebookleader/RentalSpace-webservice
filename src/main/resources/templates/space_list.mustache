@@ -1,99 +1,288 @@
 {{>layout/header}}
 <!-- space list start -->
 <div class="content-area pb-5 pt-5">
-    <div class="d-flex justify-content-center">
-        <div class="text-dark form-inline rounded" id="list-search-area">
-            <!-- location search -->
-            <div class="dropdown pr-4">
-                <button class="btn btn-light dropdown-toggle pl-5 pr-5" data-flip="false" type="button" id="location-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                        <path fill-rule="evenodd" d="M8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg>
-                    Search Location
-                </button>
-                <div class="dropdown-menu" aria-labelledby="location-dropdown" id="location-dropdown-list">
-                    <table class="table" id="location-list">
-                        <tbody>
-                        <tr>
-                            <td><a href="#" id="seoul">서울특별시</a></td>
-                            <td><a href="#" id="incheon">인천광역시</a></td>
-                            <td><a href="#" id="daegu">대구광역시</a></td>
-                            <td><a href="#" id="daegeon">대전광역시</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" id="busan">부산광역시</a></td>
-                            <td><a href="#" id="gwangju">광주광역시</a></td>
-                            <td><a href="#" id="ulsan">울산광역시</a></td>
-                            <td><a href="#" id="saejong">세종특별자치도</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" id="gyeonggi">경기도</a></td>
-                            <td><a href="#" id="gangwon">강원도</a></td>
-                            <td><a href="#" id="chungn">충청북도</a></td>
-                            <td><a href="#" id="chungs">충청남도</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" id="junn">전라북도</a></td>
-                            <td><a href="#" id="juns">전라남도</a></td>
-                            <td><a href="#" id="gyeongn">경상북도</a></td>
-                            <td><a href="#" id="gyeongs">경상남도</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" id="jeju">제주특별자치도</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
+    <div class="content-info">
+        <h1 id="product-list-title-h1">Product List</h1>
+        <p class="font-weight-normal mt-3" id="product-list-title-p">Home - Product List</p>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="product_sidebar">
+                    <nav class="nav flex-column search-nav bg-white">
+                        <h5>Search by name</h5>
+                        <div class="input-group mb-3 mt-3">
+                            <input type="text" class="form-control" aria-describedby="name-search-btn">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="name-search-btn">Search</button>
+                            </div>
+                        </div>
+                    </nav>
+                    <nav class="nav flex-column search-nav bg-white mt-4">
+                        <h5>Location</h5>
+                        <a class="nav-link" href="#">서울특별시 (5)</a>
+                        <a class="nav-link" href="#">인천광역시 (5)</a>
+                        <a class="nav-link" href="#">대전광역시 (5)</a>
+                        <a class="nav-link" href="#">대구광역시 (5)</a>
+                        <a class="nav-link" href="#">부산광역시 (5)</a>
+                        <a class="nav-link" href="#">광주광역시 (5)</a>
+                        <a class="nav-link" href="#">울산광역시 (5)</a>
+                        <a class="nav-link" href="#">세종특별자치도 (5)</a>
+                        <a class="nav-link" href="#">경기도 (5)</a>
+                        <a class="nav-link" href="#">강원도 (5)</a>
+                        <a class="nav-link" href="#">충청북도 (5)</a>
+                        <a class="nav-link" href="#">충청남도 (5)</a>
+                        <a class="nav-link" href="#">전라북도 (5)</a>
+                        <a class="nav-link" href="#">전라남도 (5)</a>
+                        <a class="nav-link" href="#">경상북도 (5)</a>
+                        <a class="nav-link" href="#">경상남도 (5)</a>
+                    </nav>
+                    <nav class="nav flex-column search-nav bg-white mt-4">
+                        <h5>Categories</h5>
+                        <a class="nav-link" href="#">악기 (5)</a>
+                        <a class="nav-link" href="#">노래/녹음 (5)</a>
+                        <a class="nav-link" href="#">댄스 (5)</a>
+                        <a class="nav-link" href="#">뮤지컬 (5)</a>
+                        <a class="nav-link" href="#">쿠킹 (5)</a>
+                        <a class="nav-link" href="#">스터디 (5)</a>
+                    </nav>
+                    <nav class="nav flex-column search-nav bg-white mt-4">
+                        <h5>Price</h5>
+                        <a class="nav-link" href="#">₩10,000 이하 (5)</a>
+                        <a class="nav-link" href="#">₩10,000 - ₩35,000 (5)</a>
+                        <a class="nav-link" href="#">₩35,000 - ₩70,000 (5)</a>
+                        <a class="nav-link" href="#">₩70,000 - ₩100,000 (5)</a>
+                        <a class="nav-link" href="#">₩100,000 이상 (5)</a>
+                    </nav>
+                    <nav class="nav flex-column search-nav bg-white mt-4">
+                        <h5>Rating</h5>
+                        <a class="nav-link" href="#">전체 (5)</a>
+                        <a class="nav-link" href="#">&starf;&starf;&starf;&starf;&starf; (5)</a>
+                        <a class="nav-link" href="#">&starf;&starf;&starf;&starf;&star; (5)</a>
+                        <a class="nav-link" href="#">&starf;&starf;&starf;&star;&star; (5)</a>
+                        <a class="nav-link" href="#">&starf;&starf;&star;&star;&star; (5)</a>
+                        <a class="nav-link" href="#">&starf;&star;&star;&star;&star; (5)</a>
+                    </nav>
                 </div>
             </div>
-            <!-- category search -->
-            <div class="dropdown pr-4">
-                <button class="btn btn-light dropdown-toggle pl-5 pr-5" data-flip="false" type="button" id="category-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tag mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M2 2v4.586l7 7L13.586 9l-7-7H2zM1 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2z"/>
-                        <path fill-rule="evenodd" d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                    </svg>
-                    Search Category
-                </button>
-                <div class="dropdown-menu" aria-labelledby="category-dropdown" id="category-dropdown-list">
-                    <div class="form-inline" id="category-list">
-                        <a href="#" id="category-instrument">악기</a>
-                        <a href="#" id="category-sing">노래/녹음</a>
-                    </div>
-                    <div class="form-inline"  id="category-list">
-                        <a href="#" id="category-dance">댄스</a>
-                        <a href="#" id="category-musical">뮤지컬</a>
-                    </div>
-                    <div class="form-inline"  id="category-list">
-                        <a href="#" id="category-cooking">쿠킹</a>
-                        <a href="#" id="category-study">스터디</a>
+
+            <div class="col-lg-9">
+                <div class="tab-content">
+                    <div class="tab-content-list">
+                        <div class="product">
+                            <div class="row no-gutters bg-white position-relative product_grid">
+                                <div class="col-md-6">
+                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
+                                </div>
+                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
+                                    <div class="meta d-flex justify-content-between">
+                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
+                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                    <div class="product-hashtag pt-2">
+                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
+                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
+                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
+                                        <span><i class="fa fa-hashtag"></i> MAC</span>
+                                    </div>
+                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
+                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
+                                        <span class="price">₩ 12,000 / 시간</span>
+                                    </div>
+                                    <a href="" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product mt-3">
+                            <div class="row no-gutters bg-white position-relative product_grid">
+                                <div class="col-md-6">
+                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
+                                </div>
+                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
+                                    <div class="meta d-flex justify-content-between">
+                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
+                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                    <div class="product-hashtag pt-2">
+                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
+                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
+                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
+                                        <span><i class="fa fa-hashtag"></i> MAC</span>
+                                    </div>
+                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
+                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
+                                        <span class="price">₩ 12,000 / 시간</span>
+                                    </div>
+                                    <a href="" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product mt-3">
+                            <div class="row no-gutters bg-white position-relative product_grid">
+                                <div class="col-md-6">
+                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
+                                </div>
+                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
+                                    <div class="meta d-flex justify-content-between">
+                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
+                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                    <div class="product-hashtag pt-2">
+                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
+                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
+                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
+                                        <span><i class="fa fa-hashtag"></i> MAC</span>
+                                    </div>
+                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
+                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
+                                        <span class="price">₩ 12,000 / 시간</span>
+                                    </div>
+                                    <a href="" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product mt-3">
+                            <div class="row no-gutters bg-white position-relative product_grid">
+                                <div class="col-md-6">
+                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
+                                </div>
+                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
+                                    <div class="meta d-flex justify-content-between">
+                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
+                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                    <div class="product-hashtag pt-2">
+                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
+                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
+                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
+                                        <span><i class="fa fa-hashtag"></i> MAC</span>
+                                    </div>
+                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
+                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
+                                        <span class="price">₩ 12,000 / 시간</span>
+                                    </div>
+                                    <a href="" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product mt-3">
+                            <div class="row no-gutters bg-white position-relative product_grid">
+                                <div class="col-md-6">
+                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
+                                </div>
+                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
+                                    <div class="meta d-flex justify-content-between">
+                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
+                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                    <div class="product-hashtag pt-2">
+                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
+                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
+                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
+                                        <span><i class="fa fa-hashtag"></i> MAC</span>
+                                    </div>
+                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
+                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
+                                        <span class="price">₩ 12,000 / 시간</span>
+                                    </div>
+                                    <a href="" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product mt-3">
+                            <div class="row no-gutters bg-white position-relative product_grid">
+                                <div class="col-md-6">
+                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
+                                </div>
+                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
+                                    <div class="meta d-flex justify-content-between">
+                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
+                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                    <div class="product-hashtag pt-2">
+                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
+                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
+                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
+                                        <span><i class="fa fa-hashtag"></i> MAC</span>
+                                    </div>
+                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
+                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
+                                        <span class="price">₩ 12,000 / 시간</span>
+                                    </div>
+                                    <a href="" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product mt-3">
+                            <div class="row no-gutters bg-white position-relative product_grid">
+                                <div class="col-md-6">
+                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
+                                </div>
+                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
+                                    <div class="meta d-flex justify-content-between">
+                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
+                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                    <div class="product-hashtag pt-2">
+                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
+                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
+                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
+                                        <span><i class="fa fa-hashtag"></i> MAC</span>
+                                    </div>
+                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
+                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
+                                        <span class="price">₩ 12,000 / 시간</span>
+                                    </div>
+                                    <a href="" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product mt-3">
+                            <div class="row no-gutters bg-white position-relative product_grid">
+                                <div class="col-md-6">
+                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
+                                </div>
+                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
+                                    <div class="meta d-flex justify-content-between">
+                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
+                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                    <div class="product-hashtag pt-2">
+                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
+                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
+                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
+                                        <span><i class="fa fa-hashtag"></i> MAC</span>
+                                    </div>
+                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
+                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
+                                        <span class="price">₩ 12,000 / 시간</span>
+                                    </div>
+                                    <a href="" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center pt-5">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
-            <!-- total search button -->
-            <button type="button" class="btn btn-dark" id="mainpage-search-button">Search</button>
         </div>
     </div>
-    <div class="list-side-nav mt-5">
-        <nav class="nav flex-column search-nav bg-white">
-            <h5>Categories</h5>
-            <a class="nav-link" href="#">악기 (5)</a>
-            <a class="nav-link" href="#">노래/녹음 (5)</a>
-            <a class="nav-link" href="#">댄스 (5)</a>
-            <a class="nav-link" href="#">뮤지컬 (5)</a>
-            <a class="nav-link" href="#">쿠킹 (5)</a>
-            <a class="nav-link" href="#">스터디 (5)</a>
-        </nav>
-        <nav class="nav flex-column search-nav bg-white mt-4">
-            <h5>Price</h5>
-            <a class="nav-link" href="#">₩10,000 이하 (5)</a>
-            <a class="nav-link" href="#">₩10,000 - ₩35,000 (5)</a>
-            <a class="nav-link" href="#">₩35,000 - ₩70,000 (5)</a>
-            <a class="nav-link" href="#">₩7,000 - ₩100,000 (5)</a>
-            <a class="nav-link" href="#">₩100,000 이상 (5)</a>
-        </nav>
-    </div>
 </div>
-
 <!-- space list end -->
 {{>layout/footer}}
