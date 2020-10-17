@@ -12,6 +12,7 @@ public class IndexController {
 
     @GetMapping("/user/login")
     public String login_user() {
+
         return "login_user";
     }
 
@@ -22,7 +23,13 @@ public class IndexController {
 
     @GetMapping("/space/list")
     public String space_list() {
+
         return "space_list";
+    }
+
+    @GetMapping("/space/detail")
+    public String space_detail() {
+        return "space_detail";
     }
 
 }

@@ -211,3 +211,112 @@ input {
 #product-list-title-p {
   font-size: 23px;
 }
+
+/* space detail */
+.content-body {
+  background-color: white;
+  border-radius: 1%;
+  padding-bottom: 5em;
+  padding-top: 3em;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+.carousel {
+  width: 100%;
+  height: auto;
+}
+
+.reservation-nav {
+  border: 1px solid gray;
+  border-radius: 3%;
+}
+
+.reservation-p {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.text-sidebar {
+  border-left: 5px solid #FFCC00;
+  padding-left: 10px;
+}
+
+.inform-list > li{
+  padding-bottom: 10px;
+}
+
+.review-image {
+  width: 6em;
+}
+
+.fa-star, .fa-star-o {
+  color: #FFCC00;
+  padding-right: 3px;
+}
+
+.review-star {
+  padding-right: 4em;
+}
+
+.anchor-nav {
+  background-color: #FFCC00;
+  width: 80%;
+  opacity: 80%;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.anchor-nav > li > a {
+  color: black;
+  font-weight: bold;
+}
+
+.anchor-nav > li > a:hover {
+  color: white;
+}
+
+.select-room {
+  height: auto;
+}
+
+.price-info {
+  margin-top: 1em;
+  background-color: #EAEAEA;
+  padding: 1em;
+  height: 17%;
+}
+
+.price-span-first {
+  font-weight: bold;
+  margin-right: 2em;
+  font-size: 1.2em;
+}
+
+.price-span-second {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #0066CC;
+}
+
+.question, .answer {
+  padding-left: 6em;
+  padding-right: 5em;
+}
+
+.answer-div {
+  margin-left: 6em;
+  margin-right: 5em;
+  width: 80%;
+}
+
+.answer > a {
+  color: #9999FF;
+  font-weight: bold;
+}
+
+.answer > a:hover {
+  text-decoration: none;
+
+}
