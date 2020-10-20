@@ -319,3 +319,51 @@ input {
   text-decoration: none;
 
 }
+
+/* payment */
+.reservation-title {
+  width: 15%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.8em;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 1.5em;
+}
+
+.info-div {
+  border: 1px solid black;
+  width: 70%;
+  padding: 1em;
+}
+
+.info-p-div {
+  font-weight: 600;
+  padding-top: 1em;
+}
+
+.info-p {
+  border-bottom: 2px solid gray;
+}
+
+.info-div div div div input {
+  border: 1px solid black;
+  width: 50%;
+}
+
+.bill-table tbody tr td {
+  font-weight: 500;
+}
+
+.bill-table tbody tr th{
+  width: 20%;
+}
+
+.bill-table-last-row {
+  background-color: #cfd1d4;
+}
+
+.payment-btn {
+  font-size: 1.3em;
+  padding: 0.5em 1em 0.5em 1em;
+}

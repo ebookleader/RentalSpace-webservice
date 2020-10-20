@@ -32,5 +32,10 @@ public class IndexController {
         return "space_detail";
     }
 
+    @GetMapping("/space/payment")
+    public String space_payment() {
+        return "payment";
+    }
+
 }
 
