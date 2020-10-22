@@ -37,5 +37,10 @@ public class IndexController {
         return "payment";
     }
 
+    @GetMapping("/mypage/home")
+    public String mypage_home() {
+        return "mypage_home";
+    }
+
 }
 
