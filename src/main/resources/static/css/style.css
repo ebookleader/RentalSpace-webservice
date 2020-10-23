@@ -367,3 +367,35 @@ input {
   font-size: 1.3em;
   padding: 0.5em 1em 0.5em 1em;
 }
+
+/* mypage home */
+
+.mypage-reservation-list, .mypage-info-list {
+  list-style: none;
+}
+
+.mypage-reservation-list li, .mypage-info-list li {
+  margin-bottom: 1em;
+}
+
+.mypage-reservation-list li a, .mypage-reservation-list li span, .mypage-info-list li span {
+  color: black;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mypage-info-list li a {
+  color: gray;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mypage-reservation-list li a:hover, .mypage-info-list li a:hover {
+  text-decoration: none;
+  color: #FF9900;
+}
+
+.email-change-btn {
+  border: none;
+  font-weight: 600;
+}
