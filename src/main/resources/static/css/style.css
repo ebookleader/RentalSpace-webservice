@@ -428,3 +428,18 @@ input {
   margin-right: 6em;
   margin-bottom: 5em;
 }
+
+/* liked list */
+.liked-list-start {
+  margin-left: 10em;
+  margin-right: 10em;
+}
+
+.liked-list-start p {
+  font-weight: 600;
+  font-size: 1.8em;
+  padding-left: 2em;
+  color: white;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+}

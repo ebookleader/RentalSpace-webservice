@@ -62,5 +62,10 @@ public class IndexController {
         return "deleteAccount";
     }
 
+    @GetMapping("/mypage/likedList")
+    public String liked_list() {
+        return "liked_list";
+    }
+
 }
 
