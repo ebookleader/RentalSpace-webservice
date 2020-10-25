@@ -399,3 +399,32 @@ input {
   border: none;
   font-weight: 600;
 }
+
+/* before change password */
+.beforePassword-div {
+  padding-top: 5em;
+}
+
+.beforePasswordBtn-div, .passwordBtn-div {
+  padding-bottom: 5em;
+}
+
+.beforePassword-label {
+  font-weight: 600;
+  font-size: 1.2em;
+  padding-right: 1.5em;
+}
+
+/* change password */
+.changePassword-div label {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+/* delete account */
+.delete-info {
+  margin-top: 2em;
+  margin-left: 6em;
+  margin-right: 6em;
+  margin-bottom: 5em;
+}

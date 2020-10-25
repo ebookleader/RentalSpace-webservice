@@ -42,5 +42,25 @@ public class IndexController {
         return "mypage_home";
     }
 
+    @GetMapping("/mypage/before/changePassword")
+    public String before_changePassword() {
+        return "before_changePassword";
+    }
+
+    @GetMapping("/mypage/changePassword")
+    public String changePassword() {
+        return "changePassword";
+    }
+
+    @GetMapping("/mypage/before/deleteAccount")
+    public String before_deleteAccount() {
+        return "before_deleteAccount";
+    }
+
+    @GetMapping("/mypage/deleteAccount")
+    public String deleteAccount() {
+        return "deleteAccount";
+    }
+
 }
 
