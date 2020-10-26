@@ -443,3 +443,24 @@ input {
   padding-top: 0.4em;
   padding-bottom: 0.4em;
 }
+
+/* reservation list now */
+.reservation-list-div {
+  margin: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: #EAEAEA;
+}
+
+.reservation-img {
+  padding-right: 0;
+}
+
+.reservation-info {
+  font-weight: 600;
+  margin-right: 10em;
+}
+
+.reservation-info p a:hover {
+  text-decoration: none;
+}

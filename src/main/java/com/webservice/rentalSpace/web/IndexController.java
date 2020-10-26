@@ -67,5 +67,10 @@ public class IndexController {
         return "liked_list";
     }
 
+    @GetMapping("/mypage/reservation/ongoing")
+    public String ongoing_reservation_list() {
+        return "ongoing_reservation_list";
+    }
+
 }
 
