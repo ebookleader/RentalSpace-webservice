@@ -77,5 +77,20 @@ public class IndexController {
         return "past_reservation_list";
     }
 
+    @GetMapping("/mypage/review/write")
+    public String write_review() {
+        return "writeReview";
+    }
+
+    @GetMapping("/mypage/review")
+    public String my_review() {
+        return "myReview";
+    }
+
+    @GetMapping("/mypage/review/delete")
+    public String delete_review() {
+        return "deleteReview";
+    }
+
 }
 

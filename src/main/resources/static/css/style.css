@@ -464,3 +464,43 @@ input {
 .reservation-info p a:hover {
   text-decoration: none;
 }
+
+/* writeReview */
+.rating-div {
+  margin-left: 6em;
+  margin-right: 2em;
+  vertical-align: middle;
+  padding-left: 2em;
+  border: 1px solid gray;
+}
+
+.rating-p {
+  font-weight: 600;
+  font-size: 1.1em;
+  margin-top: 0.5em;
+  margin-bottom: 10px;
+  color: #5F5F5F;
+}
+
+.reiewTextarea {
+  border: 1px solid gray;
+  padding: 1em;
+}
+
+textarea {
+   resize: none;
+}
+
+/* my review */
+.my-review-table {
+ border: 1px solid gray;
+ margin-left: 2em;
+ margin-right: 2em;
+ padding: 1em;
+}
+
+/* delete review */
+.reviewDeleteForm {
+  margin-left: 20em;
+  margin-bottom: 2em;
+}
