@@ -72,5 +72,10 @@ public class IndexController {
         return "ongoing_reservation_list";
     }
 
+    @GetMapping("/mypage/reservation/past")
+    public String past_reservation_list() {
+        return "past_reservation_list";
+    }
+
 }
 
