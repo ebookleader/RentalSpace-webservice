@@ -1,0 +1,34 @@
+{{>layout/header}}
+<!-- login start -->
+<div class="content-area pb-5 pt-5">
+    <div class="container d-flex justify-content-center">
+        <form class="mt-5 mb-5 p-5" id="login-form">
+            <h3 class="text-center mb-5">Login</h3>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="" id="naver-login"><img src="/img/naver.png" width="50" height="50" alt=""></span>
+                </div>
+                <button type="button" class="btn-naver" aria-describedby="naver-login">Sign in with Naver</button>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="" id="google-login"><img src="/img/google.png" width="50" height="50" alt=""></span>
+                </div>
+                <button type="button" class="btn-google" aria-describedby="google-login">Sign in with Google</button>
+            </div>
+            <hr>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password">
+            </div>
+            <p class="text-right"><a href="" class="text-decoration-none">Forgot password?</a></p>
+            <button type="submit" class="btn btn-primary mt-4" id="btn-login">Login</button>
+            <a class="btn btn-info mt-2" href="#" role="button" id="btn-signup">Sign Up</a>
+        </form>
+    </div>
+</div>
+<!-- login end -->
+{{>layout/footer}}
