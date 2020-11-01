@@ -23,6 +23,7 @@ public class PostsRepositoryTest {
         postsRepository.deleteAll();
     }
 
+
     @Test
     public void post_save_load() {
         String title = "test title";
