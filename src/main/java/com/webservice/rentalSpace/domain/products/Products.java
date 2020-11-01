@@ -77,6 +77,22 @@ public class Products extends BaseTimeEntity {
         this.p_avgRating = p_avgRating;
     }
 
+    public void update(String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice,
+                       String p_introduce, String p_facility, String p_notice, String p_policy, int p_maxNum, int p_liked, double p_avgRating) {
+        this.p_name = p_name;
+        this.p_location = p_location;
+        this.p_city = p_city;
+        this.p_category = p_category;
+        this.p_weekdayPrice = p_weekdayPrice;
+        this.p_weekendPrice = p_weekendPrice;
+        this.p_introduce = p_introduce;
+        this.p_facility = p_facility;
+        this.p_notice = p_notice;
+        this.p_policy = p_policy;
+        this.p_maxNum = p_maxNum;
+        this.p_liked = p_liked;
+        this.p_avgRating = p_avgRating;
+    }
 
 
 }
