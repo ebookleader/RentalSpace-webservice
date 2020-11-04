@@ -2,12 +2,16 @@ package com.webservice.rentalSpace.service.products;
 
 import com.webservice.rentalSpace.domain.products.Products;
 import com.webservice.rentalSpace.domain.products.ProductsRepository;
+import com.webservice.rentalSpace.web.dto.ProductsListResponseDto;
 import com.webservice.rentalSpace.web.dto.ProductsResponseDto;
 import com.webservice.rentalSpace.web.dto.ProductsSaveRequestDto;
 import com.webservice.rentalSpace.web.dto.ProductsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -37,6 +41,13 @@ public class ProductsService {
         );
 
         return new ProductsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsListResponseDto> findAllDesc() {
+        return productsRepository.findAllDesc().stream()
+                .map(ProductsListResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 }

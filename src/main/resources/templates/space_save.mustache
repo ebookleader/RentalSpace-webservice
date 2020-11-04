@@ -1,0 +1,99 @@
+{{>layout/header}}
+<div class="content-area pb-5 pt-3">
+    <div class="container mt-5 content-body">
+        <h3 class="pb-4">상품 등록</h3>
+        <div class="product-save-form">
+            <form class="">
+                <div class="form-group">
+                    <label for="p_owner_id">작성자</label>
+                    <input type="text" class="form-control" id="p_owner_id" placeholder="작성자를 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="p_name">게시글 제목</label>
+                    <input type="text" class="form-control" id="p_name" placeholder="게시글 제목을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="p_category">카테고리</label>
+                    <select class="form-control" id="p_category">
+                        <option>악기</option>
+                        <option>노래/녹음</option>
+                        <option>댄스</option>
+                        <option>뮤지컬</option>
+                        <option>쿠킹</option>
+                        <option>스터디</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="p_city">도시</label>
+                    <select class="form-control" id="p_city">
+                        <option>서울특별시</option>
+                        <option>인천광역시</option>
+                        <option>대전광역시</option>
+                        <option>대구광역시</option>
+                        <option>부산광역시</option>
+                        <option>광주광역시</option>
+                        <option>울산광역시</option>
+                        <option>세종특별자치도</option>
+                        <option>경기도</option>
+                        <option>강원도</option>
+                        <option>충청북도</option>
+                        <option>충청남도</option>
+                        <option>전라북도</option>
+                        <option>전라남도</option>
+                        <option>경상북도</option>
+                        <option>경상남도</option>
+                        <option>제주도</option>
+                        <option></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="p_location">장소 위치</label>
+                    <input type="text" class="form-control" id="p_location" placeholder="위치를 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="p_introduce">장소 소개</label>
+                    <textarea class="form-control" id="p_introduce" placeholder="장소 소개를 입력하세요" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="p_weekdayPrice">평일 가격 / 시간</label>
+                    <input type="number" class="form-control" id="p_weekdayPrice" placeholder="평일 가격 (/시간)을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="p_weekendPrice">주말 가격 / 시간</label>
+                    <input type="number" class="form-control" id="p_weekendPrice" placeholder="주말 가격 (/시간)을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="p_facility">시설</label>
+                    <textarea class="form-control" id="p_facility" placeholder="시설을 입력하세요" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="p_notice">유의사항</label>
+                    <textarea class="form-control" id="p_notice" placeholder="유의사항을 입력하세요" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="p_policy">정책</label>
+                    <textarea class="form-control" id="p_policy" placeholder="정책을 입력하세요" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="p_maxNum">최대 인원 수</label>
+                    <input type="number" class="form-control" id="p_maxNum" placeholder="최대 인원 수를 입력하세요">
+                </div>
+
+                <!-- 후에 값 가져오는거로 수정 -->
+                <div class="form-group">
+                    <label for="p_liked">좋아요 수</label>
+                    <input type="number" class="form-control" id="p_liked" placeholder="좋아요 수">
+                </div>
+                <div class="form-group">
+                    <label for="p_avgRating">별점</label>
+                    <input type="number" class="form-control" id="p_avgRating" placeholder="별점">
+                </div>
+            </form>
+
+            <a href="/" role="button" class="btn btn-secondary">취소</a>
+            <button type="button" class="btn btn-primary" id="btn-space-save">등록</button>
+        </div>
+
+    </div>
+</div>
+{{>layout/footer}}

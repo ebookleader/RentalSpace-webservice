@@ -69,198 +69,31 @@
             <div class="col-lg-9">
                 <div class="tab-content">
                     <div class="tab-content-list">
-                        <div class="product">
-                            <div class="row no-gutters bg-white position-relative product_grid">
-                                <div class="col-md-6">
-                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
-                                </div>
-                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
-                                    <div class="meta d-flex justify-content-between">
-                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
-                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                        <!--상품 전체 조회 만드는중 시작-->
+                        {{#products}}
+                            <div class="product mt-3">
+                                <div class="row no-gutters bg-white position-relative product_grid">
+                                    <div class="col-md-6">
+                                        <img class="product_img img-fluid" src="/img/recordroom.png" >
                                     </div>
-                                    <div class="product-hashtag pt-2">
-                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
-                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
-                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
-                                        <span><i class="fa fa-hashtag"></i> MAC</span>
+                                    <div class="col-md-6 position-static pt-4 pl-4 pr-4">
+                                        <div class="meta d-flex justify-content-between">
+                                            <h4><a href="/space/detail/{{p_id}}" id="product-title">{{p_name}}</a></h4>
+                                            <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
+                                        </div>
+
+                                        <div class="ads_price_date d-flex justify-content-between product-last-line">
+                                            <span><i class="fa fa-star"></i> {{p_avgRating}}/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
+                                            <span class="price">₩ {{p_weekdayPrice}} / 시간</span>
+                                        </div>
+                                        <a href="/space/detail/{{p_id}}" class="stretched-link"></a>
                                     </div>
-                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
-                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
-                                        <span class="price">₩ 12,000 / 시간</span>
-                                    </div>
-                                    <a href="" class="stretched-link"></a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="product mt-3">
-                            <div class="row no-gutters bg-white position-relative product_grid">
-                                <div class="col-md-6">
-                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
-                                </div>
-                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
-                                    <div class="meta d-flex justify-content-between">
-                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
-                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                    <div class="product-hashtag pt-2">
-                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
-                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
-                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
-                                        <span><i class="fa fa-hashtag"></i> MAC</span>
-                                    </div>
-                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
-                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
-                                        <span class="price">₩ 12,000 / 시간</span>
-                                    </div>
-                                    <a href="" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product mt-3">
-                            <div class="row no-gutters bg-white position-relative product_grid">
-                                <div class="col-md-6">
-                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
-                                </div>
-                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
-                                    <div class="meta d-flex justify-content-between">
-                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
-                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                    <div class="product-hashtag pt-2">
-                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
-                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
-                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
-                                        <span><i class="fa fa-hashtag"></i> MAC</span>
-                                    </div>
-                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
-                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
-                                        <span class="price">₩ 12,000 / 시간</span>
-                                    </div>
-                                    <a href="" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product mt-3">
-                            <div class="row no-gutters bg-white position-relative product_grid">
-                                <div class="col-md-6">
-                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
-                                </div>
-                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
-                                    <div class="meta d-flex justify-content-between">
-                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
-                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                    <div class="product-hashtag pt-2">
-                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
-                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
-                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
-                                        <span><i class="fa fa-hashtag"></i> MAC</span>
-                                    </div>
-                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
-                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
-                                        <span class="price">₩ 12,000 / 시간</span>
-                                    </div>
-                                    <a href="" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product mt-3">
-                            <div class="row no-gutters bg-white position-relative product_grid">
-                                <div class="col-md-6">
-                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
-                                </div>
-                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
-                                    <div class="meta d-flex justify-content-between">
-                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
-                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                    <div class="product-hashtag pt-2">
-                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
-                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
-                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
-                                        <span><i class="fa fa-hashtag"></i> MAC</span>
-                                    </div>
-                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
-                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
-                                        <span class="price">₩ 12,000 / 시간</span>
-                                    </div>
-                                    <a href="" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product mt-3">
-                            <div class="row no-gutters bg-white position-relative product_grid">
-                                <div class="col-md-6">
-                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
-                                </div>
-                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
-                                    <div class="meta d-flex justify-content-between">
-                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
-                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                    <div class="product-hashtag pt-2">
-                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
-                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
-                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
-                                        <span><i class="fa fa-hashtag"></i> MAC</span>
-                                    </div>
-                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
-                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
-                                        <span class="price">₩ 12,000 / 시간</span>
-                                    </div>
-                                    <a href="" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product mt-3">
-                            <div class="row no-gutters bg-white position-relative product_grid">
-                                <div class="col-md-6">
-                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
-                                </div>
-                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
-                                    <div class="meta d-flex justify-content-between">
-                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
-                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                    <div class="product-hashtag pt-2">
-                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
-                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
-                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
-                                        <span><i class="fa fa-hashtag"></i> MAC</span>
-                                    </div>
-                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
-                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
-                                        <span class="price">₩ 12,000 / 시간</span>
-                                    </div>
-                                    <a href="" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product mt-3">
-                            <div class="row no-gutters bg-white position-relative product_grid">
-                                <div class="col-md-6">
-                                    <img class="product_img img-fluid" src="/img/recordroom.png" >
-                                </div>
-                                <div class="col-md-6 position-static pt-4 pl-4 pr-4">
-                                    <div class="meta d-flex justify-content-between">
-                                        <h4><a href="index.html" id="product-title">선셋밸리 레코드스튜디오</a></h4>
-                                        <a class="like" href="#"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                    <div class="product-hashtag pt-2">
-                                        <span class="mr-2"><i class="fa fa-hashtag"></i> 서울 종로구</span>
-                                        <span><i class="fa fa-hashtag"></i> 녹음장비</span>
-                                        <span><i class="fa fa-hashtag"></i> 방음시설</span>
-                                        <span><i class="fa fa-hashtag"></i> MAC</span>
-                                    </div>
-                                    <div class="ads_price_date d-flex justify-content-between product-last-line">
-                                        <span><i class="fa fa-star"></i> 4.3/5.0 <span class="review pl-1">(이용후기 43개)</span></span>
-                                        <span class="price">₩ 12,000 / 시간</span>
-                                    </div>
-                                    <a href="" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
+                        {{/products}}
+
+                        <!--상품 전체 조회 만드는중 끝-->
+
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center pt-5">
                                 <li class="page-item">

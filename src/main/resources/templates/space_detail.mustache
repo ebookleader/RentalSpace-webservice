@@ -2,7 +2,7 @@
 <!-- space detail start -->
 <div class="content-area pb-5 pt-3">
     <div class="container mt-5 content-body">
-        <h3 class="pb-4">선셋밸리 레코드 스튜디오</h3>
+        <h3 class="pb-4">{{product.p_name}}</h3>
         <div class="row">
             <div class="col-8">
                 <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -40,8 +40,8 @@
                                     <i class="fa fa-credit-card fa-2x pr-2" aria-hidden="true"></i>
                                 </p>
                             </td>
-                            <td><span class="price-span-first">주중</span><span class="price-span-second">7000원/시간</span></td>
-                            <td><span class="price-span-first">주말</span><span class="price-span-second">9000원/시간</span></td>
+                            <td><span class="price-span-first">주중</span><span class="price-span-second">{{product.p_weekdayPrice}}원/시간</span></td>
+                            <td><span class="price-span-first">주말</span><span class="price-span-second">{{product.p_weekendPrice}}원/시간</span></td>
                         </tr>
                         </tbody>
                     </table>
