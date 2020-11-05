@@ -30,7 +30,8 @@ public class ProductsService {
         );
 
         products.update(requestDto.getP_name(), requestDto.getP_location(), requestDto.getP_city(), requestDto.getP_category(), requestDto.getP_weekdayPrice(), requestDto.getP_weekendPrice(),
-        requestDto.getP_introduce(), requestDto.getP_facility(), requestDto.getP_notice(), requestDto.getP_policy(), requestDto.getP_maxNum(), requestDto.getP_liked(), requestDto.getP_avgRating());
+        requestDto.getP_introduce(), requestDto.getP_facility1(), requestDto.getP_facility2(), requestDto.getP_facility3(), requestDto.getP_facility4(),
+                requestDto.getP_facility5(), requestDto.getP_facility6(), requestDto.getP_facility7(), requestDto.getP_facility8(), requestDto.getP_facility9(), requestDto.getP_facility10(), requestDto.getP_notice(), requestDto.getP_policy(), requestDto.getP_maxNum(), requestDto.getP_liked(), requestDto.getP_avgRating());
 
         return id;
     }

@@ -34,7 +34,7 @@ public class ProductsRepositoryTest {
         int p_weekdayPrice=7000;
         int p_weekendPrice=8000;
         String p_introduce="test product introduce";
-        String p_facility="test facility";
+        String p_facility1="test facility1";
         String p_notice="test notice";
         String p_policy="test policy";
         int p_maxNum=10;
@@ -51,7 +51,7 @@ public class ProductsRepositoryTest {
                 .p_weekdayPrice(p_weekdayPrice)
                 .p_weekendPrice(p_weekendPrice)
                 .p_introduce(p_introduce)
-                .p_facility(p_facility)
+                .p_facility1(p_facility1)
                 .p_notice(p_notice)
                 .p_policy(p_policy)
                 .p_maxNum(p_maxNum)
