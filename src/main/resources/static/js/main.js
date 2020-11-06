@@ -29,7 +29,7 @@ $(document).ready(function() {
     $('.facility_add_btn').click(function() {
       if(cnt<maxField) {
         cnt++;
-        var fieldHtml = '<div class="form-inline"><div class="input-group-prepend"><span class="input-group-text" id="facility-'+cnt+'">'+cnt+'</span></div><input type="text" class="form-control" id="p_facility'+cnt+'" aria-label="Username" aria-describedby="facility-'+cnt+'"><a href="#aa" class="facility_remove_btn"><i class="fa fa-minus ml-3"></i></a></div>'
+        var fieldHtml = '<div class="form-inline"><div class="input-group-prepend"><span class="input-group-text" id="facility-'+cnt+'">'+cnt+'</span></div><input type="text" class="form-control" name="facility" id="p_facility'+cnt+'" aria-label="Username" aria-describedby="facility-'+cnt+'"><a href="#aa" class="facility_remove_btn"><i class="fa fa-minus ml-3"></i></a></div>'
         $('.append').append(fieldHtml);
       }
     });
@@ -39,7 +39,7 @@ $(document).ready(function() {
       cnt--;
       $('.append').empty();
       for(var i=2;i<=cnt;i++) {
-        var fieldHtml = '<div class="form-inline"><div class="input-group-prepend"><span class="input-group-text" id="facility-'+i+'">'+i+'</span></div><input type="text" class="form-control" id="p_facility'+i+'" aria-label="Username" aria-describedby="facility-'+i+'"><a href="#aa" class="facility_remove_btn"><i class="fa fa-minus ml-3"></i></a></div>'
+        var fieldHtml = '<div class="form-inline"><div class="input-group-prepend"><span class="input-group-text" id="facility-'+i+'">'+i+'</span></div><input type="text" class="form-control" name="facility" id="p_facility'+i+'" aria-label="Username" aria-describedby="facility-'+i+'"><a href="#aa" class="facility_remove_btn"><i class="fa fa-minus ml-3"></i></a></div>'
         $('.append').append(fieldHtml);
       }
     });
@@ -56,5 +56,23 @@ $(function () {
     $('#datetimepicker1').datetimepicker('maxDate', e.date);
   });
 });
+
+$('#p_name').keyup(function(e) {
+    var p_name = $(this).val();
+    $('.title-count').html('('+p_name.length+' / 최대 100자)');
+    if(p_name.length > 100) {
+        $(this).val(p_name.substring(0,100));
+        $('.title-count').html('(100 / 최대 100자)');
+    }
+});
+
+$('#p_introduce').keyup(function(e) {
+    var p_introduce = $(this).val();
+    $('.introduce-count').html('('+p_introduce.length+' / 최대 500자)');
+    if(p_introduce.length > 500) {
+        $(this).val(p_introduce.substring(0,500));
+        $('.introduce-count').html('(500 / 최대 500자)');
+    }
+})
 
 

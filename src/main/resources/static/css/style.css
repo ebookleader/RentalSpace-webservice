@@ -504,3 +504,7 @@ textarea {
   margin-left: 20em;
   margin-bottom: 2em;
 }
+
+label {
+    font-weight: bold;
+}

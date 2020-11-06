@@ -8,6 +8,11 @@ var main = {
     },
 
     save : function() {
+        var facilityList = [];
+        $('input[name="facility"]').each(function(i) {
+            facilityList.push($(this).val());
+        });
+
         var data = {
             p_owner_id: $('#p_owner_id').val(),
             p_name: $('#p_name').val(),
@@ -17,24 +22,14 @@ var main = {
             p_weekdayPrice: $('#p_weekdayPrice').val(),
             p_weekendPrice: $('#p_weekendPrice').val(),
             p_introduce: $('#p_introduce').val(),
-            p_facility1: $('#p_facility1').val(),
-            p_facility2: $('#p_facility2').val(),
-            p_facility3: $('#p_facility3').val(),
-            p_facility4: $('#p_facility4').val(),
-            p_facility5: $('#p_facility5').val(),
-            p_facility6: $('#p_facility6').val(),
-            p_facility7: $('#p_facility7').val(),
-            p_facility8: $('#p_facility8').val(),
-            p_facility9: $('#p_facility9').val(),
-            p_facility10: $('#p_facility10').val(),
             p_notice: $('#p_notice').val(),
             p_policy: $('#p_policy').val(),
             p_maxNum: $('#p_maxNum').val(),
             p_liked: $('#p_liked').val(),
             p_avgRating: $('#p_avgRating').val(),
+            facility : facilityList
         };
 
-        alert(data);
         $.ajax({
             type: 'POST',
             url: '/api/v1/products',
