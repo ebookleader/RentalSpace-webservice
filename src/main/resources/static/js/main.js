@@ -23,26 +23,29 @@ $(document).ready(function() {
 
     // 동적 input(facility) 추가
     var maxField = 10;
-    var wrapper = $('.append');
+    var facility_wrapper = $('#facility_append');
     var cnt = 1;
 
     $('.facility_add_btn').click(function() {
       if(cnt<maxField) {
         cnt++;
-        var fieldHtml = '<div class="form-inline"><div class="input-group-prepend"><span class="input-group-text" id="facility-'+cnt+'">'+cnt+'</span></div><input type="text" class="form-control" name="facility" id="p_facility'+cnt+'" aria-label="Username" aria-describedby="facility-'+cnt+'"><a href="#aa" class="facility_remove_btn"><i class="fa fa-minus ml-3"></i></a></div>'
-        $('.append').append(fieldHtml);
+        var fieldHtml = '<div class="form-inline"><div class="input-group-prepend"><span class="input-group-text" id="facility-'+cnt+'">'+cnt+'</span></div><input type="text" class="form-control" name="facility" id="p_facility'+cnt+'"><a href="#aa" class="facility_remove_btn"><i class="fa fa-minus ml-3"></i></a></div>'
+        $('#facility_append').append(fieldHtml);
       }
     });
 
-    $(wrapper).on('click','.facility_remove_btn', function(e) {
+    $(facility_wrapper).on('click','.facility_remove_btn', function(e) {
       e.preventDefault();
       cnt--;
-      $('.append').empty();
+      $('#facility_append').empty();
       for(var i=2;i<=cnt;i++) {
         var fieldHtml = '<div class="form-inline"><div class="input-group-prepend"><span class="input-group-text" id="facility-'+i+'">'+i+'</span></div><input type="text" class="form-control" name="facility" id="p_facility'+i+'" aria-label="Username" aria-describedby="facility-'+i+'"><a href="#aa" class="facility_remove_btn"><i class="fa fa-minus ml-3"></i></a></div>'
-        $('.append').append(fieldHtml);
+        $('#facility_append').append(fieldHtml);
       }
     });
+
+    // 동적 input notice 추가
+
 
 })
 

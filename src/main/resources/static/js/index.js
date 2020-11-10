@@ -22,7 +22,6 @@ var main = {
             p_weekdayPrice: $('#p_weekdayPrice').val(),
             p_weekendPrice: $('#p_weekendPrice').val(),
             p_introduce: $('#p_introduce').val(),
-            p_notice: $('#p_notice').val(),
             p_policy: $('#p_policy').val(),
             p_maxNum: $('#p_maxNum').val(),
             p_liked: $('#p_liked').val(),

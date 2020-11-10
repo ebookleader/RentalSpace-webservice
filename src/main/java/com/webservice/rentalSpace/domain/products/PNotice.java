@@ -9,24 +9,21 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "facility")
-public class Facility {
+public class PNotice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long f_id;
+    private Long pno_id;
 
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @ManyToOne // facility 저장시 product 저장하지 않도록 cascade 설정x
+    @ManyToOne
     @JoinColumn(name="p_id")
     private Products products;
 
-    private String facility;
-
+    private String p_notice;
 
     @Builder
-    public Facility(String facility, Products products) {
-        this.facility = facility;
+    public PNotice(String p_notice, Products products) {
+        this.p_notice = p_notice;
         this.products = products;
     }
 }

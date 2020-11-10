@@ -18,28 +18,21 @@ public class ProductsService {
     private final ProductsRepository productsRepository;
     private final FacilityRepository facilityRepository;
 
-//    @Transactional
-//    public Long facility_save(ProductsSaveRequestDto requestDto, Long p_id) {
-//        return facilityRepository.save(requestDto.toFacilityEntity()).getFid();
-//    }
-
     @Transactional
     public Long save(ProductsSaveRequestDto requestDto) {
-        System.out.println(">>>>>>>> save function <<<<<<<<<<<");
         Products products = requestDto.toEntity();
+        productsRepository.save(products);
+        List<String> facilities = requestDto.getFacility();
+        for(String fstr : facilities) {
+            Facility f = Facility.builder()
+                    .facility(fstr)
+                    .products(products)
+                    .build();
+            facilityRepository.save(f);
+        }
         return products.getP_id();
-//        return productsRepository.save(products).getP_id();
     }
 
-    public Facility addFacility(String facility, Products products) {
-        System.out.println(">>>>>>>> addFacility function <<<<<<<<<<<");
-        Facility fa = Facility.builder()
-                .facility(facility)
-                .products(products)
-                .build();
-        facilityRepository.save(fa);
-        return fa;
-    }
 
 //    @Transactional
 //    public Long update(Long id, ProductsUpdateRequestDto requestDto) {
