@@ -12,13 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FacilityRepositoryTest {
+public class ProductsFacilityRepositoryTest {
 
     @Autowired
     ProductsRepository productsRepository;
 
     @Autowired
-    FacilityRepository facilityRepository;
+    ProductsFacilityRepository facilityRepository;
 
     @After
     public void cleanup() {
@@ -56,22 +56,22 @@ public class FacilityRepositoryTest {
 
         productsRepository.save(products);
 
-        Facility facility = Facility.builder()
-                .facility("facility1")
+        ProductsFacility facility = ProductsFacility.builder()
+                .p_facility("facility1")
                 .products(products)
                 .build();
 
         facilityRepository.save(facility);
 
         ////////////////////////
-        Facility f1 = facilityRepository.findAll().get(0);
-        assertThat(f1.getFacility()).isEqualTo("facility1");
+        ProductsFacility f1 = facilityRepository.findAll().get(0);
+        assertThat(f1.getP_facility()).isEqualTo("facility1");
         Products p1 = productsRepository.findAll().get(0);
         assertThat(p1.getP_name()).isEqualTo(p_name);
 
-        List<Facility> flist = products.getFacility();
-        for(Facility f : flist) {
-            assertThat(f.getFacility()).startsWith("facility");
+        List<ProductsFacility> flist = products.getFacility();
+        for(ProductsFacility f : flist) {
+            assertThat(f.getP_facility()).startsWith("facility");
         }
     }
 }

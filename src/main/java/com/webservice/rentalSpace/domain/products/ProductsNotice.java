@@ -9,11 +9,11 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class PNotice {
+public class ProductsNotice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pno_id;
+    private Long pn_id;
 
     @ManyToOne
     @JoinColumn(name="p_id")
@@ -22,7 +22,7 @@ public class PNotice {
     private String p_notice;
 
     @Builder
-    public PNotice(String p_notice, Products products) {
+    public ProductsNotice(String p_notice, Products products) {
         this.p_notice = p_notice;
         this.products = products;
     }

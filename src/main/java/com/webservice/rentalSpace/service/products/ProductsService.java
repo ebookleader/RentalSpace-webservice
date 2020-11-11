@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 @Service
 public class ProductsService {
     private final ProductsRepository productsRepository;
-    private final FacilityRepository facilityRepository;
-    private final PNoticeRepository pnoticeRepository;
+    private final ProductsFacilityRepository facilityRepository;
+    private final ProductsNoticeRepository productsNoticeRepository;
     private final ProductsPolicyRepository productsPolicyRepository;
 
     @Transactional
@@ -23,19 +23,19 @@ public class ProductsService {
         productsRepository.save(products);
         List<String> facilities = requestDto.getFacility();
         for(String fac : facilities) {
-            Facility f = Facility.builder()
-                    .facility(fac)
+            ProductsFacility f = ProductsFacility.builder()
+                    .p_facility(fac)
                     .products(products)
                     .build();
             facilityRepository.save(f);
         }
         List<String> notices = requestDto.getNotice();
         for(String pno : notices) {
-            PNotice pn = PNotice.builder()
+            ProductsNotice pn = ProductsNotice.builder()
                     .p_notice(pno)
                     .products(products)
                     .build();
-            pnoticeRepository.save(pn);
+            productsNoticeRepository.save(pn);
         }
         List<String> policies = requestDto.getPolicy();
         for(String pol : policies) {

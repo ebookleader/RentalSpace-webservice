@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class ProductsPolicy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ppo_id;
+    private Long pp_id;
 
     @ManyToOne
     @JoinColumn(name="p_id")

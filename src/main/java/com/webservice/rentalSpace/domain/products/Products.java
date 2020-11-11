@@ -56,11 +56,11 @@ public class Products extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "products", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Facility> facility = new ArrayList<>();
+    private List<ProductsFacility> facility = new ArrayList<>();
 
     @OneToMany(mappedBy = "products")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<PNotice> p_notice = new ArrayList<>();
+    private List<ProductsNotice> p_notice = new ArrayList<>();
 
     @OneToMany(mappedBy = "products")
     @OnDelete(action = OnDeleteAction.CASCADE)

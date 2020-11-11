@@ -13,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PNoticeRepositoryTest {
+public class ProductsNoticeRepositoryTest {
 
     @Autowired
     ProductsRepository productsRepository;
 
     @Autowired
-    PNoticeRepository noticeRepository;
+    ProductsNoticeRepository noticeRepository;
 
     @After
     public void cleanup() {
@@ -57,7 +57,7 @@ public class PNoticeRepositoryTest {
 
         productsRepository.save(products);
 
-        PNotice pnotice = PNotice.builder()
+        ProductsNotice pnotice = ProductsNotice.builder()
                 .p_notice("notice1")
                 .products(products)
                 .build();
@@ -65,13 +65,13 @@ public class PNoticeRepositoryTest {
         noticeRepository.save(pnotice);
 
         //////////////////////////////////
-        PNotice p1 = noticeRepository.findAll().get(0);
+        ProductsNotice p1 = noticeRepository.findAll().get(0);
         assertThat(p1.getP_notice()).isEqualTo("notice1");
         Products pro1 = productsRepository.findAll().get(0);
         assertThat(pro1.getP_name()).isEqualTo(p_name);
 
-        List<PNotice> nlist = products.getP_notice();
-        for(PNotice p : nlist) {
+        List<ProductsNotice> nlist = products.getP_notice();
+        for(ProductsNotice p : nlist) {
             assertThat(p.getP_notice()).startsWith("notice");
         }
     }
