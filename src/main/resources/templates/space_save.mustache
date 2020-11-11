@@ -70,17 +70,33 @@
                         </div>
                         <input type="text" class="form-control" id="p_facility1" name="facility">
                     </div>
-                    <div id="facility_append">
+                    <div class="facility_append">
 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="p_notice">유의사항</label>
-                    <textarea class="form-control" id="p_notice" placeholder="유의사항을 입력하세요" rows="5"></textarea>
+                    <label for="p_notice">유의사항 (최대 10개 추가 가능)<a href="#ab" class="notice_add_btn ml-3"><i class="fa fa-plus"></i></a></label>
+                    <div class="form-inline">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="notice-1">1</span>
+                        </div>
+                        <input type="text" class="form-control" id="p_notice1" name="notice">
+                    </div>
+                    <div class="notice_append">
+
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="p_policy">정책</label>
-                    <textarea class="form-control" id="p_policy" placeholder="정책을 입력하세요" rows="5"></textarea>
+                    <label for="p_policy">정책 (최대 10개 추가 가능)<a href="#ab" class="policy_add_btn ml-3"><i class="fa fa-plus"></i></a></label>
+                    <div class="form-inline">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="policy-1">1</span>
+                        </div>
+                        <input type="text" class="form-control" id="p_policy1" name="policy">
+                    </div>
+                    <div class="policy_append">
+
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="p_maxNum">최대 인원 수</label>
