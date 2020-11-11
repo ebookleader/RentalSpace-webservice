@@ -14,7 +14,6 @@ public class ProductsResponseDto {
     private int p_weekdayPrice;
     private int p_weekendPrice;
     private String p_introduce;
-    private String p_policy;
     private int p_maxNum;
     private int p_liked;
     private double p_avgRating;
@@ -29,7 +28,6 @@ public class ProductsResponseDto {
         this.p_weekdayPrice = entity.getP_weekdayPrice();
         this.p_weekendPrice = entity.getP_weekendPrice();
         this.p_introduce = entity.getP_introduce();
-        this.p_policy = entity.getP_policy();
         this.p_maxNum = entity.getP_maxNum();
         this.p_liked = entity.getP_liked();
         this.p_avgRating = entity.getP_avgRating();

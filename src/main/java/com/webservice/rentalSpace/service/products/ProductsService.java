@@ -1,9 +1,6 @@
 package com.webservice.rentalSpace.service.products;
 
-import com.webservice.rentalSpace.domain.products.Facility;
-import com.webservice.rentalSpace.domain.products.FacilityRepository;
-import com.webservice.rentalSpace.domain.products.Products;
-import com.webservice.rentalSpace.domain.products.ProductsRepository;
+import com.webservice.rentalSpace.domain.products.*;
 import com.webservice.rentalSpace.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,18 +14,36 @@ import java.util.stream.Collectors;
 public class ProductsService {
     private final ProductsRepository productsRepository;
     private final FacilityRepository facilityRepository;
+    private final PNoticeRepository pnoticeRepository;
+    private final ProductsPolicyRepository productsPolicyRepository;
 
     @Transactional
     public Long save(ProductsSaveRequestDto requestDto) {
         Products products = requestDto.toEntity();
         productsRepository.save(products);
         List<String> facilities = requestDto.getFacility();
-        for(String fstr : facilities) {
+        for(String fac : facilities) {
             Facility f = Facility.builder()
-                    .facility(fstr)
+                    .facility(fac)
                     .products(products)
                     .build();
             facilityRepository.save(f);
+        }
+        List<String> notices = requestDto.getNotice();
+        for(String pno : notices) {
+            PNotice pn = PNotice.builder()
+                    .p_notice(pno)
+                    .products(products)
+                    .build();
+            pnoticeRepository.save(pn);
+        }
+        List<String> policies = requestDto.getPolicy();
+        for(String pol : policies) {
+            ProductsPolicy p = ProductsPolicy.builder()
+                    .p_policy(pol)
+                    .products(products)
+                    .build();
+            productsPolicyRepository.save(p);
         }
         return products.getP_id();
     }

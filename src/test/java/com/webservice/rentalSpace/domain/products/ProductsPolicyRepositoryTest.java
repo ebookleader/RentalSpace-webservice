@@ -6,28 +6,29 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FacilityRepositoryTest {
+public class ProductsPolicyRepositoryTest {
 
     @Autowired
-    ProductsRepository productsRepository;
+    private ProductsRepository productsRepository;
 
     @Autowired
-    FacilityRepository facilityRepository;
+    private ProductsPolicyRepository policyRepository;
 
     @After
     public void cleanup() {
         productsRepository.deleteAll();
-        facilityRepository.deleteAll();
+        policyRepository.deleteAll();
     }
 
     @Test
-    public void facility_save_load() {
+    public void productsPolicy_save_load() {
         String p_owner_id = "test id";
         String p_name = "test product name";
         String p_location = "test location";
@@ -56,22 +57,22 @@ public class FacilityRepositoryTest {
 
         productsRepository.save(products);
 
-        Facility facility = Facility.builder()
-                .facility("facility1")
+        ProductsPolicy ppolicy = ProductsPolicy.builder()
+                .p_policy("policy1")
                 .products(products)
                 .build();
 
-        facilityRepository.save(facility);
+        policyRepository.save(ppolicy);
 
-        ////////////////////////
-        Facility f1 = facilityRepository.findAll().get(0);
-        assertThat(f1.getFacility()).isEqualTo("facility1");
-        Products p1 = productsRepository.findAll().get(0);
-        assertThat(p1.getP_name()).isEqualTo(p_name);
 
-        List<Facility> flist = products.getFacility();
-        for(Facility f : flist) {
-            assertThat(f.getFacility()).startsWith("facility");
+        //////////////////////////////////
+        ProductsPolicy pp1 = policyRepository.findAll().get(0);
+        assertThat(pp1.getP_policy()).isEqualTo("policy1");
+        Products pro1 = productsRepository.findAll().get(0);
+        assertThat(pro1.getP_name()).isEqualTo(p_name);
+        List<ProductsPolicy> pplist = products.getP_policy();
+        for(ProductsPolicy p : pplist) {
+            assertThat(p.getP_policy()).startsWith("policy");
         }
     }
 }

@@ -34,8 +34,6 @@ public class ProductsRepositoryTest {
         int p_weekdayPrice=7000;
         int p_weekendPrice=8000;
         String p_introduce="test product introduce";
-        String p_notice="test notice";
-        String p_policy="test policy";
         int p_maxNum=10;
         int p_liked=24;
         double p_avgRating=3.5;
@@ -49,8 +47,6 @@ public class ProductsRepositoryTest {
                 .p_weekdayPrice(p_weekdayPrice)
                 .p_weekendPrice(p_weekendPrice)
                 .p_introduce(p_introduce)
-                .p_notice(p_notice)
-                .p_policy(p_policy)
                 .p_maxNum(p_maxNum)
                 .p_liked(p_liked)
                 .p_avgRating(p_avgRating)

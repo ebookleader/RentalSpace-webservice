@@ -50,12 +50,6 @@ public class Products extends BaseTimeEntity {
     private String p_img2;
     private String p_img3;
 
-//    @Column(length = 500)
-//    private String p_notice;
-
-    @Column(length = 500)
-    private String p_policy;
-
     private int p_maxNum;
     private int p_liked;
     private double p_avgRating;
@@ -68,11 +62,15 @@ public class Products extends BaseTimeEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PNotice> p_notice = new ArrayList<>();
 
+    @OneToMany(mappedBy = "products")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<ProductsPolicy> p_policy = new ArrayList<>();
+
 
 
     @Builder
     public Products(String p_owner_id, String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice,
-                    String p_introduce, String p_policy, int p_maxNum, int p_liked, double p_avgRating
+                    String p_introduce,  int p_maxNum, int p_liked, double p_avgRating
                     ) {
         this.p_owner_id = p_owner_id;
         this.p_name = p_name;
@@ -82,14 +80,13 @@ public class Products extends BaseTimeEntity {
         this.p_weekdayPrice = p_weekdayPrice;
         this.p_weekendPrice = p_weekendPrice;
         this.p_introduce = p_introduce;
-        this.p_policy = p_policy;
         this.p_maxNum = p_maxNum;
         this.p_liked = p_liked;
         this.p_avgRating = p_avgRating;
     }
 
     public void update(String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice, String p_introduce,
-                       String p_policy, int p_maxNum, int p_liked, double p_avgRating) {
+                       int p_maxNum, int p_liked, double p_avgRating) {
         this.p_name = p_name;
         this.p_location = p_location;
         this.p_city = p_city;
@@ -97,7 +94,6 @@ public class Products extends BaseTimeEntity {
         this.p_weekdayPrice = p_weekdayPrice;
         this.p_weekendPrice = p_weekendPrice;
         this.p_introduce = p_introduce;
-        this.p_policy = p_policy;
         this.p_maxNum = p_maxNum;
         this.p_liked = p_liked;
         this.p_avgRating = p_avgRating;

@@ -13,6 +13,16 @@ var main = {
             facilityList.push($(this).val());
         });
 
+        var noticeList = [];
+        $('input[name="notice"]').each(function(i) {
+            noticeList.push($(this).val());
+        });
+
+        var policyList = [];
+        $('input[name="policy"]').each(function(i) {
+            policyList.push($(this).val());
+        })
+
         var data = {
             p_owner_id: $('#p_owner_id').val(),
             p_name: $('#p_name').val(),
@@ -26,7 +36,9 @@ var main = {
             p_maxNum: $('#p_maxNum').val(),
             p_liked: $('#p_liked').val(),
             p_avgRating: $('#p_avgRating').val(),
-            facility : facilityList
+            facility : facilityList,
+            notice : noticeList,
+            policy : policyList
         };
 
         $.ajax({
