@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductsService {
     private final ProductsRepository productsRepository;
-    private final ProductsFacilityRepository facilityRepository;
+    private final ProductsFacilityRepository productsFacilityRepository;
     private final ProductsNoticeRepository productsNoticeRepository;
     private final ProductsPolicyRepository productsPolicyRepository;
 
@@ -27,7 +27,7 @@ public class ProductsService {
                     .p_facility(fac)
                     .products(products)
                     .build();
-            facilityRepository.save(f);
+            productsFacilityRepository.save(f);
         }
         List<String> notices = requestDto.getNotice();
         for(String pno : notices) {
@@ -62,12 +62,19 @@ public class ProductsService {
 //        return id;
 //    }
 
+    @Transactional(readOnly = true)
     public ProductsResponseDto findById(Long id) {
         Products entity = productsRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("There is no products which id=" + id)
         );
-
         return new ProductsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<FacilityResponseDto> findProductsFacilityById(Long id) {
+        return productsFacilityRepository.findProductsFacilityDesc(id).stream()
+                .map(FacilityResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

@@ -5,6 +5,9 @@ var main = {
         $('#btn-space-save').on('click', function() {
             _this.save();
         });
+        $('#btn-space-delete').on('click', function() {
+            _this.deleteSpace();
+        })
     },
 
     save : function() {
@@ -53,6 +56,10 @@ var main = {
         }).fail(function(error) {
             alert(JSON.stringify(error));
         });
+    },
+
+    deleteSpace : function() {
+
     }
 };
 

@@ -34,6 +34,7 @@ public class IndexController {
     public String spaceDetail(@PathVariable Long p_id, Model model) {
         ProductsResponseDto dto = productsService.findById(p_id);
         model.addAttribute("product", dto);
+        model.addAttribute("facility", productsService.findProductsFacilityById(p_id));
         return "space_detail";
     }
 

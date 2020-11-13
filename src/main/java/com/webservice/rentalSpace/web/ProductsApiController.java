@@ -4,6 +4,7 @@ import com.webservice.rentalSpace.web.dto.ProductsResponseDto;
 import com.webservice.rentalSpace.web.dto.ProductsSaveRequestDto;
 import com.webservice.rentalSpace.web.dto.ProductsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -24,9 +25,9 @@ public class ProductsApiController {
 //        return productsService.update(id, requestDto);
 //    }
 
-    //조회
-    @GetMapping("/api/v1/products/{id}")
-    public ProductsResponseDto findById(@PathVariable Long id) {
-        return productsService.findById(id);
-    }
+
+//    @GetMapping("/api/v1/products/{id}")
+//    public ProductsResponseDto findById(@PathVariable Long id) {
+//        return productsService.findById(id);
+//    }
 }
