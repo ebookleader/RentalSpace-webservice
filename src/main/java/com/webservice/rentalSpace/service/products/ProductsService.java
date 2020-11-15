@@ -65,15 +65,29 @@ public class ProductsService {
     @Transactional(readOnly = true)
     public ProductsResponseDto findById(Long id) {
         Products entity = productsRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("There is no products which id=" + id)
+                () -> new IllegalArgumentException("There is no product which id=" + id)
         );
         return new ProductsResponseDto(entity);
     }
 
     @Transactional(readOnly = true)
     public List<FacilityResponseDto> findProductsFacilityById(Long id) {
-        return productsFacilityRepository.findProductsFacilityDesc(id).stream()
+        return productsFacilityRepository.findProductsFacility(id).stream()
                 .map(FacilityResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsNoticeResponseDto> findProductsNoticeById(Long id) {
+        return productsNoticeRepository.findProductsNotice(id).stream()
+                .map(ProductsNoticeResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsPolicyResponseDto> findProductsPolicyById(Long id) {
+        return productsPolicyRepository.findProductsPolicy(id).stream()
+                .map(ProductsPolicyResponseDto::new)
                 .collect(Collectors.toList());
     }
 
@@ -82,6 +96,14 @@ public class ProductsService {
         return productsRepository.findAllDesc().stream()
                 .map(ProductsListResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteSpace(Long id) {
+        Products products = productsRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("There is no product which id=" + id));
+
+        productsRepository.delete(products);
     }
 
 }

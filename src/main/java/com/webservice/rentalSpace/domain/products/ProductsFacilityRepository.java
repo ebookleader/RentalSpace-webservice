@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ProductsFacilityRepository extends JpaRepository<ProductsFacility, Long> {
 
-    @Query("SELECT pf from ProductsFacility pf WHERE p_id=:p_id ORDER BY pf_id DESC")
-    List<ProductsFacility> findProductsFacilityDesc(@Param("p_id") Long p_id);
+    @Query("SELECT pf FROM ProductsFacility pf WHERE p_id=:p_id ORDER BY pf_id")
+    List<ProductsFacility> findProductsFacility(@Param("p_id") Long p_id);
 }

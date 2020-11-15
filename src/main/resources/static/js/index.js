@@ -7,7 +7,7 @@ var main = {
         });
         $('#btn-space-delete').on('click', function() {
             _this.deleteSpace();
-        })
+        });
     },
 
     save : function() {
@@ -59,7 +59,18 @@ var main = {
     },
 
     deleteSpace : function() {
-
+        var id = $("#p_id").val();
+        $.ajax({
+            type: 'DELETE',
+            url: '/space/delete/'+id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function() {
+            alert('해당 게시물이 삭제되었습니다.');
+            window.location.href = '/';
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        })
     }
 };
 

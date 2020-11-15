@@ -30,4 +30,10 @@ public class ProductsApiController {
 //    public ProductsResponseDto findById(@PathVariable Long id) {
 //        return productsService.findById(id);
 //    }
+
+    @DeleteMapping("/space/delete/{id}")
+    public Long deleteSpace(@PathVariable Long id) {
+        productsService.deleteSpace(id);
+        return id;
+    }
 }

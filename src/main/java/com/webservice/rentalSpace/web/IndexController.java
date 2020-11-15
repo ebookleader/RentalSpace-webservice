@@ -32,9 +32,10 @@ public class IndexController {
 
     @GetMapping("/space/detail/{p_id}")
     public String spaceDetail(@PathVariable Long p_id, Model model) {
-        ProductsResponseDto dto = productsService.findById(p_id);
-        model.addAttribute("product", dto);
+        model.addAttribute("product", productsService.findById(p_id));
         model.addAttribute("facility", productsService.findProductsFacilityById(p_id));
+        model.addAttribute("notice", productsService.findProductsNoticeById(p_id));
+        model.addAttribute("policy", productsService.findProductsPolicyById(p_id));
         return "space_detail";
     }
 
