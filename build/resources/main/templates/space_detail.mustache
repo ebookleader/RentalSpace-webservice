@@ -3,6 +3,7 @@
 <div class="content-area pb-5 pt-3">
     <div class="container mt-5 content-body">
         <h3 class="pb-3">{{product.p_name}}</h3>
+        <a href="/space/update/{{product.p_id}}" role="button" class="btn btn-info mb-4">게시글 수정</a>
         <button type="button" class="btn btn-danger mb-4" id="btn-space-delete">게시글 삭제</button>
         <input type="hidden" id="p_id" value="{{product.p_id}}">
         <div class="row">

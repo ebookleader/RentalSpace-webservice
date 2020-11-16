@@ -39,6 +39,12 @@ public class IndexController {
         return "space_detail";
     }
 
+    @GetMapping("/space/update/{p_id}")
+    public String spaceUpdate(@PathVariable Long p_id, Model model) {
+        model.addAttribute("product", productsService.findById(p_id));
+        return "space_update";
+    }
+
 //    @GetMapping("/user/login")
 //    public String login_user() {
 //

@@ -48,20 +48,6 @@ public class ProductsService {
         return products.getP_id();
     }
 
-
-//    @Transactional
-//    public Long update(Long id, ProductsUpdateRequestDto requestDto) {
-//        Products products = productsRepository.findById(id).orElseThrow(
-//                ()->new IllegalArgumentException("There is no products which id="+id)
-//        );
-//
-//        products.update(requestDto.getP_name(), requestDto.getP_location(), requestDto.getP_city(), requestDto.getP_category(), requestDto.getP_weekdayPrice(), requestDto.getP_weekendPrice(),
-//        requestDto.getP_introduce(), requestDto.getP_facility1(), requestDto.getP_facility2(), requestDto.getP_facility3(), requestDto.getP_facility4(),
-//                requestDto.getP_facility5(), requestDto.getP_facility6(), requestDto.getP_facility7(), requestDto.getP_facility8(), requestDto.getP_facility9(), requestDto.getP_facility10(), requestDto.getP_notice(), requestDto.getP_policy(), requestDto.getP_maxNum(), requestDto.getP_liked(), requestDto.getP_avgRating());
-//
-//        return id;
-//    }
-
     @Transactional(readOnly = true)
     public ProductsResponseDto findById(Long id) {
         Products entity = productsRepository.findById(id).orElseThrow(
@@ -104,6 +90,18 @@ public class ProductsService {
                 .orElseThrow(()->new IllegalArgumentException("There is no product which id=" + id));
 
         productsRepository.delete(products);
+    }
+
+    @Transactional
+    public Long update(Long id, ProductsUpdateRequestDto requestDto) {
+        Products products = productsRepository.findById(id).orElseThrow(
+                ()->new IllegalArgumentException("There is no products which id="+id)
+        );
+
+        products.update(requestDto.getP_name(), requestDto.getP_location(), requestDto.getP_city(), requestDto.getP_category(),
+                requestDto.getP_weekdayPrice(), requestDto.getP_weekendPrice(), requestDto.getP_introduce(), requestDto.getP_maxNum());
+
+        return id;
     }
 
 }

@@ -20,10 +20,10 @@ public class ProductsApiController {
     }
 
     //update
-//    @PutMapping("/api/v1/products/{id}")
-//    public Long update(@PathVariable Long id, @RequestBody ProductsUpdateRequestDto requestDto) {
-//        return productsService.update(id, requestDto);
-//    }
+    @PutMapping("/api/v1/products/{id}")
+    public Long updateSpace(@PathVariable Long id, @RequestBody ProductsUpdateRequestDto requestDto) {
+        return productsService.update(id, requestDto);
+    }
 
 
 //    @GetMapping("/api/v1/products/{id}")

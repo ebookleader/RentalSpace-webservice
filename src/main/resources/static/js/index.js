@@ -8,6 +8,9 @@ var main = {
         $('#btn-space-delete').on('click', function() {
             _this.deleteSpace();
         });
+        $('#btn-space-update').on('click', function() {
+            _this.updateSpace();
+        })
     },
 
     save : function() {
@@ -35,7 +38,6 @@ var main = {
             p_weekdayPrice: $('#p_weekdayPrice').val(),
             p_weekendPrice: $('#p_weekendPrice').val(),
             p_introduce: $('#p_introduce').val(),
-            p_policy: $('#p_policy').val(),
             p_maxNum: $('#p_maxNum').val(),
             p_liked: $('#p_liked').val(),
             p_avgRating: $('#p_avgRating').val(),
@@ -71,6 +73,36 @@ var main = {
         }).fail(function(error){
             alert(JSON.stringify(error));
         })
+    },
+
+    updateSpace : function() {
+        var data = {
+            p_name: $('#p_name').val(),
+            p_location: $('#p_location').val(),
+            p_city: $('#p_city').val(),
+            p_category: $('#p_category').val(),
+            p_weekdayPrice: $('#p_weekdayPrice').val(),
+            p_weekendPrice: $('#p_weekendPrice').val(),
+            p_introduce: $('#p_introduce').val(),
+            p_maxNum: $('#p_maxNum').val(),
+        };
+
+        var id = $('#p_id').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/products/'+id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('게시글 수정 완료');
+            window.location.href = '/';
+        }).fail(function() {
+            alert(JSON.stringify(error));
+        })
+
+
     }
 };
 
