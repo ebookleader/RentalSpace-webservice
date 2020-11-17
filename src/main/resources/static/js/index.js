@@ -76,6 +76,22 @@ var main = {
     },
 
     updateSpace : function() {
+
+        var facilityList = [];
+        $('input[name="facility"]').each(function(i) {
+            facilityList.push($(this).val());
+        });
+
+        var noticeList = [];
+        $('input[name="notice"]').each(function(i) {
+            noticeList.push($(this).val());
+        });
+
+        var policyList = [];
+        $('input[name="policy"]').each(function(i) {
+            policyList.push($(this).val());
+        })
+
         var data = {
             p_name: $('#p_name').val(),
             p_location: $('#p_location').val(),
@@ -85,6 +101,9 @@ var main = {
             p_weekendPrice: $('#p_weekendPrice').val(),
             p_introduce: $('#p_introduce').val(),
             p_maxNum: $('#p_maxNum').val(),
+            facility : facilityList,
+            notice : noticeList,
+            policy : policyList
         };
 
         var id = $('#p_id').val();

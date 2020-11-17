@@ -101,6 +101,36 @@ public class ProductsService {
         products.update(requestDto.getP_name(), requestDto.getP_location(), requestDto.getP_city(), requestDto.getP_category(),
                 requestDto.getP_weekdayPrice(), requestDto.getP_weekendPrice(), requestDto.getP_introduce(), requestDto.getP_maxNum());
 
+        productsFacilityRepository.deleteProductsFacility(id);
+        productsNoticeRepository.deleteProductsNotice(id);
+        productsPolicyRepository.deleteProductsPolicy(id);
+
+        List<String> facilities = requestDto.getFacility();
+        for(String f : facilities) {
+            ProductsFacility pf = ProductsFacility.builder()
+                    .p_facility(f)
+                    .products(products)
+                    .build();
+            productsFacilityRepository.save(pf);
+        }
+
+        List<String> notices = requestDto.getNotice();
+        for(String pno : notices) {
+            ProductsNotice pn = ProductsNotice.builder()
+                    .p_notice(pno)
+                    .products(products)
+                    .build();
+            productsNoticeRepository.save(pn);
+        }
+
+        List<String> policies = requestDto.getPolicy();
+        for(String pol : policies) {
+            ProductsPolicy p = ProductsPolicy.builder()
+                    .p_policy(pol)
+                    .products(products)
+                    .build();
+            productsPolicyRepository.save(p);
+        }
         return id;
     }
 
