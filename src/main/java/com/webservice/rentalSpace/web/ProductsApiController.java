@@ -31,7 +31,7 @@ public class ProductsApiController {
 //        return productsService.findById(id);
 //    }
 
-    @DeleteMapping("/space/delete/{id}")
+    @DeleteMapping("/api/v1/products/delete/{id}")
     public Long deleteSpace(@PathVariable Long id) {
         productsService.deleteSpace(id);
         return id;

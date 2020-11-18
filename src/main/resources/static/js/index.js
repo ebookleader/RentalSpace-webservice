@@ -64,7 +64,7 @@ var main = {
         var id = $("#p_id").val();
         $.ajax({
             type: 'DELETE',
-            url: '/space/delete/'+id,
+            url: '/api/v1/products/delete/'+id,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function() {
