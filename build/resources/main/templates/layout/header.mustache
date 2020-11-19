@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css"/>
 </head>
 <body>
 <div class="container">
@@ -25,15 +26,29 @@
                     <a class="nav-link" href="/space/list">Product List</a>
                 </li>
                 <li class="nav-item active mr-3">
-                    <!-- 로그인 안되어있을시 -->
                     <div class="dropdown">
-                        <button class="btn btn-link dropdown-toggle text-decoration-none" type="button" id="login-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Login
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="login-dropdown">
-                            <a class="dropdown-item" href="#">로그인</a>
-                            <a class="dropdown-item" href="#">회원가입</a>
-                        </div>
+                        {{#userAccountName}}
+                            <button class="btn btn-link dropdown-toggle text-decoration-none" type="button"
+                                    id="login-dropdown" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                {{userAccountName}}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="login-dropdown">
+                                <a class="dropdown-item" href="#">마이페이지</a>
+                                <a class="dropdown-item" href="/logout" role="button">로그아웃</a>
+                            </div>
+                        {{/userAccountName}}
+                        {{^userAccountName}}
+                            <button class="btn btn-link dropdown-toggle text-decoration-none" type="button"
+                                    id="login-dropdown" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                로그인
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="login-dropdown">
+                                <a class="dropdown-item" href="/newUser/login" role="button">로그인</a>
+                                <a class="dropdown-item" href="/newUser/login" role="button">회원가입</a>
+                            </div>
+                        {{/userAccountName}}
                     </div>
                 </li>
             </ul>

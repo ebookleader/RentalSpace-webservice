@@ -1,5 +1,6 @@
 package com.webservice.rentalSpace.web;
 
+import com.webservice.rentalSpace.config.auth.dto.SessionUser;
 import com.webservice.rentalSpace.service.products.ProductsService;
 import com.webservice.rentalSpace.web.dto.ProductsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -8,14 +9,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
     private final ProductsService productsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        SessionUser user = (SessionUser)httpSession.getAttribute("user");
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
         return "index";
     }
 
@@ -45,11 +53,10 @@ public class IndexController {
         return "space_update";
     }
 
-//    @GetMapping("/user/login")
-//    public String login_user() {
-//
-//        return "login_user";
-//    }
+    @GetMapping("/newUser/login")
+    public String login_user() {
+        return "login_user";
+    }
 //
 //    @GetMapping("/signup")
 //    public String signup_user() {
