@@ -1,5 +1,6 @@
 package com.webservice.rentalSpace.web;
 
+import com.webservice.rentalSpace.config.auth.LoginUser;
 import com.webservice.rentalSpace.config.auth.dto.SessionUser;
 import com.webservice.rentalSpace.service.products.ProductsService;
 import com.webservice.rentalSpace.web.dto.ProductsResponseDto;
@@ -16,11 +17,9 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final ProductsService productsService;
-    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
-        SessionUser user = (SessionUser)httpSession.getAttribute("user");
+    public String index(Model model, @LoginUser SessionUser user) {
         if(user != null) {
             model.addAttribute("userAccountName", user.getName());
         }

@@ -1,10 +1,12 @@
 package com.webservice.rentalSpace.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.webservice.rentalSpace.domain.products.Products;
 import com.webservice.rentalSpace.domain.products.ProductsRepository;
 import com.webservice.rentalSpace.web.dto.ProductsSaveRequestDto;
 import com.webservice.rentalSpace.web.dto.ProductsUpdateRequestDto;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,18 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -33,12 +43,26 @@ public class ProductsApiControllerTest {
     @Autowired
     private ProductsRepository productsRepository;
 
+    @Autowired
+    private WebApplicationContext context;
+
+    private MockMvc mvc;
+
+    @Before
+    public void setup() {
+        mvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity())
+                .build();
+    }
+
     @After
     public void tearDown() throws Exception {
         productsRepository.deleteAll();
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     public void products_save() throws Exception {
         String p_owner_id="test id";
         String p_name="test product name";
@@ -68,10 +92,16 @@ public class ProductsApiControllerTest {
 
         String url = "http://localhost:"+port+"/api/v1/products";
 
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+        mvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(new ObjectMapper().writeValueAsString(requestDto)))
+                .andExpect(status().isOk());
 
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+
+//        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+//
+//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+//        assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         List<Products> all = productsRepository.findAll();
 
@@ -80,6 +110,7 @@ public class ProductsApiControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     public void products_update() throws Exception {
         String p_owner_id="test id";
         String p_name="test product name";
@@ -123,12 +154,17 @@ public class ProductsApiControllerTest {
 
         String url = "http://localhost:"+port+"/api/v1/products/"+updateP_id;
 
-        HttpEntity<ProductsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+        mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(new ObjectMapper().writeValueAsString(requestDto)))
+                .andExpect(status().isOk());
 
-        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
-
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+//        HttpEntity<ProductsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+//
+//        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
+//
+//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+//        assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         List<Products> all = productsRepository.findAll();
 

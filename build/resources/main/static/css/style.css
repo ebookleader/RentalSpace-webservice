@@ -115,6 +115,9 @@ input {
   font-weight: 500;
   border: none;
   width: 88%;
+  font-size: larger;
+  padding-top: 8px;
+  text-align: center;
 }
 
 .btn-naver:focus, .btn-google:focus {
@@ -124,6 +127,8 @@ input {
 
 .btn-naver:hover {
   background-color: #00C433;
+  text-decoration: none;
+  color: white;
 }
 
 .btn-google {
@@ -132,11 +137,15 @@ input {
   font-weight: 500;
   border: none;
   width: 88%;
+  text-align: center;
+  font-size: larger;
+  padding-top: 8px;
 }
 
 .btn-google:hover {
   background-color: #D93C27;
-  opacity: 100%;
+  text-decoration: none;
+  color: white;
 }
 
 /* signup */
