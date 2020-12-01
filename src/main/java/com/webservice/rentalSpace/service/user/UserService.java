@@ -17,9 +17,7 @@ public class UserService {
         User user = userRepository.findByEmail(email).orElseThrow(
                 () -> new IllegalArgumentException("There is no user where email = "+email)
         );
-        System.out.println("user 찾기 완료");
         user.updateToSeller();
-        System.out.println("seller 변경 완료");
         return user.getId();
     }
 }

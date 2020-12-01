@@ -65,6 +65,11 @@ public class IndexController {
         return "enroll_seller";
     }
 
+    @GetMapping("/seller/enroll/complete")
+    public String enroll_seller_complete() {
+        return "enroll_seller_complete";
+    }
+
 //
 //    @GetMapping("/signup")
 //    public String signup_user() {

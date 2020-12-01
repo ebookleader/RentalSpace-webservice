@@ -154,8 +154,7 @@ var main = {
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            alert('판매자 등록 완료');
-            window.location.href = '/';
+            window.location.href = '/seller/enroll/complete';
         }).fail(function() {
             alert(JSON.stringify(error));
         })
