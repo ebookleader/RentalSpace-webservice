@@ -17,8 +17,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable().headers().frameOptions().disable() //h2-console 사용
                 .and()
                     .authorizeRequests() //url별 권환 관리, antMatchers 옵션 사용
-                    .antMatchers("/", "/css/**", "/img/**", "/js/**", "/h2-console/**", "/newUser/**").permitAll()
-                    .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+                    .antMatchers("/", "/css/**", "/img/**", "/js/**", "/h2-console/**", "/basicUser/**").permitAll()
+                    .antMatchers("/api/v1/**", "/seller/**").hasRole(Role.USER.name())
                     .anyRequest().authenticated()
                 .and()
                     .logout().logoutSuccessUrl("/")

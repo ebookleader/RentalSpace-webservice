@@ -52,10 +52,19 @@ public class IndexController {
         return "space_update";
     }
 
-    @GetMapping("/newUser/login")
+    @GetMapping("/basicUser/login")
     public String login_user() {
         return "login_user";
     }
+
+    @GetMapping("/seller/enroll")
+    public String enroll_seller(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userEmail", user.getEmail());
+        }
+        return "enroll_seller";
+    }
+
 //
 //    @GetMapping("/signup")
 //    public String signup_user() {

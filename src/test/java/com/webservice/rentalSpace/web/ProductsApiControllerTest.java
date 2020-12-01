@@ -89,13 +89,14 @@ public class ProductsApiControllerTest {
                 .p_liked(p_liked)
                 .p_avgRating(p_avgRating)
                 .build();
-
+        System.out.println("call0");
         String url = "http://localhost:"+port+"/api/v1/products";
 
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(new ObjectMapper().writeValueAsString(requestDto)))
                 .andExpect(status().isOk());
+        System.out.println("call1");
 
 
 //        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
@@ -104,7 +105,7 @@ public class ProductsApiControllerTest {
 //        assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         List<Products> all = productsRepository.findAll();
-
+        System.out.println("call2");
         assertThat(all.get(0).getP_name()).isEqualTo(p_name);
         assertThat(all.get(0).getP_avgRating()).isEqualTo(p_avgRating);
     }

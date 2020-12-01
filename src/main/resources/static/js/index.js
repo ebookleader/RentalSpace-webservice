@@ -10,6 +10,11 @@ var main = {
         });
         $('#btn-space-update').on('click', function() {
             _this.updateSpace();
+        });
+        $('#btn-enroll-seller').on('click', function() {
+            if(_this.enrollSeller()) {
+                _this.enrollComplete();
+            }
         })
     },
 
@@ -120,8 +125,40 @@ var main = {
         }).fail(function() {
             alert(JSON.stringify(error));
         })
+    },
 
+    enrollSeller : function() {
+        if($('#sellerCheck1').prop("checked")) {
+            if($('#sellerCheck2').prop("checked")) {
+                return true;
+            }
+            else {
+                alert('두번째 항목이 체크되지 않았습니다.');
+            }
+        }
+        else {
+            alert('첫번째 항목이 체크되지 않았습니다.');
+        }
+        return false;
+    },
 
+    enrollComplete : function() {
+        var userEmail = $('#userEmail').val();
+        var data = {
+            email: userEmail
+        };
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/user/'+userEmail,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('판매자 등록 완료');
+            window.location.href = '/';
+        }).fail(function() {
+            alert(JSON.stringify(error));
+        })
     }
 };
 

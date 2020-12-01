@@ -30,7 +30,7 @@ public class ProductsSaveRequestDto {
 
     @Builder
     public ProductsSaveRequestDto(String p_owner_id, String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice, String p_introduce,
-                                   String p_policy, int p_maxNum, int p_liked, double p_avgRating, List<String> facility, List<String> notice, List<String> policy) {
+                                  int p_maxNum, int p_liked, double p_avgRating, List<String> facility, List<String> notice, List<String> policy) {
         this.p_owner_id = p_owner_id;
         this.p_name = p_name;
         this.p_location = p_location;
