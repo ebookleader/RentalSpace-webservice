@@ -5,6 +5,7 @@ import com.webservice.rentalSpace.config.auth.dto.SessionUser;
 import com.webservice.rentalSpace.service.products.ProductsService;
 import com.webservice.rentalSpace.web.dto.ProductsResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,18 +28,27 @@ public class IndexController {
     }
 
     @GetMapping("/space/save")
-    public String spaceSave() {
+    public String spaceSave(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
         return "space_save";
     }
 
     @GetMapping("/space/list")
-    public String spaceList(Model model) {
+    public String spaceList(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
         model.addAttribute("products", productsService.findAllDesc());
         return "space_list";
     }
 
     @GetMapping("/space/detail/{p_id}")
-    public String spaceDetail(@PathVariable Long p_id, Model model) {
+    public String spaceDetail(@PathVariable Long p_id, Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
         model.addAttribute("product", productsService.findById(p_id));
         model.addAttribute("facility", productsService.findProductsFacilityById(p_id));
         model.addAttribute("notice", productsService.findProductsNoticeById(p_id));
@@ -47,7 +57,10 @@ public class IndexController {
     }
 
     @GetMapping("/space/update/{p_id}")
-    public String spaceUpdate(@PathVariable Long p_id, Model model) {
+    public String spaceUpdate(@PathVariable Long p_id, Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
         model.addAttribute("product", productsService.findById(p_id));
         return "space_update";
     }
@@ -66,7 +79,10 @@ public class IndexController {
     }
 
     @GetMapping("/seller/enroll/complete")
-    public String enroll_seller_complete() {
+    public String enroll_seller_complete(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
         return "enroll_seller_complete";
     }
 

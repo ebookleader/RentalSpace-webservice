@@ -16,7 +16,7 @@ public class UserApiController {
 
     // enroll seller
     @PutMapping("/api/v1/user/{email}")
-    public Long updateUserSeller(@PathVariable String email, @RequestBody UserUpdateRequestDto requestDto) {
+    public Long updateUserSeller(@PathVariable String email) {
         return userService.updateToSeller(email);
     }
 }

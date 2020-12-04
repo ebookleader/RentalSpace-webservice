@@ -100,7 +100,7 @@ input {
 }
 
 /* login */
-#login-form {
+#login-form, #enroll-complete-div {
   background-color: white;
   width: 55%;
   border-radius: 10%;
@@ -516,4 +516,10 @@ textarea {
 
 label {
     font-weight: bold;
+}
+
+/* enroll seller complete*/
+#seller_comment {
+  border-left: 10px solid green;
+  margin-right: 10px;
 }

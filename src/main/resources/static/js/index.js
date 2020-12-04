@@ -144,15 +144,13 @@ var main = {
 
     enrollComplete : function() {
         var userEmail = $('#userEmail').val();
-        var data = {
-            email: userEmail
-        };
+
         $.ajax({
             type: 'PUT',
             url: '/api/v1/user/'+userEmail,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            data: JSON.stringify(userEmail)
         }).done(function() {
             window.location.href = '/seller/enroll/complete';
         }).fail(function() {
