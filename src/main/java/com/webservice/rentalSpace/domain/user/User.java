@@ -21,19 +21,25 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private String email;
 
-
     @Column
     private String picture;
+
+    @Column(nullable = false)
+    private boolean emailVerified;
+
+    @Column
+    private String verificationCode;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
     @Builder
-    public User(String name, String email, String picture, Role role) {
+    public User(String name, String email, String picture, boolean emailVerified, Role role) {
         this.name = name;
         this.email = email;
         this.picture = picture;
+        this.emailVerified = emailVerified;
         this.role = role;
     }
 
@@ -45,6 +51,18 @@ public class User extends BaseTimeEntity {
 
     public void updateToSeller() {
         this.role = Role.SELLER;
+    }
+
+    public void updateToUser() {
+        this.role = Role.USER;
+    }
+
+    public void updateEmailVerified() {
+        this.emailVerified = true;
+    }
+
+    public void updateVerificationCode(String code) {
+        this.verificationCode = code;
     }
 
     public String getRoleKey() {

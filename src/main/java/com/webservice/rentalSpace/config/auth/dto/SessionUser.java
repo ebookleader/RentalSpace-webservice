@@ -9,6 +9,7 @@ public class SessionUser implements Serializable {
     private String name;
     private String email;
     private String picture;
+    private boolean emailVerified;
 
     public SessionUser(){}
 
@@ -16,5 +17,6 @@ public class SessionUser implements Serializable {
         this.name = user.getName();
         this.email = user.getEmail();
         this.picture = user.getPicture();
+        this.emailVerified = user.isEmailVerified(); //true or false
     }
 }

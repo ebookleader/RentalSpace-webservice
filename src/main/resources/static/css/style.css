@@ -409,6 +409,12 @@ input {
   font-weight: 600;
 }
 
+.mypage-email-div {
+  padding-top: 5em;
+  padding-bottom: 3em;
+  text-align: center;
+}
+
 /* before change password */
 .beforePassword-div {
   padding-top: 5em;
@@ -522,4 +528,30 @@ label {
 #seller_comment {
   border-left: 10px solid green;
   margin-right: 10px;
+}
+
+/* error page */
+.error-title {
+  font-weight: bold;
+  font-size: 10em;
+  text-align: center;
+  letter-spacing: 5px;
+  color: #ff1f53;
+  margin-bottom: 0;
+}
+
+.error-sub {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #525252;
+}
+
+#error_comment {
+  border-left: 10px solid #ff1f53;
+  margin-right: 10px;
+}
+
+.error-logo:hover {
+  text-decoration: none;
 }

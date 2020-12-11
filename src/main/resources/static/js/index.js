@@ -15,7 +15,13 @@ var main = {
             if(_this.enrollSeller()) {
                 _this.enrollComplete();
             }
-        })
+        });
+        $('#btn-email-verify').on('click', function() {
+            _this.emailVerify();
+        });
+        $('#btn-email-key').on('click', function() {
+            _this.checkEmailKey();
+        });
     },
 
     save : function() {
@@ -147,16 +153,71 @@ var main = {
 
         $.ajax({
             type: 'PUT',
-            url: '/api/v1/user/'+userEmail,
+            url: '/api/user/'+userEmail,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(userEmail)
         }).done(function() {
-            window.location.href = '/seller/enroll/complete';
+            alert('판매자 등록이 완료되었습니다.\n다시 로그인 해주세요.');
+            window.location.href = '/logout';
+//            window.location.href = '/seller/enroll/complete';
         }).fail(function() {
             alert(JSON.stringify(error));
-        })
+        });
+    },
+
+    emailVerify : function() {
+        var userEmail = $('#userEmail').val();
+        $.ajax({
+            	type : 'POST',
+            	url : '/api/guestUser/email/verify',
+        		data : { userEmail:userEmail },
+            	dataType :'json'
+            }).done(function() {
+                alert(userEmail+"로 인증번호가 전송되었습니다.");
+                window.location.href = '/myPage/user/checkEmail';
+            }).fail(function() {
+                alert('fail');
+            });
+    },
+
+    checkEmailKey : function() {
+        var inputKey = $('#verification_code').val();
+        var userEmail = $('#userEmail').val();
+        if(inputKey=="") {
+            alert('인증번호가 입력되지 않았습니다.');
+        }
+        else {
+            $.ajax({
+                type: 'PUT',
+                url: '/api/guestUser/email/check',
+                data : { inputKey:inputKey, userEmail:userEmail },
+                dataType :'json',
+                success : function(result) {
+                    if(result == true) {
+                        alert('인증이 완료되었습니다.\n다시 로그인 해주세요.');
+                        window.location.href = '/logout';
+                    }
+                    else {
+                        alert('인증번호가 일치하지 않습니다.\n다시 입력해주세요.');
+                    }
+                }
+            })
+//            $.ajax({
+//                type: 'PUT',
+//                url: '/api/guestUser/email/check',
+//                data : { inputKey:inputKey, userEmail:userEmail },
+//                dataType :'json',
+//            }).done(function() {
+//                alert('인증이 완료되었습니다.\n다시 로그인 해주세요.');
+//                window.location.href = '/logout';
+//            }).fail(function() {
+//                alert('인증번호가 일치하지 않습니다.\n다시 입력해주세요.');
+//            })
+        }
     }
+
+
 };
 
 main.init();

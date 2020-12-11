@@ -32,7 +32,7 @@ public class IndexController {
         if(user != null) {
             model.addAttribute("userAccountName", user.getName());
         }
-        return "space_save";
+        return "products/space_save";
     }
 
     @GetMapping("/space/list")
@@ -41,10 +41,10 @@ public class IndexController {
             model.addAttribute("userAccountName", user.getName());
         }
         model.addAttribute("products", productsService.findAllDesc());
-        return "space_list";
+        return "products/space_list";
     }
 
-    @GetMapping("/space/detail/{p_id}")
+    @GetMapping("/space/list/detail/{p_id}")
     public String spaceDetail(@PathVariable Long p_id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
             model.addAttribute("userAccountName", user.getName());
@@ -53,7 +53,7 @@ public class IndexController {
         model.addAttribute("facility", productsService.findProductsFacilityById(p_id));
         model.addAttribute("notice", productsService.findProductsNoticeById(p_id));
         model.addAttribute("policy", productsService.findProductsPolicyById(p_id));
-        return "space_detail";
+        return "products/space_detail";
     }
 
     @GetMapping("/space/update/{p_id}")
@@ -62,12 +62,12 @@ public class IndexController {
             model.addAttribute("userAccountName", user.getName());
         }
         model.addAttribute("product", productsService.findById(p_id));
-        return "space_update";
+        return "products/space_update";
     }
 
     @GetMapping("/basicUser/login")
     public String login_user() {
-        return "login_user";
+        return "account/login_user";
     }
 
     @GetMapping("/seller/enroll")
@@ -75,7 +75,7 @@ public class IndexController {
         if(user != null) {
             model.addAttribute("userEmail", user.getEmail());
         }
-        return "enroll_seller";
+        return "account/enroll_seller";
     }
 
     @GetMapping("/seller/enroll/complete")
@@ -83,35 +83,29 @@ public class IndexController {
         if(user != null) {
             model.addAttribute("userAccountName", user.getName());
         }
-        return "enroll_seller_complete";
+        return "account/enroll_seller_complete";
     }
 
-//
-//    @GetMapping("/signup")
-//    public String signup_user() {
-//        return "signup_user";
-//    }
-//
-//    @GetMapping("/space/list")
-//    public String space_list() {
-//
-//        return "space_list";
-//    }
-//
-//    @GetMapping("/space/detail")
-//    public String space_detail() {
-//        return "space_detail";
-//    }
-//
-//    @GetMapping("/space/payment")
-//    public String space_payment() {
-//        return "payment";
-//    }
-//
-//    @GetMapping("/mypage/home")
-//    public String mypage_home() {
-//        return "mypage_home";
-//    }
+    @GetMapping("/myPage/home")
+    public String myPage_home(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("userEmailVerified", user.isEmailVerified());
+        }
+        return "account/mypage_home";
+    }
+
+    @GetMapping("/myPage/user/checkEmail")
+    public String myPage_checkEmail(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("userEmail", user.getEmail());
+        }
+        return "account/mypage_check_email";
+    }
+
+
 //
 //    @GetMapping("/mypage/before/changePassword")
 //    public String before_changePassword() {

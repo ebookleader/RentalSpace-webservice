@@ -60,7 +60,8 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .picture(picture)
-                .role(Role.USER)
+                .emailVerified(false)
+                .role(Role.GUEST)
                 .build();
     }
 }
