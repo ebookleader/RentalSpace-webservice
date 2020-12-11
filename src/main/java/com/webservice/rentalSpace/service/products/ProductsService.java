@@ -134,4 +134,9 @@ public class ProductsService {
         return id;
     }
 
+//    @Transactional(readOnly = true)
+//    public List<Integer> findTotalNumByCategory() {
+//
+//    }
+
 }
