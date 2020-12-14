@@ -85,8 +85,40 @@ public class ProductsService {
                 .collect(Collectors.toList());
     }
 
-//    @Transactional(readOnly = true)
-//    public List<ProductsListResponseDto>
+    @Transactional(readOnly = true)
+    public List<ProductsListResponseDto> findAllByCategory(String category) {
+        return productsRepository.findAllByCategory(category).stream()
+                .map(ProductsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsListResponseDto> findAllByCity(String city) {
+        return productsRepository.findAllByCity(city).stream()
+                .map(ProductsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsListResponseDto> findAllByPrice(int min, int max) {
+        return productsRepository.findAllByPrice(min, max).stream()
+                .map(ProductsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsListResponseDto> findAllByPriceLast(int max) {
+        return productsRepository.findAllByPriceLast(max).stream()
+                .map(ProductsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsListResponseDto> findAllByRating(double rating) {
+        return productsRepository.findAllByRating(rating, rating+1.0).stream()
+                .map(ProductsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
     public void deleteSpace(Long id) {

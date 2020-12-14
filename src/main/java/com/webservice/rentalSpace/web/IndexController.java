@@ -6,6 +6,7 @@ import com.webservice.rentalSpace.service.products.ProductsService;
 import com.webservice.rentalSpace.web.dto.ProductsResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,14 +49,52 @@ public class IndexController {
         return "products/space_list";
     }
 
-//    @GetMapping("/space/list/{category}")
-//    public String spaceListCategory(Model model, @PathVariable String category, @LoginUser SessionUser user) {
-//        if(user != null) {
-//            model.addAttribute("userAccountName", user.getName());
-//        }
-//        addSidebarAttribute(model);
-//        model.addAttribute("products", productsService)
-//    }
+    @GetMapping("/space/list/city/{city}")
+    public String spaceListCity(Model model, @PathVariable String city, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
+        addSidebarAttribute(model);
+        model.addAttribute("products", productsService.findAllByCity(city));
+        return "products/space_list";
+    }
+
+    @GetMapping("/space/list/category/{category}")
+    public String spaceListCategory(Model model, @PathVariable String category, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
+        addSidebarAttribute(model);
+        model.addAttribute("products", productsService.findAllByCategory(category));
+        return "products/space_list";
+    }
+
+    @GetMapping("/space/list/price/{priceIndex}")
+    public String spaceListPrice(Model model, @PathVariable int priceIndex, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
+        addSidebarAttribute(model);
+
+        Integer[] priceList = {0, 10000, 35000, 70000, 100000};
+        if(priceIndex==4) {
+            model.addAttribute("products", productsService.findAllByPriceLast(priceList[priceIndex]));
+        }
+        else {
+            model.addAttribute("products", productsService.findAllByPrice(priceList[priceIndex], priceList[priceIndex+1]));
+        }
+        return "products/space_list";
+    }
+
+    @GetMapping("/space/list/rating/{rating}")
+    public String spaceListRating(Model model, @PathVariable int rating, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
+        addSidebarAttribute(model);
+        model.addAttribute("products", productsService.findAllByRating((double)rating));
+        return "products/space_list";
+    }
 
     private void addSidebarAttribute(Model model) {
         //city sidebar num
@@ -66,7 +105,7 @@ public class IndexController {
             model.addAttribute("city"+i, productsService.findEachNumByCity(cityList[i]));
         }
         //category sidebar num
-        String[] categoryList = {"악기", "노래/녹음", "댄스", "뮤지컬", "쿠킹", "스터디"};
+        String[] categoryList = {"악기", "녹음", "댄스", "뮤지컬", "쿠킹", "스터디"};
         for(int i=0;i<6;i++) {
             model.addAttribute("category"+i, productsService.findEachNumByCategory(categoryList[i]));
         }

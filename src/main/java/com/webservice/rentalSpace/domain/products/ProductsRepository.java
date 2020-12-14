@@ -15,6 +15,22 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
     @Query("SELECT p FROM Products p ORDER BY p_id DESC")
     List<Products> findAllDesc();
 
+    @Query("SELECT p FROM Products p WHERE p_category=:category ORDER BY p_id DESC")
+    List<Products> findAllByCategory(@Param("category") String category);
+
+    @Query("SELECT p FROM Products p WHERE p_city=:city ORDER BY p_id DESC")
+    List<Products> findAllByCity(@Param("city") String city);
+
+    @Query("SELECT p FROM Products p WHERE p_weekdayPrice>=:min and p_weekdayPrice<:max")
+    List<Products> findAllByPrice(@Param("min") int min, @Param("max") int max);
+
+    @Query("SELECT p FROM Products p WHERE p_weekdayPrice>=:max")
+    List<Products> findAllByPriceLast(@Param("max") int max);
+
+    @Query("SELECT p FROM Products p WHERE p_avgRating>=:r and p_avgRating<:rr")
+    List<Products> findAllByRating(@Param("r") double r, @Param("rr") double rr);
+
+    // sidebar
     // By City
     @Query("SELECT COUNT(*) FROM Products p WHERE p_city=:p_city")
     int findEachNumByCity(@Param("p_city") String p_city);
