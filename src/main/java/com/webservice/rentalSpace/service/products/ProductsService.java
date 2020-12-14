@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,6 +85,9 @@ public class ProductsService {
                 .collect(Collectors.toList());
     }
 
+//    @Transactional(readOnly = true)
+//    public List<ProductsListResponseDto>
+
     @Transactional
     public void deleteSpace(Long id) {
         Products products = productsRepository.findById(id)
@@ -134,9 +138,33 @@ public class ProductsService {
         return id;
     }
 
-//    @Transactional(readOnly = true)
-//    public List<Integer> findTotalNumByCategory() {
-//
-//    }
+    // sidebar 관련
+    @Transactional(readOnly = true)
+    public int findEachNumByCity(String p_city) {
+        return productsRepository.findEachNumByCity(p_city);
+    }
+
+    @Transactional(readOnly = true)
+    public int findEachNumByCategory(String p_category) {
+        return productsRepository.findEachNumByCategory(p_category);
+    }
+
+    @Transactional(readOnly = true)
+    public int findEachNumByPrice(int min, int max) {
+        return productsRepository.findEachNumByPrice(min, max);
+    }
+
+    @Transactional(readOnly = true)
+    public int findEachNumByPriceMax(int max) {
+        return productsRepository.findEachNumByPriceLast(max);
+    }
+
+    @Transactional(readOnly = true)
+    public int findEachNumByRating(double p_avgRating) {
+        return productsRepository.findEachNumByRating(p_avgRating, p_avgRating+1.0);
+
+    }
+
+
 
 }
