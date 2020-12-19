@@ -26,11 +26,14 @@ public class ProductsSaveRequestDto {
     private List<String> notice;
     private List<String> policy;
 
+    private List<String> optionTitle;
+    private List<Integer> startTime;
+    private List<Integer> endTime;
 
 
     @Builder
     public ProductsSaveRequestDto(String p_owner_id, String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice, String p_introduce,
-                                  int p_maxNum, int p_liked, double p_avgRating, List<String> facility, List<String> notice, List<String> policy) {
+                                  int p_maxNum, int p_liked, double p_avgRating, List<String> facility, List<String> notice, List<String> policy, List<String> optionTitle, List<Integer> startTime, List<Integer> endTime) {
         this.p_owner_id = p_owner_id;
         this.p_name = p_name;
         this.p_location = p_location;
@@ -45,6 +48,9 @@ public class ProductsSaveRequestDto {
         this.facility = facility;
         this.notice = notice;
         this.policy = policy;
+        this.optionTitle = optionTitle;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public Products toEntity() {

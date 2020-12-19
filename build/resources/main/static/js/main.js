@@ -157,6 +157,20 @@ $(function () {
   $("#datetimepicker2").on("change.datetimepicker", function (e) {
     $('#datetimepicker1').datetimepicker('maxDate', e.date);
   });
+
+  //timepicker
+    $("#startTime1, #endTime1, #startTime2, #endTime2, #startTime3, #endTime3, #startTime4, #endTime4, #startTime5, #endTime5" ).timepicker({
+        timeFormat: 'HH:mm',
+        interval: 60,
+        // minTime: '10',
+        maxTime: '23:00pm',
+        // defaultTime: '11',
+        startTime: '00:00am',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+
 });
 
 $('#p_name').keyup(function(e) {

@@ -17,6 +17,7 @@ public class ProductsService {
     private final ProductsFacilityRepository productsFacilityRepository;
     private final ProductsNoticeRepository productsNoticeRepository;
     private final ProductsPolicyRepository productsPolicyRepository;
+    private final ProductsOptionRepository productsOptionRepository;
 
     @Transactional
     public Long save(ProductsSaveRequestDto requestDto) {
@@ -45,6 +46,32 @@ public class ProductsService {
                     .products(products)
                     .build();
             productsPolicyRepository.save(p);
+        }
+        List<String> optionTitle = requestDto.getOptionTitle();
+        List<Integer> startTime = requestDto.getStartTime();
+        List<Integer> endTime = requestDto.getEndTime();
+        int i = 0;
+        for(String title : optionTitle) {
+            if(title != null && !title.isEmpty()) {
+                int stime = startTime.get(i);
+                int etime = endTime.get(i);
+                int utime;
+                if(stime > etime) {
+                    utime = (24-stime) + etime;
+                }
+                else {
+                    utime = etime - stime;
+                }
+                ProductsOption p = ProductsOption.builder()
+                        .optionTitle(title)
+                        .startTime(stime)
+                        .endTime(etime)
+                        .usingTime(utime)
+                        .products(products)
+                        .build();
+                productsOptionRepository.save(p);
+                i++;
+            }
         }
         return products.getP_id();
     }

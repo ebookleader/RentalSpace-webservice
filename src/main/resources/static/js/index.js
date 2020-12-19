@@ -38,7 +38,38 @@ var main = {
         var policyList = [];
         $('input[name="policy"]').each(function(i) {
             policyList.push($(this).val());
-        })
+        });
+
+        var optionTitleList = [];
+        $('input[name="typeTitle"]'.each(function(i) {
+            optionTitleList.push($(this).val());
+        }));
+
+        var startTimeList = [];
+        $('input[name="startTime"]').each(function(i) {
+            var v = $(this).val();
+            var vv;
+            if (v.substring(0,1) == 0) {
+                vv = v.substring(1,2);
+            }
+            else {
+                vv = v.substring(0,2);
+            }
+            startTimeList.push(vv);
+        });
+
+        var endTimeList = [];
+        $('input[name="endTime"]').each(function(i) {
+            var v = $(this).val();
+            var vv;
+            if (v.substring(0,1) == 0) {
+                vv = v.substring(1,2);
+            }
+            else {
+                vv = v.substring(0,2);
+            }
+            endTimeList.push(vv);
+        });
 
         var data = {
             p_owner_id: $('#p_owner_id').val(),
@@ -54,7 +85,10 @@ var main = {
             p_avgRating: $('#p_avgRating').val(),
             facility : facilityList,
             notice : noticeList,
-            policy : policyList
+            policy : policyList,
+            optionTitle : optionTitleList,
+            startTime : startTimeList,
+            endTime : endTimeList
         };
 
         $.ajax({
