@@ -64,7 +64,6 @@ public class ProductsApiControllerTest {
     @Test
     @WithMockUser(roles = "USER")
     public void products_save() throws Exception {
-        String p_owner_id="test id";
         String p_name="test product name";
         String p_location="test location";
         String p_city="test city";
@@ -77,7 +76,6 @@ public class ProductsApiControllerTest {
         double p_avgRating=3.5;
 
         ProductsSaveRequestDto requestDto = ProductsSaveRequestDto.builder()
-                .p_owner_id(p_owner_id)
                 .p_name(p_name)
                 .p_location(p_location)
                 .p_city(p_city)
@@ -113,7 +111,6 @@ public class ProductsApiControllerTest {
     @Test
     @WithMockUser(roles = "USER")
     public void products_update() throws Exception {
-        String p_owner_id="test id";
         String p_name="test product name";
         String p_location="test location";
         String p_city="test city";
@@ -126,7 +123,6 @@ public class ProductsApiControllerTest {
         double p_avgRating=3.5;
 
         Products savedProducts = productsRepository.save(Products.builder()
-                .p_owner_id(p_owner_id)
                 .p_name(p_name)
                 .p_location(p_location)
                 .p_city(p_city)

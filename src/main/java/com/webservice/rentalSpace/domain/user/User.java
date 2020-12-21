@@ -1,18 +1,26 @@
 package com.webservice.rentalSpace.domain.user;
 
 import com.webservice.rentalSpace.domain.BaseTimeEntity;
+import com.webservice.rentalSpace.domain.products.Products;
+import com.webservice.rentalSpace.domain.products.ProductsFacility;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "user")
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id", updatable = false, insertable = false)
     private Long id;
 
     @Column(nullable = false)
@@ -33,6 +41,10 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Products> products = new ArrayList<>();
 
     @Builder
     public User(String name, String email, String picture, boolean emailVerified, Role role) {

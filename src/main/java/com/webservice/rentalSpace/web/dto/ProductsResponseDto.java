@@ -20,7 +20,6 @@ public class ProductsResponseDto {
 
     public ProductsResponseDto(Products entity) {
         this.p_id = entity.getP_id();
-        this.p_owner_id = entity.getP_owner_id();
         this.p_name = entity.getP_name();
         this.p_location = entity.getP_location();
         this.p_city = entity.getP_city();

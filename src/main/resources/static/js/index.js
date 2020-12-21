@@ -41,9 +41,9 @@ var main = {
         });
 
         var optionTitleList = [];
-        $('input[name="typeTitle"]'.each(function(i) {
+        $('input[name="typeTitle"]').each(function(i) {
             optionTitleList.push($(this).val());
-        }));
+        });
 
         var startTimeList = [];
         $('input[name="startTime"]').each(function(i) {
@@ -72,7 +72,7 @@ var main = {
         });
 
         var data = {
-            p_owner_id: $('#p_owner_id').val(),
+            userEmail: $('#userEmail').val(),
             p_name: $('#p_name').val(),
             p_location: $('#p_location').val(),
             p_city: $('#p_city').val(),

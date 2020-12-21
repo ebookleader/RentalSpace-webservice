@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductsSaveRequestDto {
 
-    private String p_owner_id;
+    private String userEmail;
     private String p_name;
     private String p_location;
     private String p_city;
@@ -32,9 +32,9 @@ public class ProductsSaveRequestDto {
 
 
     @Builder
-    public ProductsSaveRequestDto(String p_owner_id, String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice, String p_introduce,
+    public ProductsSaveRequestDto(String userEmail, String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice, String p_introduce,
                                   int p_maxNum, int p_liked, double p_avgRating, List<String> facility, List<String> notice, List<String> policy, List<String> optionTitle, List<Integer> startTime, List<Integer> endTime) {
-        this.p_owner_id = p_owner_id;
+        this.userEmail = userEmail;
         this.p_name = p_name;
         this.p_location = p_location;
         this.p_city = p_city;
@@ -55,7 +55,6 @@ public class ProductsSaveRequestDto {
 
     public Products toEntity() {
         return Products.builder()
-                .p_owner_id(p_owner_id)
                 .p_name(p_name)
                 .p_location(p_location)
                 .p_city(p_city)

@@ -1,6 +1,7 @@
 package com.webservice.rentalSpace.domain.products;
 
 import com.webservice.rentalSpace.domain.BaseTimeEntity;
+import com.webservice.rentalSpace.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,12 @@ public class Products extends BaseTimeEntity {
     @Column(name="p_id", updatable = false, insertable = false)
     private Long p_id; //bigint
 
-    @Column(nullable = false)
-    private String p_owner_id;
+//    @Column(nullable = false)
+//    private String p_owner_id;
+
+    @ManyToOne
+    @JoinColumn(name="id")
+    private User user;
 
     @Column(nullable = false, length = 100)
     private String p_name;
@@ -73,10 +78,9 @@ public class Products extends BaseTimeEntity {
 
 
     @Builder
-    public Products(String p_owner_id, String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice,
+    public Products(String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice,
                     String p_introduce,  int p_maxNum, int p_liked, double p_avgRating
                     ) {
-        this.p_owner_id = p_owner_id;
         this.p_name = p_name;
         this.p_location = p_location;
         this.p_city = p_city;
@@ -87,6 +91,10 @@ public class Products extends BaseTimeEntity {
         this.p_maxNum = p_maxNum;
         this.p_liked = p_liked;
         this.p_avgRating = p_avgRating;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void update(String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice, String p_introduce,

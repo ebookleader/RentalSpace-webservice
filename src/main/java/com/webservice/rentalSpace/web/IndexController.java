@@ -33,6 +33,7 @@ public class IndexController {
     public String spaceSave(Model model, @LoginUser SessionUser user) {
         if(user != null) {
             model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("userEmail", user.getEmail());
         }
         return "products/space_save";
     }

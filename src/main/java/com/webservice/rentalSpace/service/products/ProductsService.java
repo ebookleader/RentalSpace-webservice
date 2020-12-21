@@ -1,6 +1,8 @@
 package com.webservice.rentalSpace.service.products;
 
 import com.webservice.rentalSpace.domain.products.*;
+import com.webservice.rentalSpace.domain.user.User;
+import com.webservice.rentalSpace.domain.user.UserRepository;
 import com.webservice.rentalSpace.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class ProductsService {
+    private final UserRepository userRepository;
     private final ProductsRepository productsRepository;
     private final ProductsFacilityRepository productsFacilityRepository;
     private final ProductsNoticeRepository productsNoticeRepository;
@@ -21,7 +24,11 @@ public class ProductsService {
 
     @Transactional
     public Long save(ProductsSaveRequestDto requestDto) {
+        User user = userRepository.findByEmail(requestDto.getUserEmail()).orElseThrow(
+                () -> new IllegalArgumentException("There is no user")
+        );
         Products products = requestDto.toEntity();
+        products.setUser(user);
         productsRepository.save(products);
         List<String> facilities = requestDto.getFacility();
         for(String fac : facilities) {
