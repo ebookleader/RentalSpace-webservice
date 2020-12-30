@@ -61,7 +61,7 @@
                                         <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" value="01/11/2020">
+                                        <input type="text" class="form-control datetimepicker-input" id="reserveDate" data-target="#datetimepicker1" value="01/11/2020">
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></div>
                                 </div>
-                                <input type="number" class="form-control" max="10" min="1" value="1">
+                                <input type="number" class="form-control" max="{{product.p_maxNum}}" min="1" value="1" onKeyDown="return false">
                             </div>
                         </li>
                         <li class="nav-item">
@@ -81,21 +81,24 @@
                                 <div class="input-group-prepend select-room">
                                     <div class="input-group-text"><i class="fa fa-book" aria-hidden="true"></i></div>
                                 </div>
-                                <select class="form-control" id="" >
-                                    <option>종일권(10:00-20:00)</option>
-                                    <option>오전권(10:00-15:00)</option>
-                                    <option>야간권(21:00-08:00)</option>
+                                <select class="form-control" id="optionSelectBox" >
+                                    {{#option}}
+                                        <option value="{{po_id}}">{{title}} ({{startTime}}:00-{{endTime}}:00)</option>
+                                    {{/option}}
                                 </select>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <p class="reservation-p">예상 가격</p>
+                            <div class="row pl-3">
+                                <p class="reservation-p">예상 가격</p>
+                                <button type="button" class="btn btn-info h-50 ml-2" id="previewPriceBtn">확인</button>
+                            </div>
                             <div class="input-group mb-2">
-                                <input type="text" class="form-control" name="" value="35000원">
+                                <input type="text" class="form-control bg-dark text-light" id="previewPrice" value="" readonly>
                             </div>
                         </li>
                         <li class="nav-item text-center pt-3">
-                            <button type="submit" class="btn btn-primary">예약하기</button>
+                            <button type="submit" class="btn btn-primary" id="reserveBtn">예약하기</button>
                         </li>
                     </ul>
                 </form>

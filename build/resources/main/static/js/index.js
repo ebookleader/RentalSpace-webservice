@@ -22,6 +22,12 @@ var main = {
         $('#btn-email-key').on('click', function() {
             _this.checkEmailKey();
         });
+        $('#previewPriceBtn').on('click', function() {
+            _this.previewPrice();
+        });
+        $('#reserveBtn').on('click', function() {
+            _this.makeReservation();
+        });
     },
 
     save : function() {
@@ -71,6 +77,11 @@ var main = {
             endTimeList.push(vv);
         });
 
+        var countList = [];
+        $('input[name="count"]').each(function(i) {
+            countList.push($(this).val());
+        })
+
         var data = {
             userEmail: $('#userEmail').val(),
             p_name: $('#p_name').val(),
@@ -88,7 +99,8 @@ var main = {
             policy : policyList,
             optionTitle : optionTitleList,
             startTime : startTimeList,
-            endTime : endTimeList
+            endTime : endTimeList,
+            count : countList
         };
 
         $.ajax({
@@ -236,20 +248,29 @@ var main = {
                         alert('인증번호가 일치하지 않습니다.\n다시 입력해주세요.');
                     }
                 }
-            })
-//            $.ajax({
-//                type: 'PUT',
-//                url: '/api/guestUser/email/check',
-//                data : { inputKey:inputKey, userEmail:userEmail },
-//                dataType :'json',
-//            }).done(function() {
-//                alert('인증이 완료되었습니다.\n다시 로그인 해주세요.');
-//                window.location.href = '/logout';
-//            }).fail(function() {
-//                alert('인증번호가 일치하지 않습니다.\n다시 입력해주세요.');
-//            })
+            });
         }
-    }
+    },
+
+    previewPrice : function() {
+        var p_id = $('#p_id').val();
+        var inputDate = $('#reserveDate').val();
+        var po_id = $("#optionSelectBox option:selected").val();
+        $.ajax({
+                type: 'GET',
+                url: '/api/v1/products/previewPrice',
+                data : { p_id:p_id, inputDate:inputDate, po_id:po_id },
+                dataType :'json',
+                success : function(result) {
+                    var txt = result+"원";
+                    $("#previewPrice").val(txt);
+                }
+         });
+    },
+
+    makeReservation : function() {
+      alert($("#reserveDate").val());
+    },
 
 
 };

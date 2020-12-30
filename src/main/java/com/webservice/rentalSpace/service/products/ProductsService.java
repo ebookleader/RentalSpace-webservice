@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,36 +32,47 @@ public class ProductsService {
         Products products = requestDto.toEntity();
         products.setUser(user);
         productsRepository.save(products);
+
         List<String> facilities = requestDto.getFacility();
         for(String fac : facilities) {
-            ProductsFacility f = ProductsFacility.builder()
-                    .p_facility(fac)
-                    .products(products)
-                    .build();
-            productsFacilityRepository.save(f);
+            if(NotNullAndNotEmpty(fac)) {
+                ProductsFacility f = ProductsFacility.builder()
+                        .p_facility(fac)
+                        .products(products)
+                        .build();
+                productsFacilityRepository.save(f);
+            }
         }
+
         List<String> notices = requestDto.getNotice();
         for(String pno : notices) {
-            ProductsNotice pn = ProductsNotice.builder()
-                    .p_notice(pno)
-                    .products(products)
-                    .build();
-            productsNoticeRepository.save(pn);
+            if(NotNullAndNotEmpty(pno)) {
+                ProductsNotice pn = ProductsNotice.builder()
+                        .p_notice(pno)
+                        .products(products)
+                        .build();
+                productsNoticeRepository.save(pn);
+            }
         }
+
         List<String> policies = requestDto.getPolicy();
         for(String pol : policies) {
-            ProductsPolicy p = ProductsPolicy.builder()
-                    .p_policy(pol)
-                    .products(products)
-                    .build();
-            productsPolicyRepository.save(p);
+            if(NotNullAndNotEmpty(pol)) {
+                ProductsPolicy p = ProductsPolicy.builder()
+                        .p_policy(pol)
+                        .products(products)
+                        .build();
+                productsPolicyRepository.save(p);
+            }
         }
+
         List<String> optionTitle = requestDto.getOptionTitle();
         List<Integer> startTime = requestDto.getStartTime();
         List<Integer> endTime = requestDto.getEndTime();
+        List<Integer> count = requestDto.getCount();
         int i = 0;
         for(String title : optionTitle) {
-            if(title != null && !title.isEmpty()) {
+            if(NotNullAndNotEmpty(title)) {
                 int stime = startTime.get(i);
                 int etime = endTime.get(i);
                 int utime;
@@ -69,11 +82,13 @@ public class ProductsService {
                 else {
                     utime = etime - stime;
                 }
+                int cnt = count.get(i);
                 ProductsOption p = ProductsOption.builder()
                         .optionTitle(title)
                         .startTime(stime)
                         .endTime(etime)
                         .usingTime(utime)
+                        .count(cnt)
                         .products(products)
                         .build();
                 productsOptionRepository.save(p);
@@ -109,6 +124,13 @@ public class ProductsService {
     public List<ProductsPolicyResponseDto> findProductsPolicyById(Long id) {
         return productsPolicyRepository.findProductsPolicy(id).stream()
                 .map(ProductsPolicyResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsOptionResponseDto> findProductsOptionById(Long id) {
+        return productsOptionRepository.findProductsOption(id).stream()
+                .map(ProductsOptionResponseDto::new)
                 .collect(Collectors.toList());
     }
 
@@ -229,6 +251,39 @@ public class ProductsService {
     public int findEachNumByRating(double p_avgRating) {
         return productsRepository.findEachNumByRating(p_avgRating, p_avgRating+1.0);
 
+    }
+
+    @Transactional(readOnly = true)
+    public int calculateProductPrice(Long p_id, String inputDate, Long po_id) {
+        Products products = productsRepository.findById(p_id)
+                .orElseThrow(()->new IllegalArgumentException("There is no product"));
+        //01/29/2020
+        int year = Integer.parseInt(inputDate.substring(6,10));
+        int month = Integer.parseInt(inputDate.substring(0,2));
+        int day = Integer.parseInt(inputDate.substring(3,5));
+        LocalDate date = LocalDate.of(year, month, day);
+        DayOfWeek week = date.getDayOfWeek();
+
+        int price;
+        ProductsOption option = productsOptionRepository.findById(po_id)
+                .orElseThrow(()->new IllegalArgumentException("There is no option"));
+        int usingTime = option.getUsingTime();
+
+        if(week.equals(DayOfWeek.SATURDAY) || week.equals(DayOfWeek.SUNDAY)) {
+            int weekendPrice = products.getP_weekendPrice();
+            price = weekendPrice*usingTime;
+        }
+        else {
+            int weekPrice = products.getP_weekdayPrice();
+            price = weekPrice*usingTime;
+        }
+        return price;
+    }
+
+    private static boolean NotNullAndNotEmpty(String str) {
+        if(str != null && !str.isEmpty())
+            return true;
+        return false;
     }
 
 

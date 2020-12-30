@@ -36,4 +36,11 @@ public class ProductsApiController {
         productsService.deleteSpace(id);
         return id;
     }
+
+    @GetMapping("/api/v1/products/previewPrice")
+    public String previewProductPrice(Long p_id, String inputDate, Long po_id) {
+        int calculatedPrice = productsService.calculateProductPrice(p_id, inputDate, po_id);
+        String result = Integer.toString(calculatedPrice);
+        return result;
+    }
 }

@@ -135,6 +135,7 @@ public class IndexController {
         model.addAttribute("facility", productsService.findProductsFacilityById(p_id));
         model.addAttribute("notice", productsService.findProductsNoticeById(p_id));
         model.addAttribute("policy", productsService.findProductsPolicyById(p_id));
+        model.addAttribute("option", productsService.findProductsOptionById(p_id));
         return "products/space_detail";
     }
 

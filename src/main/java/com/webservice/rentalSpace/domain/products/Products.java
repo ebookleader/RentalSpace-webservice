@@ -1,6 +1,7 @@
 package com.webservice.rentalSpace.domain.products;
 
 import com.webservice.rentalSpace.domain.BaseTimeEntity;
+import com.webservice.rentalSpace.domain.reservation.Reservation;
 import com.webservice.rentalSpace.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,9 +23,6 @@ public class Products extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto_increment
     @Column(name="p_id", updatable = false, insertable = false)
     private Long p_id; //bigint
-
-//    @Column(nullable = false)
-//    private String p_owner_id;
 
     @ManyToOne
     @JoinColumn(name="id")
@@ -74,6 +72,10 @@ public class Products extends BaseTimeEntity {
     @OneToMany(mappedBy = "products")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<ProductsOption> p_option = new ArrayList<>();
+
+    @OneToMany(mappedBy = "products")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Reservation> reservations = new ArrayList<>();
 
 
 
