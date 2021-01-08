@@ -46,6 +46,7 @@ public class User extends BaseTimeEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Products> products = new ArrayList<>();
 
+
     @Builder
     public User(String name, String email, String picture, boolean emailVerified, Role role) {
         this.name = name;

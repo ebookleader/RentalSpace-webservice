@@ -11,6 +11,9 @@ var main = {
         $('#btn-space-update').on('click', function() {
             _this.updateSpace();
         });
+        $('#btn-check-isSeller').on('click', function() {
+            _this.checkIsSeller();
+        });
         $('#btn-enroll-seller').on('click', function() {
             if(_this.enrollSeller()) {
                 _this.enrollComplete();
@@ -25,9 +28,15 @@ var main = {
         $('#previewPriceBtn').on('click', function() {
             _this.previewPrice();
         });
-        $('#reserveBtn').on('click', function() {
-            _this.makeReservation();
+        $('#checkReserveBtn').on('click', function() {
+            _this.checkReservationIsOk();
         });
+        $('#reserve-ongoing-btn').on('click', function() {
+            _this.ongoingReservation();
+        });
+        $("#mainpage-search-button").on('click', function() {
+            _this.mainPageSearch();
+        })
     },
 
     save : function() {
@@ -179,6 +188,22 @@ var main = {
         })
     },
 
+    checkIsSeller : function() {
+        $.ajax({
+            type:'GET',
+            url: '/api/user/checkIsSeller',
+            success: function(result) {
+                if(result==true) {
+                    alert('이미 판매자 등록이 완료되었습니다.');
+                    return false;
+                }
+                else {
+                    window.location.href = '/seller/enroll'
+                }
+            }
+        });
+    },
+
     enrollSeller : function() {
         if($('#sellerCheck1').prop("checked")) {
             if($('#sellerCheck2').prop("checked")) {
@@ -195,21 +220,15 @@ var main = {
     },
 
     enrollComplete : function() {
-        var userEmail = $('#userEmail').val();
-
         $.ajax({
             type: 'PUT',
-            url: '/api/user/'+userEmail,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(userEmail)
+            url: '/api/user/enrollSeller',
         }).done(function() {
-            alert('판매자 등록이 완료되었습니다.\n다시 로그인 해주세요.');
+            alert('판매자 등록이 완료되었습니다.\n다시 로그인해주세요.');
             window.location.href = '/logout';
-//            window.location.href = '/seller/enroll/complete';
         }).fail(function() {
             alert(JSON.stringify(error));
-        });
+        })
     },
 
     emailVerify : function() {
@@ -268,8 +287,101 @@ var main = {
          });
     },
 
-    makeReservation : function() {
-      alert($("#reserveDate").val());
+    checkReservationIsOk : function() {
+        var p_id = $('#p_id').val();
+        var inputDate = $('#reserveDate').val();
+        var date = inputDate.split("/"); //month, day, year
+        var po_id = $("#optionSelectBox option:selected").val();
+        var reserveNum = $('#reserveNum').val();
+        $.ajax({
+                type: 'GET',
+                url: '/api/v1/products/checkReservationIsOk',
+                data : { p_id:p_id, inputDate:inputDate, po_id:po_id },
+                dataType :'json',
+                success : function(result) {
+                    if (result==true) {
+                        alert('예약 가능합니다.');
+                        window.location.href = "/space/list/detail/reservationOngoing/"+date[0]+"/"+date[1]+"/"+date[2]+"/"+p_id+"/"+po_id+"/"+reserveNum;
+                    }
+                    else {
+                        alert('해당 날짜의 해당 옵션은 예약이 모두 찼습니다.\n다른 옵션을 선택해주세요.');
+                    }
+                }
+         });
+    },
+
+    ongoingReservation : function() {
+        var name = $('#reservation-name').val();
+        var email = $('#reservation-email').val();
+        var phone = $('#reservation-phone').val();
+        var chk1 = $('input:checkbox[id="reserveConfirmCheck1"]').is(":checked");
+        var chk2 = $('input:checkbox[id="reserveConfirmCheck2"]').is(":checked");
+        var isOk = false;
+        if(name=="" || name==null) {
+            alert('예약자 이름을 입력해주세요');
+        }
+        else if(email=="" || email==null) {
+            alert('예약자 이메일을 입력해주세요');
+        }
+        else if(phone=="" || phone==null) {
+            alert('예약자 핸드폰 번호를 입력해주세요');
+        }
+        else if(chk1==false || chk2==false) {
+            alert('예약 안내사항 체크박스가 체크되지 않았습니다.\n모두 체크해주세요');
+        }
+        else {
+            isOk = true;
+        }
+
+        if (isOk) {
+            var data = {
+                ryear: document.getElementById('ryear').innerHTML,
+                rmonth: document.getElementById('rmonth').innerHTML,
+                rday: document.getElementById('rday').innerHTML,
+                numOfPeople: document.getElementById('reserveNum').innerHTML,
+                totalPrice: document.getElementById('totalPrice').innerHTML,
+                productId: $('#productId').val(),
+                userEmail: $('#userEmail').val(),
+                optionId: $('#optionId').val(),
+                userReservationName: name,
+                userReservationEmail: email,
+                userReservationPhone: phone
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/products/reservation/ongoing',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+            }).done(function() {
+                alert('예약이 완료되었습니다');
+                window.location.href = "/";
+            }).fail(function(error) {
+                alert(JSON.stringify(error));
+            });
+        }
+
+    },
+
+    mainPageSearch : function() {
+        var location = $("#location-dropdown").text();
+        var category = $("#category-dropdown").text();
+        $.ajax({
+                type: 'GET',
+                url: '/api/v1/products/checkReservationIsOk',
+                data : { p_id:p_id, inputDate:inputDate, po_id:po_id },
+                dataType :'json',
+                success : function(result) {
+                    if (result==true) {
+                        alert('예약 가능합니다.');
+                        window.location.href = "/space/list/detail/reservationOngoing/"+date[0]+"/"+date[1]+"/"+date[2]+"/"+p_id+"/"+po_id+"/"+reserveNum;
+                    }
+                    else {
+                        alert('해당 날짜의 해당 옵션은 예약이 모두 찼습니다.\n다른 옵션을 선택해주세요.');
+                    }
+                }
+         });
     },
 
 

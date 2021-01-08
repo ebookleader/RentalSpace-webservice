@@ -111,5 +111,9 @@ public class Products extends BaseTimeEntity {
         this.p_maxNum = p_maxNum;
     }
 
+    public Long getSellerId() {
+        return this.user.getId();
+    }
+
 
 }

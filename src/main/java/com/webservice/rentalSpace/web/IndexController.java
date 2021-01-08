@@ -135,7 +135,7 @@ public class IndexController {
         model.addAttribute("facility", productsService.findProductsFacilityById(p_id));
         model.addAttribute("notice", productsService.findProductsNoticeById(p_id));
         model.addAttribute("policy", productsService.findProductsPolicyById(p_id));
-        model.addAttribute("option", productsService.findProductsOptionById(p_id));
+        model.addAttribute("option", productsService.findAllProductsOptionById(p_id));
         return "products/space_detail";
     }
 
@@ -156,18 +156,18 @@ public class IndexController {
     @GetMapping("/seller/enroll")
     public String enroll_seller(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute(("userAccountName"), user.getName());
         }
         return "account/enroll_seller";
     }
 
-    @GetMapping("/seller/enroll/complete")
-    public String enroll_seller_complete(Model model, @LoginUser SessionUser user) {
-        if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
-        }
-        return "account/enroll_seller_complete";
-    }
+//    @GetMapping("/seller/enroll/complete")
+//    public String enroll_seller_complete(Model model, @LoginUser SessionUser user) {
+//        if(user != null) {
+//            model.addAttribute("userAccountName", user.getName());
+//        }
+//        return "account/enroll_seller_complete";
+//    }
 
     @GetMapping("/myPage/home")
     public String myPage_home(Model model, @LoginUser SessionUser user) {
@@ -188,57 +188,30 @@ public class IndexController {
         return "account/mypage_check_email";
     }
 
+    @GetMapping("/space/list/detail/reservationOngoing/{month}/{day}/{year}/{p_id}/{po_id}/{reserveNum}")
+    public String reservationOngoing(@PathVariable String month, @PathVariable String day, @PathVariable String year,
+                                     @PathVariable Long p_id, @PathVariable Long po_id,
+                                     @PathVariable int reserveNum, Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("userEmail", user.getEmail());
+        }
+        String inputDate = month+"/"+day+"/"+year;
+        int totalPrice = productsService.calculateProductPrice(p_id, inputDate, po_id);
+        int usingTime = productsService.findProductsOptionById(po_id).getUsingTime();
+        model.addAttribute("price", totalPrice/usingTime);
+        model.addAttribute("product", productsService.findById(p_id));
+        model.addAttribute("option", productsService.findProductsOptionById(po_id));
+        model.addAttribute("reserveNum", reserveNum);
+        model.addAttribute("year", year);
+        model.addAttribute("month", month);
+        model.addAttribute("day", day);
+        model.addAttribute("dayOfWeek", productsService.getDayInKorean(inputDate));
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("weekValue", productsService.findWeekOrWeekend(inputDate));
 
-//
-//    @GetMapping("/mypage/before/changePassword")
-//    public String before_changePassword() {
-//        return "before_changePassword";
-//    }
-//
-//    @GetMapping("/mypage/changePassword")
-//    public String changePassword() {
-//        return "changePassword";
-//    }
-//
-//    @GetMapping("/mypage/before/deleteAccount")
-//    public String before_deleteAccount() {
-//        return "before_deleteAccount";
-//    }
-//
-//    @GetMapping("/mypage/deleteAccount")
-//    public String deleteAccount() {
-//        return "deleteAccount";
-//    }
-//
-//    @GetMapping("/mypage/likedList")
-//    public String liked_list() {
-//        return "liked_list";
-//    }
-//
-//    @GetMapping("/mypage/reservation/ongoing")
-//    public String ongoing_reservation_list() {
-//        return "ongoing_reservation_list";
-//    }
-//
-//    @GetMapping("/mypage/reservation/past")
-//    public String past_reservation_list() {
-//        return "past_reservation_list";
-//    }
-//
-//    @GetMapping("/mypage/review/write")
-//    public String write_review() {
-//        return "writeReview";
-//    }
-//
-//    @GetMapping("/mypage/review")
-//    public String my_review() {
-//        return "myReview";
-//    }
-//
-//    @GetMapping("/mypage/review/delete")
-//    public String delete_review() {
-//        return "deleteReview";
-//    }
+        return "products/reservation_ongoing";
+    }
 
 }
 

@@ -21,7 +21,7 @@ public class ProductsOption {
     @JoinColumn(name="p_id")
     private Products products;
 
-    // optionTitle, startTime, endTime, usingTime, count
+    // optionTitle, startTime, endTime, usingTime, availableCount
     private String optionTitle;
 
     private int startTime;
@@ -30,14 +30,14 @@ public class ProductsOption {
 
     private int usingTime;
 
-    private int count;
+    private int availableCount;
 
-    @Builder ProductsOption(String optionTitle, int startTime, int endTime, int usingTime, int count, Products products) {
+    @Builder ProductsOption(String optionTitle, int startTime, int endTime, int usingTime, int availableCount, Products products) {
         this.optionTitle = optionTitle;
         this.startTime = startTime;
         this.endTime = endTime;
         this.usingTime = usingTime;
         this.products = products;
-        this.count = count;
+        this.availableCount = availableCount;
     }
 }

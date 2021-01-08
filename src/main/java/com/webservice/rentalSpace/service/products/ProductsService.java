@@ -1,6 +1,8 @@
 package com.webservice.rentalSpace.service.products;
 
 import com.webservice.rentalSpace.domain.products.*;
+import com.webservice.rentalSpace.domain.reservation.Reservation;
+import com.webservice.rentalSpace.domain.reservation.ReservationRepository;
 import com.webservice.rentalSpace.domain.user.User;
 import com.webservice.rentalSpace.domain.user.UserRepository;
 import com.webservice.rentalSpace.web.dto.*;
@@ -23,6 +25,7 @@ public class ProductsService {
     private final ProductsNoticeRepository productsNoticeRepository;
     private final ProductsPolicyRepository productsPolicyRepository;
     private final ProductsOptionRepository productsOptionRepository;
+    private final ReservationRepository reservationRepository;
 
     @Transactional
     public Long save(ProductsSaveRequestDto requestDto) {
@@ -88,7 +91,7 @@ public class ProductsService {
                         .startTime(stime)
                         .endTime(etime)
                         .usingTime(utime)
-                        .count(cnt)
+                        .availableCount(cnt)
                         .products(products)
                         .build();
                 productsOptionRepository.save(p);
@@ -128,10 +131,18 @@ public class ProductsService {
     }
 
     @Transactional(readOnly = true)
-    public List<ProductsOptionResponseDto> findProductsOptionById(Long id) {
-        return productsOptionRepository.findProductsOption(id).stream()
+    public List<ProductsOptionResponseDto> findAllProductsOptionById(Long id) {
+        return productsOptionRepository.findAllProductsOption(id).stream()
                 .map(ProductsOptionResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public ProductsOptionResponseDto findProductsOptionById(Long id) {
+        ProductsOption entity = productsOptionRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("There is no option")
+        );
+        return new ProductsOptionResponseDto(entity);
     }
 
     @Transactional(readOnly = true)
@@ -258,18 +269,18 @@ public class ProductsService {
         Products products = productsRepository.findById(p_id)
                 .orElseThrow(()->new IllegalArgumentException("There is no product"));
         //01/29/2020
-        int year = Integer.parseInt(inputDate.substring(6,10));
-        int month = Integer.parseInt(inputDate.substring(0,2));
-        int day = Integer.parseInt(inputDate.substring(3,5));
-        LocalDate date = LocalDate.of(year, month, day);
-        DayOfWeek week = date.getDayOfWeek();
+//        int year = Integer.parseInt(inputDate.substring(6,10));
+//        int month = Integer.parseInt(inputDate.substring(0,2));
+//        int day = Integer.parseInt(inputDate.substring(3,5));
+//        LocalDate date = LocalDate.of(year, month, day);
+//        DayOfWeek week = date.getDayOfWeek();
 
         int price;
         ProductsOption option = productsOptionRepository.findById(po_id)
                 .orElseThrow(()->new IllegalArgumentException("There is no option"));
         int usingTime = option.getUsingTime();
 
-        if(week.equals(DayOfWeek.SATURDAY) || week.equals(DayOfWeek.SUNDAY)) {
+        if(findWeekOrWeekend(inputDate).equals("주말")) {
             int weekendPrice = products.getP_weekendPrice();
             price = weekendPrice*usingTime;
         }
@@ -280,12 +291,99 @@ public class ProductsService {
         return price;
     }
 
+    @Transactional(readOnly = true)
+    public boolean checkReservationIsOk(Long p_id, String inputDate, Long po_id) {
+        int maxCount = productsOptionRepository.findOptionAvailableCountByOptionId(po_id);
+        int year = splitDate(inputDate)[0];
+        int month = splitDate(inputDate)[1];
+        int day = splitDate(inputDate)[2];
+        int reservedCount = reservationRepository.findReservedCountByOptionId(year, month, day, po_id);
+        if (reservedCount<maxCount) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     private static boolean NotNullAndNotEmpty(String str) {
         if(str != null && !str.isEmpty())
             return true;
         return false;
     }
 
+    public String findWeekOrWeekend(String inputDate) {
+        int year = Integer.parseInt(inputDate.substring(6,10));
+        int month = Integer.parseInt(inputDate.substring(0,2));
+        int day = Integer.parseInt(inputDate.substring(3,5));
+        LocalDate date = LocalDate.of(year, month, day);
+        DayOfWeek week = date.getDayOfWeek();
+        if(week.equals(DayOfWeek.SATURDAY) || week.equals(DayOfWeek.SUNDAY)) {
+            return "주말";
+        }
+        else {
+            return "주중";
+        }
+    }
+
+    public String getDayInKorean(String inputDate) {
+        int year = splitDate(inputDate)[0];
+        int month = splitDate(inputDate)[1];
+        int day = splitDate(inputDate)[2];
+        LocalDate date = LocalDate.of(year, month, day);
+        DayOfWeek dow = date.getDayOfWeek();
+        String val = "";
+        switch (dow) {
+            case MONDAY:
+                val = "월요일";
+                break;
+            case TUESDAY:
+                val = "화요일";
+                break;
+            case WEDNESDAY:
+                val = "수요일";
+                break;
+            case THURSDAY:
+                val = "목요일";
+                break;
+            case FRIDAY:
+                val = "금요일";
+                break;
+            case SATURDAY:
+                val = "토요일";
+                break;
+            case SUNDAY:
+                val = "일요일";
+                break;
+        }
+        return val;
+    }
+
+    private static int[] splitDate(String date) {
+        int temp[] = new int[3];
+        temp[0] = Integer.parseInt(date.substring(6, 10)); //year
+        temp[1] = Integer.parseInt(date.substring(0,2)); //month
+        temp[2] = Integer.parseInt(date.substring(3,5)); //day
+        return temp;
+    }
+
+    @Transactional
+    public Long saveReservation(ReservationSaveRequestDto requestDto) {
+        User user = userRepository.findByEmail(requestDto.getUserEmail()).orElseThrow(
+                () -> new IllegalArgumentException("no user")
+        );
+        Long userId = user.getId();
+        Products products = productsRepository.findById(requestDto.getProductId()).orElseThrow(
+                () -> new IllegalArgumentException("no product")
+        );
+        Long sellerId = products.getSellerId();
+
+        Reservation reservation = requestDto.toEntity(sellerId, userId);
+        reservation.setProducts(products);
+        reservationRepository.save(reservation);
+
+        return reservation.getRid();
+    }
 
 
 }

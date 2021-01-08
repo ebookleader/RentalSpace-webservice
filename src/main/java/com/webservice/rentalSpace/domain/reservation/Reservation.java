@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "reservation")
 public class Reservation extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,22 +50,37 @@ public class Reservation extends BaseTimeEntity {
     @Column(nullable = false)
     private Long optionId;
 
-    @Builder Reservation(int ryear, int rmonth, int rday, int numOfPeople, int totalPrice,
-                         ReservationStatus reservationStatus, Products products, Long sellerId,
-                         Long userId, Long optionId) {
+    @Column(nullable = false)
+    private String userReservationName;
+
+    @Column(nullable = false)
+    private String userReservationEmail;
+
+    @Column(nullable = false)
+    private String userReservationPhone;
+
+    @Builder
+    public Reservation(int ryear, int rmonth, int rday, int numOfPeople, int totalPrice,
+                         ReservationStatus reservationStatus, Long sellerId,
+                         Long userId, Long optionId, String userReservationName,
+                         String userReservationEmail, String userReservationPhone) {
         this.ryear = ryear;
         this.rmonth = rmonth;
         this.rday = rday;
         this.numOfPeople = numOfPeople;
         this.totalPrice = totalPrice;
         this.reservationStatus = reservationStatus;
-        this.products = products;
         this.sellerId = sellerId;
         this.userId = userId;
         this.optionId = optionId;
+        this.userReservationName = userReservationName;
+        this.userReservationEmail = userReservationEmail;
+        this.userReservationPhone = userReservationPhone;
     }
 
-
+    public void setProducts(Products products) {
+        this.products = products;
+    }
 
 
 }

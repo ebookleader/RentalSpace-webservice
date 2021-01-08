@@ -12,15 +12,6 @@ $(document).ready(function() {
     var k = $(this).text();
     $("#category-dropdown").text(k);
   })
-
-  // Search button
-  $("#mainpage-search-button").click(function() {
-    var location = $("#location-dropdown").text();
-    var category = $("#category-dropdown").text();
-    alert(location);
-    alert(category);
-  })
-
     // 동적 input(facility) 추가
 
       var maxField = 10;

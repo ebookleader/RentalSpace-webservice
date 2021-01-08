@@ -19,8 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests() //url별 권환 관리, antMatchers 옵션 사용
                     .antMatchers("/", "/css/**", "/img/**", "/js/**", "/h2-console/**", "/basicUser/**", "/login").permitAll()
                     .antMatchers( "/api/guestUser/**").hasRole(Role.GUEST.name())
-                    .antMatchers("/space/list/**").access("hasRole('USER') or hasRole('SELLER')")
-                    .antMatchers("/seller/**", "/api/user/**").hasRole(Role.USER.name())
+                    .antMatchers("/space/list/**", "/api/user/**").access("hasRole('USER') or hasRole('SELLER')")
+                    .antMatchers("/seller/**").hasRole(Role.USER.name())
                     .antMatchers("/api/v1/**", "/space/save/**", "/space/update/**").hasRole(Role.SELLER.name())
                     .anyRequest().authenticated()
                 .and()

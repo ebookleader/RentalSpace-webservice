@@ -2,6 +2,7 @@ package com.webservice.rentalSpace.web;
 
 import com.webservice.rentalSpace.config.auth.LoginUser;
 import com.webservice.rentalSpace.config.auth.dto.SessionUser;
+import com.webservice.rentalSpace.domain.user.Role;
 import com.webservice.rentalSpace.domain.user.UserRepository;
 import com.webservice.rentalSpace.service.user.UserService;
 import com.webservice.rentalSpace.web.dto.UserUpdateRequestDto;
@@ -22,9 +23,20 @@ public class UserApiController {
     private final JavaMailSender javaMailSender;
 
     // enroll seller
-    @PutMapping("/api/user/{email}")
-    public Long updateUserSeller(@PathVariable String email) {
-        return userService.updateToSeller(email);
+    @GetMapping("/api/user/checkIsSeller")
+    public boolean checkIsSeller(@LoginUser SessionUser user) {
+        boolean result;
+        if(user.getRole().equals(Role.SELLER))
+            result = true;
+        else
+            result = false;
+        return result;
+    }
+
+    @PutMapping("/api/user/enrollSeller")
+    public Long updateUserSeller(@LoginUser SessionUser user) {
+        String userEmail = user.getEmail();
+        return userService.updateToSeller(userEmail);
     }
 
     // email verify

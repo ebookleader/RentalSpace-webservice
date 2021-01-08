@@ -6,7 +6,6 @@ import lombok.Getter;
 @Getter
 public class ProductsResponseDto {
     private Long p_id;
-    private String p_owner_id;
     private String p_name;
     private String p_location;
     private String p_city;
