@@ -57,11 +57,11 @@
                 </div>
                 <div class="form-group">
                     <label for="p_weekdayPrice">평일 가격 / 시간</label>
-                    <input type="number" class="form-control" id="p_weekdayPrice" placeholder="평일 가격 (/시간)을 입력하세요">
+                    <input type="number" class="form-control" id="p_weekdayPrice" placeholder="평일 가격 (/시간)을 입력하세요" step="10">
                 </div>
                 <div class="form-group">
                     <label for="p_weekendPrice">주말 가격 / 시간</label>
-                    <input type="number" class="form-control" id="p_weekendPrice" placeholder="주말 가격 (/시간)을 입력하세요">
+                    <input type="number" class="form-control" id="p_weekendPrice" placeholder="주말 가격 (/시간)을 입력하세요" step="10">
                 </div>
 
                 <p class="font-weight-bold">판매 상품 유형(최대 5개)</p>
@@ -295,16 +295,6 @@
                 <div class="form-group">
                     <label for="p_maxNum">최대 인원 수</label>
                     <input type="number" class="form-control" id="p_maxNum" placeholder="최대 인원 수를 입력하세요">
-                </div>
-
-                <!-- 후에 값 가져오는거로 수정 -->
-                <div class="form-group">
-                    <label for="p_liked">좋아요 수</label>
-                    <input type="number" class="form-control" id="p_liked" placeholder="좋아요 수">
-                </div>
-                <div class="form-group">
-                    <label for="p_avgRating">별점</label>
-                    <input type="number" class="form-control" id="p_avgRating" placeholder="별점">
                 </div>
                 <a href="/" role="button" class="btn btn-secondary">취소</a>
                 <button type="button" class="btn btn-primary" id="btn-space-save">등록</button>
