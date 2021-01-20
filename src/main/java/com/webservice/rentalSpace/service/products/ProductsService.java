@@ -201,8 +201,8 @@ public class ProductsService {
                 ()->new IllegalArgumentException("There is no products which id="+id)
         );
 
-        products.update(requestDto.getP_name(), requestDto.getP_location(), requestDto.getP_city(), requestDto.getP_category(),
-                requestDto.getP_weekdayPrice(), requestDto.getP_weekendPrice(), requestDto.getP_introduce(), requestDto.getP_maxNum());
+        products.update(requestDto.getP_name(), requestDto.getP_postcode(), requestDto.getP_address(), requestDto.getP_detailAddress(),
+                requestDto.getP_city(), requestDto.getP_category(), requestDto.getP_weekdayPrice(), requestDto.getP_weekendPrice(), requestDto.getP_introduce(), requestDto.getP_maxNum());
 
         productsFacilityRepository.deleteProductsFacility(id);
         productsNoticeRepository.deleteProductsNotice(id);

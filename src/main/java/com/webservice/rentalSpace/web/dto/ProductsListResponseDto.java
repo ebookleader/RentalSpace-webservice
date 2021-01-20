@@ -11,7 +11,6 @@ public class ProductsListResponseDto {
     private int p_weekdayPrice;
     private String p_city;
     private String p_category;
-    private String p_location;
 
     public ProductsListResponseDto(Products entity) {
         this.p_id = entity.getP_id();
@@ -20,6 +19,5 @@ public class ProductsListResponseDto {
         this.p_weekdayPrice = entity.getP_weekdayPrice();
         this.p_city = entity.getP_city();
         this.p_category = entity.getP_category();
-        this.p_location = entity.getP_location();
     }
 }

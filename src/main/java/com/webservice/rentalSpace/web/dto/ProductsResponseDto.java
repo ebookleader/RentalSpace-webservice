@@ -7,7 +7,9 @@ import lombok.Getter;
 public class ProductsResponseDto {
     private Long p_id;
     private String p_name;
-    private String p_location;
+    private int p_postcode;
+    private String p_address;
+    private String p_detailAddress;
     private String p_city;
     private String p_category;
     private int p_weekdayPrice;
@@ -20,7 +22,9 @@ public class ProductsResponseDto {
     public ProductsResponseDto(Products entity) {
         this.p_id = entity.getP_id();
         this.p_name = entity.getP_name();
-        this.p_location = entity.getP_location();
+        this.p_postcode = entity.getP_postcode();
+        this.p_address = entity.getP_address();
+        this.p_detailAddress = entity.getP_detailAddress();
         this.p_city = entity.getP_city();
         this.p_category = entity.getP_category();
         this.p_weekdayPrice = entity.getP_weekdayPrice();

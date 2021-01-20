@@ -32,7 +32,13 @@ public class Products extends BaseTimeEntity {
     private String p_name;
 
     @Column(nullable = false)
-    private String p_location;
+    private int p_postcode;
+
+    @Column(nullable = false)
+    private String p_address;
+
+    @Column(nullable = false)
+    private String p_detailAddress;
 
     @Column(nullable = false)
     private String p_city;
@@ -80,11 +86,13 @@ public class Products extends BaseTimeEntity {
 
 
     @Builder
-    public Products(String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice,
-                    String p_introduce,  int p_maxNum, int p_liked, double p_avgRating
+    public Products(String p_name, int p_postcode, String p_address, String p_detailAddress, String p_city, String p_category,
+                    int p_weekdayPrice, int p_weekendPrice, String p_introduce,  int p_maxNum, int p_liked, double p_avgRating
                     ) {
         this.p_name = p_name;
-        this.p_location = p_location;
+        this.p_postcode = p_postcode;
+        this.p_address = p_address;
+        this.p_detailAddress = p_detailAddress;
         this.p_city = p_city;
         this.p_category = p_category;
         this.p_weekdayPrice = p_weekdayPrice;
@@ -99,10 +107,12 @@ public class Products extends BaseTimeEntity {
         this.user = user;
     }
 
-    public void update(String p_name, String p_location, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice, String p_introduce,
-                       int p_maxNum) {
+    public void update(String p_name, int p_postcode, String p_address, String p_detailAddress, String p_city, String p_category, int p_weekdayPrice,
+                       int p_weekendPrice, String p_introduce, int p_maxNum) {
         this.p_name = p_name;
-        this.p_location = p_location;
+        this.p_postcode = p_postcode;
+        this.p_address = p_address;
+        this.p_detailAddress = p_detailAddress;
         this.p_city = p_city;
         this.p_category = p_category;
         this.p_weekdayPrice = p_weekdayPrice;
