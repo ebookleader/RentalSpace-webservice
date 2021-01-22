@@ -7,9 +7,13 @@ import com.webservice.rentalSpace.domain.user.User;
 import com.webservice.rentalSpace.domain.user.UserRepository;
 import com.webservice.rentalSpace.web.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,6 +30,7 @@ public class ProductsService {
     private final ProductsPolicyRepository productsPolicyRepository;
     private final ProductsOptionRepository productsOptionRepository;
     private final ReservationRepository reservationRepository;
+    private final FilesRepository filesRepository;
 
     @Transactional
     public Long save(ProductsSaveRequestDto requestDto) {
@@ -185,6 +190,41 @@ public class ProductsService {
         return productsRepository.findAllByRating(rating, rating+1.0).stream()
                 .map(ProductsListResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void saveProductsImage(List<MultipartFile> filesList, Long p_id) throws Exception{
+
+        Products products = productsRepository.findById(p_id)
+                .orElseThrow(()->new IllegalArgumentException("There is no product which id=" + p_id));
+
+        String fileUrl = "C:/Users/Jeongeun/IdeaProjects/RentalSpace-webservice/src/main/resources/static/img/uploadImg/";
+
+        for(MultipartFile files : filesList) {
+            String sourceFileName = files.getOriginalFilename();
+            String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase();
+
+            File destinationFile;
+            String destinationFileName;
+
+            do {
+                destinationFileName = RandomStringUtils.randomAlphanumeric(32)+"."+sourceFileNameExtension;
+                destinationFile = new File(fileUrl+destinationFileName);
+                System.out.println("count");
+            } while (destinationFile.exists());
+
+            destinationFile.getParentFile().mkdirs();
+
+            files.transferTo(destinationFile);
+            Files f = Files.builder()
+                    .fileName(destinationFileName)
+                    .fileOriginalName(sourceFileName)
+                    .fileUrl(fileUrl)
+                    .products(products)
+                    .build();
+            filesRepository.save(f);
+        }
+
     }
 
     @Transactional

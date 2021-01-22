@@ -7,6 +7,11 @@ import com.webservice.rentalSpace.web.dto.ReservationSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -17,7 +22,14 @@ public class ProductsApiController {
     //save
     @PostMapping("/api/v1/products")
     public Long save(@RequestBody ProductsSaveRequestDto requestDto) {
-        return productsService.save(requestDto);
+        Long pid = productsService.save(requestDto);
+        return pid;
+    }
+
+    @RequestMapping("/api/v1/products/{p_id}/imageInsert")
+    public RedirectView imageInsert(HttpServletRequest request, @PathVariable Long p_id, @RequestPart List<MultipartFile> files) throws Exception {
+        productsService.saveProductsImage(files, p_id);
+        return new RedirectView("/");
     }
 
     //update

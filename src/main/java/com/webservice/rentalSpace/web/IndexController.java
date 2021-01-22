@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -36,6 +37,16 @@ public class IndexController {
             model.addAttribute("userEmail", user.getEmail());
         }
         return "products/space_save";
+    }
+
+    @RequestMapping("/products/{p_id}/imageInsert")
+    public String insertProductsImage(@PathVariable Long p_id, Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userAccountName", user.getName());
+        }
+        model.addAttribute("p_id", p_id);
+
+        return "products/space_image_save";
     }
 
     @GetMapping("/space/list")

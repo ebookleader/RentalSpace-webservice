@@ -121,9 +121,9 @@ var main = {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
-        }).done(function() {
-            alert('상품 등록 완료');
-            window.location.href = "/";
+        }).done(function(pid) {
+            alert('상품 등록 완료\n상품 사진 등록으로 넘어갑니다.');
+            window.location.href = "/products/"+pid+"/imageInsert";
         }).fail(function(error) {
             alert(JSON.stringify(error));
         });

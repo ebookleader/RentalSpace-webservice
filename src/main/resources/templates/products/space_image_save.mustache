@@ -1,0 +1,14 @@
+{{>layout/header}}
+<div class="content-area pb-5 pt-3">
+    <div class="container mt-5 content-body">
+        <h3 class="pb-4">상품 이미지 등록</h3>
+        <div class="container">
+            <form action="/api/v1/products/{{p_id}}/imageInsert" method="post" enctype="multipart/form-data">
+                <input type="file" name="files" multiple>
+                <!-- 여기서 files는 controller에 @RequestPart MultipartFile files -->
+                <button type="submit" class="btn btn-dark">업로드</button>
+            </form>
+        </div>
+    </div>
+</div>
+{{>layout/footer}}
