@@ -42,8 +42,8 @@ public class ProductsService {
         productsRepository.save(products);
 
         List<String> facilities = requestDto.getFacility();
-        for(String fac : facilities) {
-            if(NotNullAndNotEmpty(fac)) {
+        for (String fac : facilities) {
+            if (NotNullAndNotEmpty(fac)) {
                 ProductsFacility f = ProductsFacility.builder()
                         .p_facility(fac)
                         .products(products)
@@ -53,8 +53,8 @@ public class ProductsService {
         }
 
         List<String> notices = requestDto.getNotice();
-        for(String pno : notices) {
-            if(NotNullAndNotEmpty(pno)) {
+        for (String pno : notices) {
+            if (NotNullAndNotEmpty(pno)) {
                 ProductsNotice pn = ProductsNotice.builder()
                         .p_notice(pno)
                         .products(products)
@@ -64,8 +64,8 @@ public class ProductsService {
         }
 
         List<String> policies = requestDto.getPolicy();
-        for(String pol : policies) {
-            if(NotNullAndNotEmpty(pol)) {
+        for (String pol : policies) {
+            if (NotNullAndNotEmpty(pol)) {
                 ProductsPolicy p = ProductsPolicy.builder()
                         .p_policy(pol)
                         .products(products)
@@ -79,15 +79,14 @@ public class ProductsService {
         List<Integer> endTime = requestDto.getEndTime();
         List<Integer> count = requestDto.getCount();
         int i = 0;
-        for(String title : optionTitle) {
-            if(NotNullAndNotEmpty(title)) {
+        for (String title : optionTitle) {
+            if (NotNullAndNotEmpty(title)) {
                 int stime = startTime.get(i);
                 int etime = endTime.get(i);
                 int utime;
-                if(stime > etime) {
-                    utime = (24-stime) + etime;
-                }
-                else {
+                if (stime > etime) {
+                    utime = (24 - stime) + etime;
+                } else {
                     utime = etime - stime;
                 }
                 int cnt = count.get(i);
@@ -187,42 +186,57 @@ public class ProductsService {
 
     @Transactional(readOnly = true)
     public List<ProductsListResponseDto> findAllByRating(double rating) {
-        return productsRepository.findAllByRating(rating, rating+1.0).stream()
+        return productsRepository.findAllByRating(rating, rating + 1.0).stream()
                 .map(ProductsListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional
-    public void saveProductsImage(List<MultipartFile> filesList, Long p_id) throws Exception{
+    public void saveProductsImage(List<MultipartFile> filesList, Long p_id) throws Exception {
 
         Products products = productsRepository.findById(p_id)
-                .orElseThrow(()->new IllegalArgumentException("There is no product which id=" + p_id));
+                .orElseThrow(() -> new IllegalArgumentException("There is no product which id=" + p_id));
 
         String fileUrl = "C:/Users/Jeongeun/IdeaProjects/RentalSpace-webservice/src/main/resources/static/img/uploadImg/";
-
-        for(MultipartFile files : filesList) {
+        int cnt = 0;
+        for (MultipartFile files : filesList) {
             String sourceFileName = files.getOriginalFilename();
-            String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase();
+            if (NotNullAndNotEmpty(sourceFileName)) {
+                String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase();
 
-            File destinationFile;
-            String destinationFileName;
+                File destinationFile;
+                String destinationFileName;
 
-            do {
-                destinationFileName = RandomStringUtils.randomAlphanumeric(32)+"."+sourceFileNameExtension;
-                destinationFile = new File(fileUrl+destinationFileName);
-                System.out.println("count");
-            } while (destinationFile.exists());
+                do {
+                    destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
+                    destinationFile = new File(fileUrl + destinationFileName);
+                } while (destinationFile.exists());
 
-            destinationFile.getParentFile().mkdirs();
+                destinationFile.getParentFile().mkdirs();
 
-            files.transferTo(destinationFile);
-            Files f = Files.builder()
-                    .fileName(destinationFileName)
-                    .fileOriginalName(sourceFileName)
-                    .fileUrl(fileUrl)
-                    .products(products)
-                    .build();
-            filesRepository.save(f);
+                files.transferTo(destinationFile);
+                Files f;
+                if (cnt == 0) {
+                    f = Files.builder()
+                            .fileName(destinationFileName)
+                            .fileOriginalName(sourceFileName)
+                            .fileUrl(fileUrl)
+                            .isThumbnail(true)
+                            .products(products)
+                            .build();
+                } else {
+                    f = Files.builder()
+                            .fileName(destinationFileName)
+                            .fileOriginalName(sourceFileName)
+                            .fileUrl(fileUrl)
+                            .isThumbnail(false)
+                            .products(products)
+                            .build();
+                }
+                filesRepository.save(f);
+                cnt++;
+            }
+
         }
 
     }
@@ -230,7 +244,7 @@ public class ProductsService {
     @Transactional
     public void deleteSpace(Long id) {
         Products products = productsRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("There is no product which id=" + id));
+                .orElseThrow(() -> new IllegalArgumentException("There is no product which id=" + id));
 
         productsRepository.delete(products);
     }
@@ -238,7 +252,7 @@ public class ProductsService {
     @Transactional
     public Long update(Long id, ProductsUpdateRequestDto requestDto) {
         Products products = productsRepository.findById(id).orElseThrow(
-                ()->new IllegalArgumentException("There is no products which id="+id)
+                () -> new IllegalArgumentException("There is no products which id=" + id)
         );
 
         products.update(requestDto.getP_name(), requestDto.getP_postcode(), requestDto.getP_address(), requestDto.getP_detailAddress(),
@@ -249,7 +263,7 @@ public class ProductsService {
         productsPolicyRepository.deleteProductsPolicy(id);
 
         List<String> facilities = requestDto.getFacility();
-        for(String f : facilities) {
+        for (String f : facilities) {
             ProductsFacility pf = ProductsFacility.builder()
                     .p_facility(f)
                     .products(products)
@@ -258,7 +272,7 @@ public class ProductsService {
         }
 
         List<String> notices = requestDto.getNotice();
-        for(String pno : notices) {
+        for (String pno : notices) {
             ProductsNotice pn = ProductsNotice.builder()
                     .p_notice(pno)
                     .products(products)
@@ -267,7 +281,7 @@ public class ProductsService {
         }
 
         List<String> policies = requestDto.getPolicy();
-        for(String pol : policies) {
+        for (String pol : policies) {
             ProductsPolicy p = ProductsPolicy.builder()
                     .p_policy(pol)
                     .products(products)
@@ -300,14 +314,14 @@ public class ProductsService {
 
     @Transactional(readOnly = true)
     public int findEachNumByRating(double p_avgRating) {
-        return productsRepository.findEachNumByRating(p_avgRating, p_avgRating+1.0);
+        return productsRepository.findEachNumByRating(p_avgRating, p_avgRating + 1.0);
 
     }
 
     @Transactional(readOnly = true)
     public int calculateProductPrice(Long p_id, String inputDate, Long po_id) {
         Products products = productsRepository.findById(p_id)
-                .orElseThrow(()->new IllegalArgumentException("There is no product"));
+                .orElseThrow(() -> new IllegalArgumentException("There is no product"));
         //01/29/2020
 //        int year = Integer.parseInt(inputDate.substring(6,10));
 //        int month = Integer.parseInt(inputDate.substring(0,2));
@@ -317,16 +331,15 @@ public class ProductsService {
 
         int price;
         ProductsOption option = productsOptionRepository.findById(po_id)
-                .orElseThrow(()->new IllegalArgumentException("There is no option"));
+                .orElseThrow(() -> new IllegalArgumentException("There is no option"));
         int usingTime = option.getUsingTime();
 
-        if(findWeekOrWeekend(inputDate).equals("주말")) {
+        if (findWeekOrWeekend(inputDate).equals("주말")) {
             int weekendPrice = products.getP_weekendPrice();
-            price = weekendPrice*usingTime;
-        }
-        else {
+            price = weekendPrice * usingTime;
+        } else {
             int weekPrice = products.getP_weekdayPrice();
-            price = weekPrice*usingTime;
+            price = weekPrice * usingTime;
         }
         return price;
     }
@@ -338,30 +351,28 @@ public class ProductsService {
         int month = splitDate(inputDate)[1];
         int day = splitDate(inputDate)[2];
         int reservedCount = reservationRepository.findReservedCountByOptionId(year, month, day, po_id);
-        if (reservedCount<maxCount) {
+        if (reservedCount < maxCount) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     private static boolean NotNullAndNotEmpty(String str) {
-        if(str != null && !str.isEmpty())
+        if (str != null && !str.isEmpty())
             return true;
         return false;
     }
 
     public String findWeekOrWeekend(String inputDate) {
-        int year = Integer.parseInt(inputDate.substring(6,10));
-        int month = Integer.parseInt(inputDate.substring(0,2));
-        int day = Integer.parseInt(inputDate.substring(3,5));
+        int year = Integer.parseInt(inputDate.substring(6, 10));
+        int month = Integer.parseInt(inputDate.substring(0, 2));
+        int day = Integer.parseInt(inputDate.substring(3, 5));
         LocalDate date = LocalDate.of(year, month, day);
         DayOfWeek week = date.getDayOfWeek();
-        if(week.equals(DayOfWeek.SATURDAY) || week.equals(DayOfWeek.SUNDAY)) {
+        if (week.equals(DayOfWeek.SATURDAY) || week.equals(DayOfWeek.SUNDAY)) {
             return "주말";
-        }
-        else {
+        } else {
             return "주중";
         }
     }
@@ -402,8 +413,8 @@ public class ProductsService {
     private static int[] splitDate(String date) {
         int temp[] = new int[3];
         temp[0] = Integer.parseInt(date.substring(6, 10)); //year
-        temp[1] = Integer.parseInt(date.substring(0,2)); //month
-        temp[2] = Integer.parseInt(date.substring(3,5)); //day
+        temp[1] = Integer.parseInt(date.substring(0, 2)); //month
+        temp[2] = Integer.parseInt(date.substring(3, 5)); //day
         return temp;
     }
 

@@ -26,15 +26,18 @@ public class Files {
 
     private String fileUrl;
 
+    private boolean isThumbnail;
+
     @ManyToOne
     @JoinColumn(name="p_id")
     private Products products;
 
     @Builder
-    public Files(String fileName, String fileOriginalName, String fileUrl, Products products) {
+    public Files(String fileName, String fileOriginalName, String fileUrl, boolean isThumbnail, Products products) {
         this.fileName = fileName;
         this.fileOriginalName = fileOriginalName;
         this.fileUrl = fileUrl;
+        this.isThumbnail = isThumbnail;
         this.products = products;
     }
 }
