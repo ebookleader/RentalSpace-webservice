@@ -12,6 +12,7 @@ public class SessionUser implements Serializable {
     private String picture;
     private Role role;
     private boolean emailVerified;
+    private boolean isSeller;
 
     public SessionUser(){}
 
@@ -21,5 +22,6 @@ public class SessionUser implements Serializable {
         this.picture = user.getPicture();
         this.role = user.getRole();
         this.emailVerified = user.isEmailVerified(); //true or false
+        this.isSeller = user.isSeller();
     }
 }

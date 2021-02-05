@@ -5,6 +5,9 @@ var main = {
         $('#btn-space-save').on('click', function() {
             _this.save();
         });
+        $('#btn-name-search').on('click', function() {
+            _this.searchProductsName();
+        })
         $('#btn-space-delete').on('click', function() {
             _this.deleteSpace();
         });
@@ -13,6 +16,11 @@ var main = {
         });
         $('#btn-check-isSeller').on('click', function() {
             _this.checkIsSeller();
+        });
+        $('#btn-undo-enrollSeller').on('click', function() {
+            if(_this.undoEnrollSellerCheck()) {
+                _this.undoEnrollSeller();
+            }
         });
         $('#btn-enroll-seller').on('click', function() {
             if(_this.enrollSeller()) {
@@ -36,7 +44,7 @@ var main = {
         });
         $("#mainpage-search-button").on('click', function() {
             _this.mainPageSearch();
-        })
+        });
     },
 
     save : function() {
@@ -92,7 +100,6 @@ var main = {
         })
 
         var data = {
-            userEmail: $('#userEmail').val(),
             p_name: $('#p_name').val(),
             p_location: $('#p_location').val(),
             p_postcode : $('#sample6_postcode').val(),
@@ -127,6 +134,20 @@ var main = {
         }).fail(function(error) {
             alert(JSON.stringify(error));
         });
+    },
+
+    searchProductsName : function() {
+        var search = $('#spaceNameSearch').val();
+        $.ajax({
+            type: 'GET',
+            url: '/space/list/search/'+search,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function() {
+
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        })
     },
 
     deleteSpace : function() {
@@ -201,8 +222,34 @@ var main = {
                     return false;
                 }
                 else {
-                    window.location.href = '/seller/enroll'
+                    window.location.href = '/seller/enroll';
                 }
+            }
+        });
+    },
+
+    undoEnrollSellerCheck : function() {
+        if($('#undoSellerCheck1').prop("checked")) {
+            if($('#undoSellerCheck2').prop("checked")) {
+                return true;
+            }
+            else {
+                alert('두번째 항목이 체크되지 않았습니다.');
+            }
+        }
+        else {
+            alert('첫번째 항목이 체크되지 않았습니다.');
+        }
+        return false;
+    },
+
+    undoEnrollSeller : function() {
+        $.ajax({
+            type: 'PUT',
+            url: '/api/user/undo/enrollSeller',
+            success: function() {
+                alert('판매자 취소가 완료되었습니다. 다시 로그인해주세요.');
+                window.location.href = '/logout';
             }
         });
     },
@@ -344,7 +391,6 @@ var main = {
                 numOfPeople: document.getElementById('reserveNum').innerHTML,
                 totalPrice: document.getElementById('totalPrice').innerHTML,
                 productId: $('#productId').val(),
-                userEmail: $('#userEmail').val(),
                 optionId: $('#optionId').val(),
                 userReservationName: name,
                 userReservationEmail: email,

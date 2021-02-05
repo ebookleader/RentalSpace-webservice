@@ -26,6 +26,15 @@ public class UserService {
     }
 
     @Transactional
+    public Long undoEnrollSeller(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(
+                () -> new IllegalArgumentException("There is no user where email = "+email)
+        );
+        user.undoEnrollSeller();
+        return user.getId();
+    }
+
+    @Transactional
     public Long sendVerificationMail(String userEmail) {
         User user = userRepository.findByEmail(userEmail).orElseThrow(
                 () -> new IllegalArgumentException("There is no user where email = "+userEmail)

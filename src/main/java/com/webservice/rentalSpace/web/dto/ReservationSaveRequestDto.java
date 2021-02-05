@@ -15,7 +15,6 @@ public class ReservationSaveRequestDto {
     private int numOfPeople;
     private int totalPrice;
     private Long productId;
-    private String userEmail;
     private Long optionId;
     //sellerId, userId
     private String userReservationName;
@@ -24,7 +23,7 @@ public class ReservationSaveRequestDto {
 
     @Builder
     public ReservationSaveRequestDto(int ryear, int rmonth, int rday, int numOfPeople, int totalPrice,
-                                     Long productId, String userEmail, Long optionId, String userReservationName,
+                                     Long productId, Long optionId, String userReservationName,
                                      String userReservationEmail, String userReservationPhone) {
         this.ryear = ryear;
         this.rmonth = rmonth;
@@ -32,7 +31,6 @@ public class ReservationSaveRequestDto {
         this.numOfPeople = numOfPeople;
         this.totalPrice = totalPrice;
         this.productId = productId;
-        this.userEmail = userEmail;
         this.optionId = optionId;
         this.userReservationName = userReservationName;
         this.userReservationEmail = userReservationEmail;

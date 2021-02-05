@@ -39,6 +39,12 @@ public class UserApiController {
         return userService.updateToSeller(userEmail);
     }
 
+    @PutMapping("/api/user/undo/enrollSeller")
+    public Long undoEnrollSeller(@LoginUser SessionUser user) {
+        String email = user.getEmail();
+        return userService.undoEnrollSeller(email);
+    }
+
     // email verify
     @PostMapping("/api/guestUser/email/verify")
     public Long sendMail(String userEmail) {

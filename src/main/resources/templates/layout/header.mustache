@@ -28,18 +28,26 @@
                 </li>
                 <li class="nav-item active mr-3">
                     <div class="dropdown">
-                        {{#userAccountName}}
+                        {{#user}}
                             <button class="btn btn-link dropdown-toggle text-decoration-none" type="button"
                                     id="login-dropdown" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                {{userAccountName}}
+                                <span>{{name}}</span>
+                                {{^emailVerified}}
+                                    <span class="text-danger h6 font-weight-bold">(계정 인증 미완료)</span>
+                                {{/emailVerified}}
                             </button>
                             <div class="dropdown-menu" aria-labelledby="login-dropdown">
-                                <a class="dropdown-item" href="/myPage/home">마이페이지</a>
+                                <a class="dropdown-item" href="/myPage/home">
+                                    마이페이지
+                                    {{^emailVerified}}
+                                        <span class="text-danger h6 font-weight-bold"> (계정 인증으로 이동)</span>
+                                    {{/emailVerified}}
+                                </a>
                                 <a class="dropdown-item" href="/logout" role="button">로그아웃</a>
                             </div>
-                        {{/userAccountName}}
-                        {{^userAccountName}}
+                        {{/user}}
+                        {{^user}}
                             <button class="btn btn-link dropdown-toggle text-decoration-none" type="button"
                                     id="login-dropdown" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
@@ -49,18 +57,25 @@
                                 <a class="dropdown-item" href="/basicUser/login" role="button">로그인</a>
                                 <a class="dropdown-item" href="/basicUser/login" role="button">회원가입</a>
                             </div>
-                        {{/userAccountName}}
-
+                        {{/user}}
                     </div>
                 </li>
             </ul>
         </div>
-        <a href="/space/save" class="btn  mr-2 btn-warning" role="button">Posts Ads</a>
-        <button role="button" class="btn btn-success mr-2" id="btn-check-isSeller">판매자 등록</button>
-<!--        <a href="/seller/enroll" class="btn  mr-2 btn-success" role="button">판매자 등록</a>-->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        {{#user}}
+            {{#emailVerified}}
+                {{#isSeller}}
+                    <a href="/space/save" class="btn  mr-2 btn-warning" role="button">Posts Ads</a>
+                    <a href="/isSeller/undo/enroll" role="button" class="btn btn-danger mr-2">판매자 등록 취소</a>
+                {{/isSeller}}
+                {{^isSeller}}
+                    <button role="button" class="btn btn-success mr-2" id="btn-check-isSeller">판매자 등록</button>
+                {{/isSeller}}
+            {{/emailVerified}}
+        {{/user}}
+<!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
     </nav>
 </div>
 <!-- navbar end -->

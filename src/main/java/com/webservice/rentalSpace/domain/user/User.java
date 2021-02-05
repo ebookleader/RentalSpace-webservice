@@ -42,18 +42,22 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @Column(nullable = false)
+    private boolean isSeller;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Products> products = new ArrayList<>();
 
 
     @Builder
-    public User(String name, String email, String picture, boolean emailVerified, Role role) {
+    public User(String name, String email, String picture, boolean emailVerified, Role role, boolean isSeller) {
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.emailVerified = emailVerified;
         this.role = role;
+        this.isSeller = isSeller;
     }
 
     public User update(String name, String picture) {
@@ -64,10 +68,16 @@ public class User extends BaseTimeEntity {
 
     public void updateToSeller() {
         this.role = Role.SELLER;
+        this.isSeller = true;
     }
 
     public void updateToUser() {
         this.role = Role.USER;
+    }
+
+    public void undoEnrollSeller() {
+        this.role = Role.USER;
+        this.isSeller = false;
     }
 
     public void updateEmailVerified() {

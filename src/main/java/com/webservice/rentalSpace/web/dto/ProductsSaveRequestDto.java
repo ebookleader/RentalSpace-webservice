@@ -10,8 +10,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class ProductsSaveRequestDto {
-
-    private String userEmail;
     private String p_name;
     private int p_postcode;
     private String p_address;
@@ -35,10 +33,9 @@ public class ProductsSaveRequestDto {
 
 
     @Builder
-    public ProductsSaveRequestDto(String userEmail, String p_name, int p_postcode, String p_address, String p_detailAddress, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice, String p_introduce,
+    public ProductsSaveRequestDto(String p_name, int p_postcode, String p_address, String p_detailAddress, String p_city, String p_category, int p_weekdayPrice, int p_weekendPrice, String p_introduce,
                                   int p_maxNum, int p_liked, double p_avgRating, List<String> facility, List<String> notice, List<String> policy, List<String> optionTitle,
                                   List<Integer> startTime, List<Integer> endTime, List<Integer> count) {
-        this.userEmail = userEmail;
         this.p_name = p_name;
         this.p_postcode = p_postcode;
         this.p_address = p_address;

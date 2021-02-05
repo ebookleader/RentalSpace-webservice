@@ -25,7 +25,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("user", user);
         }
         return "index";
     }
@@ -33,8 +33,7 @@ public class IndexController {
     @GetMapping("/space/save")
     public String spaceSave(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
-            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("user", user);
         }
         return "products/space_save";
     }
@@ -42,18 +41,16 @@ public class IndexController {
     @RequestMapping("/products/{p_id}/imageInsert")
     public String insertProductsImage(@PathVariable Long p_id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("user", user);
         }
         model.addAttribute("p_id", p_id);
-
         return "products/space_image_save";
     }
 
     @GetMapping("/space/list")
     public String spaceList(Model model, @LoginUser SessionUser user) {
-        //userAccountName
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("user", user);
         }
         //product list
         model.addAttribute("products", productsService.findAllDesc());
@@ -61,10 +58,20 @@ public class IndexController {
         return "products/space_list";
     }
 
+    @GetMapping("/space/list/search/{search}")
+    public String spaceListSearch(Model model, @PathVariable String search, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("products", productsService.searchProductsByName(search));
+        addSidebarAttribute(model);
+        return "products/space_list";
+    }
+
     @GetMapping("/space/list/city/{city}")
     public String spaceListCity(Model model, @PathVariable String city, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("user", user);
         }
         addSidebarAttribute(model);
         model.addAttribute("products", productsService.findAllByCity(city));
@@ -74,7 +81,7 @@ public class IndexController {
     @GetMapping("/space/list/category/{category}")
     public String spaceListCategory(Model model, @PathVariable String category, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("user", user);
         }
         addSidebarAttribute(model);
         model.addAttribute("products", productsService.findAllByCategory(category));
@@ -84,7 +91,7 @@ public class IndexController {
     @GetMapping("/space/list/price/{priceIndex}")
     public String spaceListPrice(Model model, @PathVariable int priceIndex, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("user", user);
         }
         addSidebarAttribute(model);
 
@@ -101,7 +108,7 @@ public class IndexController {
     @GetMapping("/space/list/rating/{rating}")
     public String spaceListRating(Model model, @PathVariable int rating, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("user", user);
         }
         addSidebarAttribute(model);
         model.addAttribute("products", productsService.findAllByRating((double)rating));
@@ -140,20 +147,23 @@ public class IndexController {
     @GetMapping("/space/list/detail/{p_id}")
     public String spaceDetail(@PathVariable Long p_id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("user", user);
         }
+//        model.addAttribute("thumbnail", productsService.findProductsThumbnailById(p_id));
+//        model.addAttribute("files", productsService.findProductsFilesById(p_id));
         model.addAttribute("product", productsService.findById(p_id));
         model.addAttribute("facility", productsService.findProductsFacilityById(p_id));
         model.addAttribute("notice", productsService.findProductsNoticeById(p_id));
         model.addAttribute("policy", productsService.findProductsPolicyById(p_id));
         model.addAttribute("option", productsService.findAllProductsOptionById(p_id));
+
         return "products/space_detail";
     }
 
     @GetMapping("/space/update/{p_id}")
     public String spaceUpdate(@PathVariable Long p_id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
+            model.addAttribute("user", user);
         }
         model.addAttribute("product", productsService.findById(p_id));
         return "products/space_update";
@@ -167,25 +177,23 @@ public class IndexController {
     @GetMapping("/seller/enroll")
     public String enroll_seller(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute(("userAccountName"), user.getName());
+            model.addAttribute("user", user);
         }
         return "account/enroll_seller";
     }
 
-//    @GetMapping("/seller/enroll/complete")
-//    public String enroll_seller_complete(Model model, @LoginUser SessionUser user) {
-//        if(user != null) {
-//            model.addAttribute("userAccountName", user.getName());
-//        }
-//        return "account/enroll_seller_complete";
-//    }
+    @GetMapping("/isSeller/undo/enroll")
+    public String undo_enroll_seller(Model model, @LoginUser SessionUser user)  {
+        if(user != null) {
+            model.addAttribute("user", user);
+        }
+        return "account/undo_enroll_seller";
+    }
 
     @GetMapping("/myPage/home")
     public String myPage_home(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
-            model.addAttribute("userEmail", user.getEmail());
-            model.addAttribute("userEmailVerified", user.isEmailVerified());
+            model.addAttribute("user", user);
         }
         return "account/mypage_home";
     }
@@ -193,8 +201,7 @@ public class IndexController {
     @GetMapping("/myPage/user/checkEmail")
     public String myPage_checkEmail(Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
-            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("user", user);
         }
         return "account/mypage_check_email";
     }
@@ -204,8 +211,7 @@ public class IndexController {
                                      @PathVariable Long p_id, @PathVariable Long po_id,
                                      @PathVariable int reserveNum, Model model, @LoginUser SessionUser user) {
         if(user != null) {
-            model.addAttribute("userAccountName", user.getName());
-            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("user", user);
         }
         String inputDate = month+"/"+day+"/"+year;
         int totalPrice = productsService.calculateProductPrice(p_id, inputDate, po_id);

@@ -1,5 +1,7 @@
 package com.webservice.rentalSpace.service.products;
 
+import com.webservice.rentalSpace.config.auth.LoginUser;
+import com.webservice.rentalSpace.config.auth.dto.SessionUser;
 import com.webservice.rentalSpace.domain.products.*;
 import com.webservice.rentalSpace.domain.reservation.Reservation;
 import com.webservice.rentalSpace.domain.reservation.ReservationRepository;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class ProductsService {
+    private final HttpSession httpSession;
     private final UserRepository userRepository;
     private final ProductsRepository productsRepository;
     private final ProductsFacilityRepository productsFacilityRepository;
@@ -34,7 +38,8 @@ public class ProductsService {
 
     @Transactional
     public Long save(ProductsSaveRequestDto requestDto) {
-        User user = userRepository.findByEmail(requestDto.getUserEmail()).orElseThrow(
+        String email = ((SessionUser) httpSession.getAttribute("user")).getEmail();
+        User user = userRepository.findByEmail(email).orElseThrow(
                 () -> new IllegalArgumentException("There is no user")
         );
         Products products = requestDto.toEntity();
@@ -114,6 +119,19 @@ public class ProductsService {
     }
 
     @Transactional(readOnly = true)
+    public FilesResponseDto findProductsThumbnailById(Long id) {
+        Files f = filesRepository.findProductsThumbnail(id);
+        return new FilesResponseDto(f);
+    }
+
+    @Transactional(readOnly = true)
+    public List<FilesResponseDto> findProductsFilesById(Long id) {
+        return filesRepository.findProductsFiles(id).stream()
+                .map(FilesResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public List<FacilityResponseDto> findProductsFacilityById(Long id) {
         return productsFacilityRepository.findProductsFacility(id).stream()
                 .map(FacilityResponseDto::new)
@@ -152,6 +170,13 @@ public class ProductsService {
     @Transactional(readOnly = true)
     public List<ProductsListResponseDto> findAllDesc() {
         return productsRepository.findAllDesc().stream()
+                .map(ProductsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductsListResponseDto> searchProductsByName(String str) {
+        return productsRepository.searchProductsByName(str).stream()
                 .map(ProductsListResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -197,7 +222,7 @@ public class ProductsService {
         Products products = productsRepository.findById(p_id)
                 .orElseThrow(() -> new IllegalArgumentException("There is no product which id=" + p_id));
 
-        String fileUrl = "C:/Users/Jeongeun/IdeaProjects/RentalSpace-webservice/src/main/resources/static/img/uploadImg/";
+        String fileUrl = "C:/Users/Jeongeun/IdeaProjects/RentalSpace-webservice/src/main/resources/static/img/";
         int cnt = 0;
         for (MultipartFile files : filesList) {
             String sourceFileName = files.getOriginalFilename();
@@ -420,7 +445,8 @@ public class ProductsService {
 
     @Transactional
     public Long saveReservation(ReservationSaveRequestDto requestDto) {
-        User user = userRepository.findByEmail(requestDto.getUserEmail()).orElseThrow(
+        String email = ((SessionUser) httpSession.getAttribute("user")).getEmail();
+        User user = userRepository.findByEmail(email).orElseThrow(
                 () -> new IllegalArgumentException("no user")
         );
         Long userId = user.getId();

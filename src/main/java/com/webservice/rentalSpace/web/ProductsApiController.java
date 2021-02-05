@@ -1,4 +1,5 @@
 package com.webservice.rentalSpace.web;
+import com.webservice.rentalSpace.config.auth.dto.SessionUser;
 import com.webservice.rentalSpace.service.products.ProductsService;
 import com.webservice.rentalSpace.web.dto.ProductsResponseDto;
 import com.webservice.rentalSpace.web.dto.ProductsSaveRequestDto;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -19,9 +21,11 @@ import java.util.List;
 public class ProductsApiController {
     private final ProductsService productsService;
 
+
     //save
     @PostMapping("/api/v1/products")
     public Long save(@RequestBody ProductsSaveRequestDto requestDto) {
+
         Long pid = productsService.save(requestDto);
         return pid;
     }

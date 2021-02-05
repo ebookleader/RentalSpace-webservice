@@ -15,6 +15,9 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
     @Query("SELECT p FROM Products p ORDER BY p_id DESC")
     List<Products> findAllDesc();
 
+    @Query("SELECT p FROM Products p WHERE p_name LIKE %:str% ORDER BY p_id DESC")
+    List<Products> searchProductsByName(@Param("str") String str);
+
     @Query("SELECT p FROM Products p WHERE p_category=:category ORDER BY p_id DESC")
     List<Products> findAllByCategory(@Param("category") String category);
 

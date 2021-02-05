@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers( "/api/guestUser/**").hasRole(Role.GUEST.name())
                     .antMatchers("/space/list/**", "/api/user/**").access("hasRole('USER') or hasRole('SELLER')")
                     .antMatchers("/seller/**").hasRole(Role.USER.name())
-                    .antMatchers("/api/v1/**", "/space/save/**", "/space/update/**").hasRole(Role.SELLER.name())
+                    .antMatchers("/api/v1/**", "/space/save/**", "/space/update/**", "/isSeller/**").hasRole(Role.SELLER.name())
                     .anyRequest().authenticated()
                 .and()
                     .oauth2Login().loginPage("/login")
