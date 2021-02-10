@@ -5,43 +5,51 @@ var main = {
         $('#btn-space-save').on('click', function() {
             _this.save();
         });
-        $('#btn-name-search').on('click', function() {
-            _this.searchProductsName();
-        })
+
         $('#btn-space-delete').on('click', function() {
             _this.deleteSpace();
         });
+
         $('#btn-space-update').on('click', function() {
             _this.updateSpace();
         });
+
         $('#btn-check-isSeller').on('click', function() {
             _this.checkIsSeller();
         });
+
         $('#btn-undo-enrollSeller').on('click', function() {
             if(_this.undoEnrollSellerCheck()) {
                 _this.undoEnrollSeller();
             }
         });
+
         $('#btn-enroll-seller').on('click', function() {
             if(_this.enrollSeller()) {
                 _this.enrollComplete();
             }
         });
+
         $('#btn-email-verify').on('click', function() {
             _this.emailVerify();
         });
+
         $('#btn-email-key').on('click', function() {
             _this.checkEmailKey();
         });
+
         $('#previewPriceBtn').on('click', function() {
             _this.previewPrice();
         });
+
         $('#checkReserveBtn').on('click', function() {
             _this.checkReservationIsOk();
         });
+
         $('#reserve-ongoing-btn').on('click', function() {
             _this.ongoingReservation();
         });
+
         $("#mainpage-search-button").on('click', function() {
             _this.mainPageSearch();
         });
@@ -136,20 +144,6 @@ var main = {
         });
     },
 
-    searchProductsName : function() {
-        var search = $('#spaceNameSearch').val();
-        $.ajax({
-            type: 'GET',
-            url: '/space/list/search/'+search,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8'
-        }).done(function() {
-
-        }).fail(function(error){
-            alert(JSON.stringify(error));
-        })
-    },
-
     deleteSpace : function() {
         var id = $("#p_id").val();
         $.ajax({
@@ -162,7 +156,7 @@ var main = {
             window.location.href = '/';
         }).fail(function(error){
             alert(JSON.stringify(error));
-        })
+        });
     },
 
     updateSpace : function() {
@@ -180,7 +174,7 @@ var main = {
         var policyList = [];
         $('input[name="policy"]').each(function(i) {
             policyList.push($(this).val());
-        })
+        });
 
         var data = {
             p_name: $('#p_name').val(),
@@ -209,7 +203,7 @@ var main = {
             window.location.href = '/';
         }).fail(function() {
             alert(JSON.stringify(error));
-        })
+        });
     },
 
     checkIsSeller : function() {
@@ -278,7 +272,7 @@ var main = {
             window.location.href = '/logout';
         }).fail(function() {
             alert(JSON.stringify(error));
-        })
+        });
     },
 
     emailVerify : function() {
@@ -416,21 +410,23 @@ var main = {
     mainPageSearch : function() {
         var location = $("#location-dropdown").text();
         var category = $("#category-dropdown").text();
-        $.ajax({
-                type: 'GET',
-                url: '/api/v1/products/checkReservationIsOk',
-                data : { p_id:p_id, inputDate:inputDate, po_id:po_id },
-                dataType :'json',
-                success : function(result) {
-                    if (result==true) {
-                        alert('예약 가능합니다.');
-                        window.location.href = "/space/list/detail/reservationOngoing/"+date[0]+"/"+date[1]+"/"+date[2]+"/"+p_id+"/"+po_id+"/"+reserveNum;
-                    }
-                    else {
-                        alert('해당 날짜의 해당 옵션은 예약이 모두 찼습니다.\n다른 옵션을 선택해주세요.');
-                    }
-                }
-         });
+        alert(location);
+        alert(category);
+//        $.ajax({
+//                type: 'GET',
+//                url: '/api/v1/products/checkReservationIsOk',
+//                data : { p_id:p_id, inputDate:inputDate, po_id:po_id },
+//                dataType :'json',
+//                success : function(result) {
+//                    if (result==true) {
+//                        alert('예약 가능합니다.');
+//                        window.location.href = "/space/list/detail/reservationOngoing/"+date[0]+"/"+date[1]+"/"+date[2]+"/"+p_id+"/"+po_id+"/"+reserveNum;
+//                    }
+//                    else {
+//                        alert('해당 날짜의 해당 옵션은 예약이 모두 찼습니다.\n다른 옵션을 선택해주세요.');
+//                    }
+//                }
+//         });
     },
 
 

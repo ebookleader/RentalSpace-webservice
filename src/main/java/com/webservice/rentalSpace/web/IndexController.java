@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -58,12 +59,14 @@ public class IndexController {
         return "products/space_list";
     }
 
-    @GetMapping("/space/list/search/{search}")
-    public String spaceListSearch(Model model, @PathVariable String search, @LoginUser SessionUser user) {
+    @RequestMapping("/space/list/search")
+    public String spaceListSearch(Model model, @RequestParam String spaceNameSearch, @LoginUser SessionUser user) {
+        System.out.println("search >>>>>> "+spaceNameSearch);
         if(user != null) {
             model.addAttribute("user", user);
         }
-        model.addAttribute("products", productsService.searchProductsByName(search));
+        model.addAttribute("products", productsService.findAllByInput(spaceNameSearch));
+        System.out.println("call");
         addSidebarAttribute(model);
         return "products/space_list";
     }

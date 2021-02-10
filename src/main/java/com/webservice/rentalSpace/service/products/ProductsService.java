@@ -175,8 +175,9 @@ public class ProductsService {
     }
 
     @Transactional(readOnly = true)
-    public List<ProductsListResponseDto> searchProductsByName(String str) {
-        return productsRepository.searchProductsByName(str).stream()
+    public List<ProductsListResponseDto> findAllByInput(String input) {
+        System.out.println("productsService input >>>>>>>> "+input);
+        return productsRepository.findAllByInput(input).stream()
                 .map(ProductsListResponseDto::new)
                 .collect(Collectors.toList());
     }
