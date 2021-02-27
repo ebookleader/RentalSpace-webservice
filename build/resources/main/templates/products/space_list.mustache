@@ -12,11 +12,16 @@
                     <nav class="nav flex-column search-nav bg-white">
                         <h5>Search by name</h5>
                         <div class="input-group mb-3 mt-3">
-                            <input type="text" class="form-control" id="spaceNameSearch" aria-describedby="name-search-btn" value="">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="btn-name-search">Search</button>
-                            </div>
+                            <form action="/space/list/search" method="get" class="row">
+                                <input type="text" class="form-control col ml-2 mr-2" name="spaceNameSearch" id="spaceNameSearch" aria-describedby="name-search-btn" value="">
+                                <div class="input-group-append mr-2">
+                                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                                </div>
+                            </form>
                         </div>
+                    </nav>
+                    <nav class="nav flex-column search-nav bg-white mt-4">
+                        <a href="/space/list" class="" id="viewAllBtn">View All Products</a>
                     </nav>
                     <nav class="nav flex-column search-nav bg-white mt-4">
                         <h5>City</h5>

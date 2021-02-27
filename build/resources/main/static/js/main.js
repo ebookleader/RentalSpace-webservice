@@ -12,6 +12,7 @@ $(document).ready(function() {
     var k = $(this).text();
     $("#category-dropdown").text(k);
   })
+
     // 동적 input(facility) 추가
 
       var maxField = 10;
@@ -139,9 +140,15 @@ $(document).ready(function() {
 
 })
 
+
 $(function () {
-  $('#datetimepicker1').datetimepicker({ format: 'L'});
-  $('#datetimepicker2').datetimepicker({ format: 'L', useCurrent: false });
+  $('#datetimepicker1').datetimepicker({
+    format: 'L'
+  });
+  $('#datetimepicker2').datetimepicker({
+    format: 'L',
+    useCurrent: false
+  });
   $("#datetimepicker1").on("change.datetimepicker", function (e) {
     $('#datetimepicker2').datetimepicker('minDate', e.date);
   });
