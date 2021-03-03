@@ -16,6 +16,22 @@ before_install:
 
 script: "./gradlew clean build"
 
+before_deploy:
+  - zip -r RentalSpace-webservice *
+  - mkdir -p deploy
+  - mv RentalSpace-webservice.zip deploy/RentalSpace-webservice.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: spaceanywhere-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
+
 notifications:
   email:
     recipients:
