@@ -36,7 +36,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: spaceanywhere-build
-    key: space-anywhere.zip
+    key: RentalSpace-webservice.zip
     bundle_type: zip
     application: space-anywhere
     deployment_group: space-anywhere-group
