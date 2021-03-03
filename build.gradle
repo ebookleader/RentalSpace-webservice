@@ -36,6 +36,7 @@ dependencies {
     compile('org.springframework.session:spring-session-jdbc')
     compile('com.h2database:h2')
     compile('org.springframework.boot:spring-boot-starter-mail')
+    compile('org.mariadb.jdbc:mariadb-java-client')
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     testCompile('org.springframework.boot:spring-boot-starter-test')
