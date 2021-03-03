@@ -33,13 +33,13 @@ deploy:
     wait-until-deployed: true
 
   - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
-    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
-    bucket: spaceanywhere-build # S3 버킷
-    key: space-anywhere.zip # 빌드 파일을 압축해서 전달
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: spaceanywhere-build
+    key: space-anywhere.zip
     bundle_type: zip
-    application: space-anywhere # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
-    deployment_group: space-anywhere-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
+    application: space-anywhere
+    deployment_group: space-anywhere-group
     region: ap-northeast-2
     wait-until-deployed: true
 
