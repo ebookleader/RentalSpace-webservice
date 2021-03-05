@@ -22,7 +22,7 @@ group 'com.jeongeun.portfolio'
 version '1.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
-ext['tomcat.version'] = '8.5.37'
+ext['tomcat.version'] = '9.0.13'
 
 repositories {
     mavenCentral()
