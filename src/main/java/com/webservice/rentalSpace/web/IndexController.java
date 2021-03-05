@@ -1,6 +1,6 @@
 package com.webservice.rentalSpace.web;
 
-import com.webservice.rentalSpace.S3Uploader;
+//import com.webservice.rentalSpace.S3Uploader;
 import com.webservice.rentalSpace.config.auth.LoginUser;
 import com.webservice.rentalSpace.config.auth.dto.SessionUser;
 import com.webservice.rentalSpace.service.products.ProductsService;
@@ -22,7 +22,7 @@ import java.util.List;
 public class IndexController {
 
     private final ProductsService productsService;
-    private final S3Uploader s3Uploader;
+//    private final S3Uploader s3Uploader;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -40,11 +40,11 @@ public class IndexController {
         return "products/space_save";
     }
 
-    @PostMapping("/upload")
-    @ResponseBody
-    public String upload(@RequestParam("data")MultipartFile multipartFile) throws IOException {
-        return s3Uploader.upload(multipartFile, "static");
-    }
+//    @PostMapping("/upload")
+//    @ResponseBody
+//    public String upload(@RequestParam("data")MultipartFile multipartFile) throws IOException {
+//        return s3Uploader.upload(multipartFile, "static");
+//    }
 
     @RequestMapping("/products/{p_id}/imageInsert")
     public String insertProductsImage(@PathVariable Long p_id, Model model, @LoginUser SessionUser user) {

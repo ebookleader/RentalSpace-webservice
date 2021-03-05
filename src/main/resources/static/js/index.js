@@ -6,9 +6,9 @@ var main = {
             _this.save();
         });
 
-        $('#btn-image-save').on('click', function() {
-            _this.uploadImage();
-        });
+//        $('#btn-image-save').on('click', function() {
+//            _this.uploadImage();
+//        });
 
         $('#btn-space-delete').on('click', function() {
             _this.deleteSpace();
@@ -148,23 +148,23 @@ var main = {
         });
     },
 
-    uploadImage : function() {
-        var file = $('#img')[0].files[0];
-        var formData = new FormData();
-        formData.append('data', file);
-
-        $.ajax({
-            type: 'POST',
-            url: '/upload',
-            data: formData,
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            $('#result-image').attr("src", data);
-        }).fail(function (error) {
-            alert(error);
-        });
-    },
+//    uploadImage : function() {
+//        var file = $('#img')[0].files[0];
+//        var formData = new FormData();
+//        formData.append('data', file);
+//
+//        $.ajax({
+//            type: 'POST',
+//            url: '/upload',
+//            data: formData,
+//            processData: false,
+//            contentType: false
+//        }).done(function (data) {
+//            $('#result-image').attr("src", data);
+//        }).fail(function (error) {
+//            alert(error);
+//        });
+//    },
 
     deleteSpace : function() {
         var id = $("#p_id").val();
