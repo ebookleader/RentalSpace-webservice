@@ -1,5 +1,6 @@
 package com.webservice.rentalSpace.web;
 
+import com.webservice.rentalSpace.S3Uploader;
 import com.webservice.rentalSpace.config.auth.LoginUser;
 import com.webservice.rentalSpace.config.auth.dto.SessionUser;
 import com.webservice.rentalSpace.service.products.ProductsService;
@@ -9,12 +10,11 @@ import lombok.extern.java.Log;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,6 +22,7 @@ import java.util.List;
 public class IndexController {
 
     private final ProductsService productsService;
+    private final S3Uploader s3Uploader;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -37,6 +38,12 @@ public class IndexController {
             model.addAttribute("user", user);
         }
         return "products/space_save";
+    }
+
+    @PostMapping("/upload")
+    @ResponseBody
+    public String upload(@RequestParam("data")MultipartFile multipartFile) throws IOException {
+        return s3Uploader.upload(multipartFile, "static");
     }
 
     @RequestMapping("/products/{p_id}/imageInsert")
